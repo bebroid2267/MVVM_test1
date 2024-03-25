@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34622.214
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MVVM_test1", "MVVM_test1.csproj", "{3B0EE09D-769C-466C-9E74-C9A9271AE007}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GSTProcessCheckerService", "..\GSTProcessCheckerService\GSTProcessCheckerService.csproj", "{165BDDF5-51C0-473C-9B4A-DEA24C8FDE33}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3B0EE09D-769C-466C-9E74-C9A9271AE007}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3B0EE09D-769C-466C-9E74-C9A9271AE007}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3B0EE09D-769C-466C-9E74-C9A9271AE007}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3B0EE09D-769C-466C-9E74-C9A9271AE007}.Release|Any CPU.Build.0 = Release|Any CPU
+		{165BDDF5-51C0-473C-9B4A-DEA24C8FDE33}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{165BDDF5-51C0-473C-9B4A-DEA24C8FDE33}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{165BDDF5-51C0-473C-9B4A-DEA24C8FDE33}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{165BDDF5-51C0-473C-9B4A-DEA24C8FDE33}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F71F7B7F-CF43-4940-9A01-3BBE397A1657}
+	EndGlobalSection
+EndGlobal
