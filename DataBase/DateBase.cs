@@ -50,9 +50,9 @@ namespace MVVM_test1.DataBase
 
                 if (!IfProcessExists(name))
                 {
-                    command.CommandText = $"INSERT INTO Process (name, start_today_session) values (@Name, @StartSession)";
+                    command.CommandText = $"INSERT INTO Process (name, global_start_time) values (@Name, @GlobalStart)";
                     command.Parameters.AddWithValue("@Name", name);
-                    command.Parameters.AddWithValue("@StartSession",startDateUsing);
+                    command.Parameters.AddWithValue("@GlobalStart", startDateUsing);
 
                     command.ExecuteNonQuery();
 
@@ -76,7 +76,7 @@ namespace MVVM_test1.DataBase
 
                 var command = new SqliteCommand();
                 command.Connection = connection;
-                command.CommandText = $"SELECT sum_time FROM Process WHERE name = '{name}'";
+                command.CommandText = $"SELECT sum_time FROM Process WHERE name LIKE '{name}'";
 
                 var reader = command.ExecuteReader();
 
@@ -108,7 +108,7 @@ namespace MVVM_test1.DataBase
                 connection.Open();
                 var command = new SqliteCommand();
                 command.Connection = connection;
-                command.CommandText = $"SELECT name, sum_time, global_start_time FROM Process WHERE status = '{whatTypeProcess}'";
+                command.CommandText = $"SELECT name, sum_time, global_start_time FROM Process WHERE status LIKE '{whatTypeProcess}'";
             
                 var reader = command.ExecuteReader();
 
@@ -133,7 +133,7 @@ namespace MVVM_test1.DataBase
                 connection.Open();
                 var command = new SqliteCommand();
                 command.Connection = connection;
-                command.CommandText = $"UPDATE Process SET start_session = '{dateTime}' AND status = 'works' WHERE name = '{name}'";
+                command.CommandText = $"UPDATE Process SET start_session = '{dateTime}', status = 'works' WHERE name LIKE '{name}'";
 
                 command.ExecuteNonQuery();
                 connection.Close();
@@ -147,7 +147,7 @@ namespace MVVM_test1.DataBase
                 connection.Open();
                 var command = new SqliteCommand();
                 command.Connection = connection;
-                command.CommandText = $"UPDATE Process SET end_session = '{dateTime}' AND status = 'stoped' AND sum_time = '{sumTime}' WHERE name = '{name}'";
+                command.CommandText = $"UPDATE Process SET end_session = '{dateTime}', status = 'stoped' , sum_time = '{sumTime}' WHERE name LIKE '{name}'";
 
                 command.ExecuteNonQuery();
                 connection.Close();
@@ -162,7 +162,7 @@ namespace MVVM_test1.DataBase
 
                 var command = new SqliteCommand();
                 command.Connection = connection;
-                command.CommandText = $"UPDATE Process SET sum_time = '{time}' WHERE name = '{name}'";
+                command.CommandText = $"UPDATE Process SET sum_time = '{time}' WHERE name LIKE '{name}'";
 
                 command.ExecuteNonQuery();
 
@@ -180,7 +180,7 @@ namespace MVVM_test1.DataBase
 
                 var command = new SqliteCommand();
                 command.Connection = connection;
-                command.CommandText = $"SELECT status FROM Process WHERE name = '{nameProcess}'";
+                command.CommandText = $"SELECT status FROM Process WHERE name LIKE '{nameProcess}'";
 
                 var reader = command.ExecuteReader();
 
