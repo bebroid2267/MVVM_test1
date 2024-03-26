@@ -26,10 +26,10 @@ namespace MVVM_test1.Model
         public ProcessJobsModel() 
         {
             RunningProcesses = _RunningProcesess;
-
-            //engine = Python.CreateEngine();
-            //scope = engine.CreateScope();
-            //engine.ExecuteFile(@"C:\Users\кирилл\source\repos\MVVM_test1\IronPython\sqlite.py", scope);
+            // создание в конструкторе класса движка питона и процесс экзекуции епта кода питона в обьект scope
+            engine = Python.CreateEngine();
+            scope = engine.CreateScope();
+            engine.ExecuteFile(@"C:\Users\кирилл\source\repos\MVVM_test1\IronPython\sqlite.py", scope);
         }
 
         public ObservableCollection<string> _RunningProcesess
@@ -57,10 +57,10 @@ namespace MVVM_test1.Model
                     {
 
 
-                        //dynamic addTask = scope.GetVariable("add_task");
-                        //addTask(process.Process.ProcessName);
+                        dynamic addTask = scope.GetVariable("add_task"); //берем нужную функцию и закидываем в переменную
+                        addTask(process.Process.ProcessName); // вызывает функцию с нужным аргументом
 
-                        DateBase.AddProcess(process.Process.ProcessName, DateTime.UtcNow.AddHours(3).ToString());
+                        //DateBase.AddProcess(process.Process.ProcessName, DateTime.UtcNow.AddHours(3).ToString());
 
                         if (!RunningProcesses.Contains(process.Process.ProcessName))
                         {
@@ -77,13 +77,15 @@ namespace MVVM_test1.Model
         }
         private void UpdateSumTimeProcessEveryTime(string nameProcess, string sumTime)
         {
-            bool doesProcessWorks = DateBase.CheckProcessDoesWorks(nameProcess);
+            bool doesProcessWorks = true;
 
             while(doesProcessWorks)
             {
+
                 DateBase.UpdateTimeProcess(nameProcess, sumTime);
 
                 Thread.Sleep(5000);
+                doesProcessWorks = DateBase.CheckProcessDoesWorks(nameProcess);
             }
         }
 
@@ -119,6 +121,7 @@ namespace MVVM_test1.Model
                         }
                     else
                     {
+                        string totalTimeSpend = string.Empty;
                         string firstTimeProcess = DateBase.GetTimeProcess(nameProcess);
                         DateTime firstTimePrcs = new DateTime();
 
@@ -128,7 +131,7 @@ namespace MVVM_test1.Model
                             TimeSpan time = DateTime.UtcNow.AddHours(3) - startTimeProcess;
 
                             firstTimePrcs = firstTimePrcs.Add(time);
-                            string totalTimeSpend = firstTimePrcs.ToString("HH:mm:ss");
+                            totalTimeSpend = firstTimePrcs.ToString("HH:mm:ss");
                         }
                         else
                         {
@@ -138,8 +141,9 @@ namespace MVVM_test1.Model
 
                             DateTime.TryParseExact(time.ToString("HH':'mm':'ss"), "HH:mm:ss", CultureInfo.InvariantCulture,
                             DateTimeStyles.None, out timePassedPrcs);
+                            totalTimeSpend = timePassedPrcs.ToString("HH:mm:ss");
                         }
-
+                        UpdateSumTimeProcessEveryTime(nameProcess, totalTimeSpend);
 
                     }
                     Thread.Sleep(2000);
