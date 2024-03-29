@@ -54,9 +54,7 @@ namespace MVVM_test1.Model
                 if (applications != null)
                 {
                     foreach (ProcessWindow process in applications)
-                    {
-
-
+                    { 
                         //dynamic addTask = scope.GetVariable("add_task"); //берем нужную функцию и закидываем в переменную
                         //addTask(process.Process.ProcessName); // вызывает функцию с нужным аргументом
 

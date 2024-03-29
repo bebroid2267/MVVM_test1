@@ -32,8 +32,23 @@ namespace MVVM_test1.ViewModel
             }
         }
 
+        public ObservableCollection<ProcessTime> CheckProcess
+        { 
+            get { return WorksProcesess._WorkProcess; }
+            set
+            {
+                Application.Current.Dispatcher.InvokeAsync(() =>
+                {
+                    WorksProcesess._WorkProcess = value;
+                    OnPropertyChanged(nameof(CheckProcess));
+                });
+
+            }
+        }
+
         public MainVM()
         {
+            WorksProcesess = new GetProcessModel();
             processes = new ProcessJobsModel();
             Application.Current.Dispatcher.InvokeAsync( () =>
             {
@@ -41,9 +56,14 @@ namespace MVVM_test1.ViewModel
                 timer.Elapsed += processes.MonitorProcesess;
                 timer.Start();
                 Process = processes._RunningProcesess;
+
+                System.Timers.Timer timerCheckProcess = new System.Timers.Timer(3000);
+                timerCheckProcess.Elapsed += WorksProcesess.GetProcess;
+                timerCheckProcess.Start();
+                CheckProcess = WorksProcesess._WorkProcess;
             });
         }
-
+        public GetProcessModel WorksProcesess;
         public ProcessJobsModel processes;
 
         public event PropertyChangedEventHandler PropertyChanged;

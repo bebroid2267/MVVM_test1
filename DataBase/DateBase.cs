@@ -1,4 +1,5 @@
 ﻿using Microsoft.Data.Sqlite;
+using Microsoft.Xaml.Behaviors.Media;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -68,6 +69,44 @@ namespace MVVM_test1.DataBase
             }
 
         }
+        public static string GetTimeStartTodaySession(string nameProcess)
+        {
+            using (SqliteConnection connection = new SqliteConnection(connectionString))
+            {
+                string todaySession = string.Empty;
+                connection.Open();
+                var command = new SqliteCommand();
+                command.Connection = connection;
+                command.CommandText = $"SELECT start_today_session FROM Process WHERE name = '{nameProcess}'";
+
+                var reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    if (!reader.IsDBNull(0))
+                    {
+                        todaySession = reader.GetString(0);
+                    }    
+                }
+                connection.Close();
+                return todaySession;
+            }
+
+        }
+        public static void AddTodaySession(string nameProcess, string dateTime)
+        {
+            using (SqliteConnection connection = new SqliteConnection(connectionString))
+            {
+                connection.Open();
+                var command = new SqliteCommand();
+                command.Connection = connection;
+                command.CommandText = $"UPDATE Process SET start_today_session = '{dateTime}' WHERE name LIKE '{nameProcess}'";
+                
+                command.ExecuteNonQuery();
+                connection.Close();
+            }
+
+        }
 
         public static string GetTimeProcess(string name)
         {
@@ -103,14 +142,14 @@ namespace MVVM_test1.DataBase
         }
         public static List<ProcessTime> GetInfoProcess(string whatTypeProcess)
         {
-            using (SqliteConnection connection = new SqliteConnection())
+            using (SqliteConnection connection = new SqliteConnection(connectionString))
             {
                 List<ProcessTime> infoProcesess = new List<ProcessTime>();
 
                 connection.Open();
                 var command = new SqliteCommand();
                 command.Connection = connection;
-                command.CommandText = $"SELECT name, sum_time, global_start_time FROM Process WHERE status LIKE '{whatTypeProcess}'";
+                command.CommandText = $"SELECT name, sum_time, global_start_time, start_today_session FROM Process WHERE status LIKE '{whatTypeProcess}'";
             
                 var reader = command.ExecuteReader();
 
@@ -120,6 +159,10 @@ namespace MVVM_test1.DataBase
                     info.NameProcess = reader.GetString(0);
                     info.SumTimeProcess = reader.GetString(1);
                     info.GlobalStartTime = reader.GetString(2);
+                    if (!reader.IsDBNull(3))
+                    {
+                        info.StartTodaySession = reader.GetString(3);
+                    }
                     infoProcesess.Add(info);
                 }
 
@@ -135,8 +178,25 @@ namespace MVVM_test1.DataBase
                 connection.Open();
                 var command = new SqliteCommand();
                 command.Connection = connection;
-                command.CommandText = $"UPDATE Process SET start_session = '{dateTime}', status = 'works' WHERE name LIKE '{name}'";
 
+                string todaySession = GetTimeStartTodaySession(name);
+                DateTime timeSession;
+                if (todaySession != string.Empty)
+                {
+                    timeSession = Convert.ToDateTime(todaySession);
+                    if (timeSession.ToString("d") != DateTime.UtcNow.ToString("d"))
+                    {
+                        command.CommandText = $"UPDATE Process SET start_session = '{dateTime}'," +
+                            $" status = 'works', start_today_session = {DateTime.UtcNow.AddHours(3)} " +
+                            $"WHERE name LIKE '{name}'";
+                    }   
+                }
+                else
+                {
+                    command.CommandText = $"UPDATE Process SET start_session = '{dateTime}', " +
+                        $"status = 'works', start_today_session = '{DateTime.UtcNow.AddHours(3)}' " +
+                        $"WHERE name LIKE '{name}'";
+                }
                 command.ExecuteNonQuery();
                 connection.Close();
             }
