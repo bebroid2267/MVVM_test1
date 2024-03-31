@@ -24,6 +24,8 @@ namespace MVVM_test1
         {
             InitializeComponent();
             DataContext = new MainVM();
+            Closing += (DataContext as MainVM).ClosingWorksProcesess;
         }
+
     }
 }

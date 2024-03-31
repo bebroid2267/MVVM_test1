@@ -1,4 +1,5 @@
-﻿using MVVM_test1.DataBase;
+﻿using Microsoft.Scripting.Utils;
+using MVVM_test1.DataBase;
 using Prism.Mvvm;
 using System;
 using System.Collections.Generic;
@@ -33,46 +34,74 @@ namespace MVVM_test1.Model
             }
         }
 
-        public void GetProcess(object sender, EventArgs e)
+        private void DeleteProcess()
         {
-            List<ProcessTime> procesess = DateBase.GetInfoProcess("works");
             Application.Current.Dispatcher.InvokeAsync(() =>
             {
-                List<ProcessTime> workProcessesCopy = new List<ProcessTime>(_WorkProcess);
-
-                // Перебираем все элементы в _WorkProcess
-                foreach (ProcessTime workProcess in workProcessesCopy)
+                List<ProcessTime> processes = DateBase.GetInfoProcess("works");
+                foreach (ProcessTime process in processes)
                 {
-                    // Проверяем, есть ли текущий элемент workProcess в коллекции processes
-                    if (!procesess.Any(p => p.NameProcess == workProcess.NameProcess))
+                    int index = WorksProcess.FindIndex(p => p.NameProcess == process.NameProcess); // Найти индекс элемента по условию
+
+                    if (index == -1)
                     {
-                        // Если элемент не найден в processes, удаляем его из _WorkProcess
-                        _WorkProcess.Remove(workProcess);
+                        Application.Current.Dispatcher.InvokeAsync(() =>
+                        {
+                            _WorkProcess.Remove(process);
+                        });
                     }
+                    
                 }
 
-                if (procesess.Count > 0)
-                { 
-                    foreach (ProcessTime process in procesess)
-                    {
-                        ProcessTime existingProcess = _WorkProcess.FirstOrDefault(p => p.NameProcess == process.NameProcess);
-                        if (existingProcess != null)
-                        {
-                            existingProcess.SumTimeProcess = process.SumTimeProcess;
-                            existingProcess.GlobalStartTime = process.GlobalStartTime;
-
-                            int index = _WorkProcess.IndexOf(existingProcess);
-                            _WorkProcess[index] = process;
-                        }
-                        
-                        else
-                        {
-                            _WorkProcess.Add(process);
-                        }
-                    }
-                }
+                OnPropertyChanged(nameof(WorksProcess)); // Уведомить об изменении коллекции
             });
         }
+        private void AddOrChangeProcess()
+        {
+            Application.Current.Dispatcher.InvokeAsync(() =>
+            {
+                List<ProcessTime> processes = DateBase.GetInfoProcess("works");
+                foreach (ProcessTime process in processes)
+                {
+                    int index = WorksProcess.FindIndex(p => p.NameProcess == process.NameProcess); // Найти индекс элемента по условию
+
+                    if (index != -1)
+                    {
+                        Application.Current.Dispatcher.InvokeAsync(() =>
+                        {
+                            _WorkProcess[index] = process; // Обновить элемент по индексу
+                        });
+                    }
+                    else
+                    {
+                        _WorkProcess.Add(process);
+                    }
+                }
+
+                OnPropertyChanged(nameof(WorksProcess)); // Уведомить об изменении коллекции
+            });
+        }
+
+
+        public void GetProcess(object sender, EventArgs e)
+        {
+            
+                List<ProcessTime> procesess = DateBase.GetInfoProcess("works");
+                Application.Current.Dispatcher.InvokeAsync(() =>
+                {
+                    Task.Run(() => DeleteProcess());
+                });
+                if (procesess.Count > 0)
+                {
+                    Application.Current.Dispatcher.InvokeAsync(() =>
+                    {
+                        Task.Run(() => AddOrChangeProcess());
+                    });
+                }
+                
+            
+        }
+
 
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName] string prop = "")
@@ -80,7 +109,7 @@ namespace MVVM_test1.Model
             if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs(prop));
         }
-        private ObservableCollection<ProcessTime> WorksProcess = new ObservableCollection<ProcessTime>();
+        public ObservableCollection<ProcessTime> WorksProcess = new ObservableCollection<ProcessTime>();
         
     }
 }

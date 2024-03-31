@@ -1,4 +1,6 @@
-﻿using MVVM_test1.Model;
+﻿using MVVM_test1.DataBase;
+using MVVM_test1.Model;
+using Prism.Commands;
 using Prism.Mvvm;
 using System;
 using System.Collections.Generic;
@@ -10,13 +12,18 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Input;
 using System.Windows.Threading;
 
 namespace MVVM_test1.ViewModel
 {
-    public class MainVM : BindableBase
+    public class MainVM : BindableBase, INotifyPropertyChanged
     {
         
+        public void ClosingWorksProcesess(object sender, EventArgs e)
+        {
+            DateBase.StopWorksProcesess();
+        }
         public ObservableCollection<string> Process
         {
             
@@ -50,7 +57,7 @@ namespace MVVM_test1.ViewModel
         {
             WorksProcesess = new GetProcessModel();
             processes = new ProcessJobsModel();
-            Application.Current.Dispatcher.InvokeAsync( () =>
+            Application.Current.Dispatcher.InvokeAsync(() =>
             {
                 System.Timers.Timer timer = new System.Timers.Timer(5000);
                 timer.Elapsed += processes.MonitorProcesess;
@@ -63,8 +70,7 @@ namespace MVVM_test1.ViewModel
                 CheckProcess = WorksProcesess._WorkProcess;
             });
         }
-        public GetProcessModel WorksProcesess;
-        public ProcessJobsModel processes;
+        
 
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName] string prop = "")
@@ -72,6 +78,9 @@ namespace MVVM_test1.ViewModel
             if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs(prop));
         }
+        public GetProcessModel WorksProcesess;
+        public ProcessJobsModel processes;
+        
 
     }
 }

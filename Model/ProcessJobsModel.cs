@@ -55,6 +55,7 @@ namespace MVVM_test1.Model
                 {
                     foreach (ProcessWindow process in applications)
                     { 
+
                         //dynamic addTask = scope.GetVariable("add_task"); //берем нужную функцию и закидываем в переменную
                         //addTask(process.Process.ProcessName); // вызывает функцию с нужным аргументом
 
@@ -94,24 +95,25 @@ namespace MVVM_test1.Model
 
             Process[] processes = Process.GetProcessesByName(nameProcess);
 
-            //Console.WriteLine($"Программа: {nameProcess} начала работать");
             
+            //Console.WriteLine($"Программа: {nameProcess} начала работать");
+
 
                 while (true)
                 {
-                    
+
                     processes = Process.GetProcessesByName(nameProcess);
 
                     if (processes.Length == 0)
+                    {
+                        StopProcess(startTimeProcess, nameProcess);
+                        Application.Current.Dispatcher.InvokeAsync(() =>
                         {
-                            StopProcess(startTimeProcess, nameProcess);
-                            Application.Current.Dispatcher.InvokeAsync(() =>
-                            {
-                                RunningProcesses.Remove(nameProcess);
-                                OnPropertyChanged(nameof(RunningProcesses));
-                            });
-                            break;
-                        }
+                            RunningProcesses.Remove(nameProcess);
+                            OnPropertyChanged(nameof(RunningProcesses));
+                        });
+                        break;
+                    }
                     else
                     {
                         string totalTimeSpend = string.Empty;
@@ -143,9 +145,10 @@ namespace MVVM_test1.Model
 
                         UpdateSumTimeProcessEveryTime(nameProcess, totalTimeSpend);
                         startTimeProcess = DateTime.UtcNow.AddHours(3);
-                }
+                    }
                     Thread.Sleep(3000);
                 }
+            
 
         }
         private void StopProcess(DateTime startTimeProcess, string nameProcess)

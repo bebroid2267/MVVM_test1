@@ -10,8 +10,8 @@ namespace MVVM_test1.DataBase
 {
     public static class DateBase
     {
-        //private static readonly string connectionString = @"Data Source = C:\Users\кирилл\Desktop\testFirstWPF.db";
-        private static readonly string connectionString = @"Data Source = C:\Users\porka\OneDrive\Рабочий стол\testFirstWPF.db";
+        private static readonly string connectionString = @"Data Source = C:\Users\кирилл\Desktop\testFirstWPF.db";
+        //private static readonly string connectionString = @"Data Source = C:\Users\porka\OneDrive\Рабочий стол\testFirstWPF.db";
 
 
         private static bool IfProcessExists(string name)
@@ -189,7 +189,11 @@ namespace MVVM_test1.DataBase
                         command.CommandText = $"UPDATE Process SET start_session = '{dateTime}'," +
                             $" status = 'works', start_today_session = {DateTime.UtcNow.AddHours(3)} " +
                             $"WHERE name LIKE '{name}'";
-                    }   
+                    }
+                    else
+                    {
+                        command.CommandText = $"UPDATE Process SET status = 'works' WHERE name LIKE '{name}'";
+                    }
                 }
                 else
                 {
@@ -232,6 +236,19 @@ namespace MVVM_test1.DataBase
 
             }
 
+        }
+        public static void StopWorksProcesess()
+        {
+            using (SqliteConnection connection = new SqliteConnection(connectionString))
+            {
+                connection.Open();
+                var command = new SqliteCommand();
+                command.Connection = connection;
+                command.CommandText = $"UPDATE Process SET status = 'stoped', end_session = '{DateTime.UtcNow.AddHours(3)}' WHERE status LIKE 'works'";
+
+                command.ExecuteNonQuery();
+                connection.Close();
+            }
         }
         public static bool CheckProcessDoesWorks(string nameProcess)
         {

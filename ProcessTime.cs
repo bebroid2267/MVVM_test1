@@ -15,5 +15,7 @@ namespace MVVM_test1
         public string EndSession { get; set; }
         public string StartSession { get; set; }
 
+        
+
     }
 }
