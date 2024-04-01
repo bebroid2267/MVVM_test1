@@ -78,6 +78,19 @@ namespace MVVM_test1.Model
                     }
                 }
 
+                foreach (var item in _WorkProcess)
+                {
+                    int index = processes.FindIndex(p => p.NameProcess == item.NameProcess);
+                    if (index == -1)
+                    {
+                        Application.Current.Dispatcher.InvokeAsync(() =>
+                        {
+                            WorksProcess.Remove(item);
+
+                        });
+                    }
+                }
+
                 OnPropertyChanged(nameof(WorksProcess)); // Уведомить об изменении коллекции
             });
         }
@@ -85,12 +98,12 @@ namespace MVVM_test1.Model
 
         public void GetProcess(object sender, EventArgs e)
         {
-            
-                List<ProcessTime> procesess = DateBase.GetInfoProcess("works");
-                Application.Current.Dispatcher.InvokeAsync(() =>
-                {
-                    Task.Run(() => DeleteProcess());
-                });
+            List<ProcessTime> procesess = DateBase.GetInfoProcess("works");
+               
+                //Application.Current.Dispatcher.InvokeAsync(() =>
+                //{
+                //    Task.Run(() => DeleteProcess());
+                //});
                 if (procesess.Count > 0)
                 {
                     Application.Current.Dispatcher.InvokeAsync(() =>

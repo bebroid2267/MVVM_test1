@@ -10,8 +10,8 @@ namespace MVVM_test1.DataBase
 {
     public static class DateBase
     {
-        private static readonly string connectionString = @"Data Source = C:\Users\кирилл\Desktop\testFirstWPF.db";
-        //private static readonly string connectionString = @"Data Source = C:\Users\porka\OneDrive\Рабочий стол\testFirstWPF.db";
+        //private static readonly string connectionString = @"Data Source = C:\Users\кирилл\Desktop\testFirstWPF.db";
+        private static readonly string connectionString = @"Data Source = C:\Users\porka\OneDrive\Рабочий стол\testFirstWPF.db";
 
 
         private static bool IfProcessExists(string name)
@@ -198,7 +198,7 @@ namespace MVVM_test1.DataBase
                 else
                 {
                     command.CommandText = $"UPDATE Process SET start_session = '{dateTime}', " +
-                        $"status = 'works', start_today_session = '{DateTime.UtcNow.AddHours(3)}' " +
+                        $"status = 'works', start_today_session = '{DateTime.UtcNow.AddHours(3).ToString()}' " +
                         $"WHERE name LIKE '{name}'";
                 }
                 command.ExecuteNonQuery();
