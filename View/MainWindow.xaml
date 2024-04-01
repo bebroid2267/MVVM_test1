@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:MVVM_test1" xmlns:viewmodel="clr-namespace:MVVM_test1.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:MainVM}"
         mc:Ignorable="d"
         Title="Process Monitor" 
-        Height="710" 
+        Height="1560" 
         Width="1220"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
@@ -18,16 +18,16 @@
 
     <ScrollViewer>
         <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="17*"/>
-            <RowDefinition Height="168*"/>
-        </Grid.RowDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="17*"/>
+                <RowDefinition Height="168*"/>
+            </Grid.RowDefinitions>
 
 
 
-        <Border Background=" #1C1D31"
+            <Border Background=" #1C1D31"
                 CornerRadius="25" Grid.RowSpan="2"/>
-        
+
             <Grid>
 
                 <Grid.ColumnDefinitions>
@@ -301,13 +301,13 @@
                                FontSize="55"
                                VerticalAlignment="Top"
                                HorizontalAlignment="Left" 
-                               Margin="44,24,0,0"/>
+                               Margin="240,24,0,0"/>
 
 
                         <ListBox ItemsSource="{Binding CheckProcess}" 
-                                 Margin="44,95,348,-5"
-                                 d:ItemsSource="{d:SampleData ItemCount=5}">
-                                  
+                                 Margin="190,95,159,0"
+                                 d:ItemsSource="{d:SampleData ItemCount=5}" >
+
 
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
@@ -320,28 +320,38 @@
                                             <ColumnDefinition Width="Auto"/>
                                         </Grid.ColumnDefinitions>
 
-                                        
-                                        <TextBlock Text="{Binding NameProcess}" FontWeight="DemiBold"
+                                        <Border CornerRadius="100" 
+                                                Margin="32,0,35,0"
+                                                BorderThickness="1">
+                                            <Image Source="{Binding IcoPath}"
+                                                   />
+                                        </Border>
+
+                                        <TextBlock Text="{Binding NameProcess}" 
+                                                   FontWeight="DemiBold"
+                                                   
+                                                   Margin="143,0,-400,1"
                                                    Foreground="#FFFFFF"
-                                                   FontSize="25" 
-                                                   Grid.Row="1" 
-                                                   Grid.Column="1"/>
+                                                   FontSize="23" />
+
+
 
                                         <TextBlock Text="{Binding SumTimeProcess}"
                                                    FontSize="18"
                                                    FontWeight="Light"
-                                                   Foreground="#FFFFFF" 
-                                                   Margin="387,14,-387,-14"
-                                                    
-                                                   Grid.Column="2"/>
+                                                   Foreground="#FFFFFF"
+                                                   VerticalAlignment="Top"
+                                                   Margin="143,30,-129,0"/>
 
                                         <TextBlock Text="{Binding GlobalStartTime}"
                                                    FontSize="18"
                                                    FontWeight="Light"
                                                    Foreground="#FFFFFF" 
-                                                   Margin="632,8,-632,-8"
-                                                    
-                                                   Grid.Column="3"/>
+                                                   VerticalAlignment="Center"
+                                                    Margin="690,0,-690,0"/>
+
+
+
                                     </Grid>
                                 </DataTemplate>
                             </ListBox.ItemTemplate>
@@ -385,13 +395,13 @@
 
 
 
-        
 
-    </Grid>
+
+        </Grid>
     </ScrollViewer>
 
 
-        <!--<Grid>
+    <!--<Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="6*"/>
             <ColumnDefinition Width="165*"/>

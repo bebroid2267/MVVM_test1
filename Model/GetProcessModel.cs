@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -33,47 +34,47 @@ namespace MVVM_test1.Model
                 });
             }
         }
-
-        private void DeleteProcess()
+        private string GetDirectoryIco(ProcessTime process)
         {
-            Application.Current.Dispatcher.InvokeAsync(() =>
-            {
-                List<ProcessTime> processes = DateBase.GetInfoProcess("works");
-                foreach (ProcessTime process in processes)
-                {
-                    int index = WorksProcess.FindIndex(p => p.NameProcess == process.NameProcess); // Найти индекс элемента по условию
-
-                    if (index == -1)
-                    {
-                        Application.Current.Dispatcher.InvokeAsync(() =>
-                        {
-                            _WorkProcess.Remove(process);
-                        });
-                    }
-                    
-                }
-
-                OnPropertyChanged(nameof(WorksProcess)); // Уведомить об изменении коллекции
-            });
+            string projectDirectory = Directory.GetCurrentDirectory();
+            
+            string filePath = Path.Combine(projectDirectory, process.NameProcess + ".ico");
+            if (File.Exists(filePath))
+                return filePath;
+            else
+                return null;
         }
+        
         private void AddOrChangeProcess()
         {
             Application.Current.Dispatcher.InvokeAsync(() =>
             {
                 List<ProcessTime> processes = DateBase.GetInfoProcess("works");
+
                 foreach (ProcessTime process in processes)
                 {
+                    string icoPath = GetDirectoryIco(process);
                     int index = WorksProcess.FindIndex(p => p.NameProcess == process.NameProcess); // Найти индекс элемента по условию
+                    
 
                     if (index != -1)
                     {
                         Application.Current.Dispatcher.InvokeAsync(() =>
                         {
+                            if (icoPath != null)
+                            {
+                                process.IcoPath = icoPath;
+                            }
                             _WorkProcess[index] = process; // Обновить элемент по индексу
                         });
                     }
                     else
                     {
+                        if (icoPath != null)
+                        {
+                            process.IcoPath = icoPath;
+                        }
+                        
                         _WorkProcess.Add(process);
                     }
                 }

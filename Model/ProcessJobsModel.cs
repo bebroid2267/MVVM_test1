@@ -18,6 +18,8 @@ using IronPython.Hosting;
 using Microsoft.Scripting.Hosting;
 
 using IronPython.SQLite;
+using System.IO;
+using System.Drawing;
 
 namespace MVVM_test1.Model
 {
@@ -82,6 +84,29 @@ namespace MVVM_test1.Model
                 DateBase.UpdateTimeProcess(nameProcess, sumTime);
         }
 
+        private void GetIcoPic(string filePath, Process process)
+        {
+            if (!File.Exists(filePath))
+            {
+                try
+                {
+                    string test =  process.MainModule.FileName;
+                    Icon icon = Icon.ExtractAssociatedIcon(process.MainModule.FileName);
+                    if (icon != null)
+                    {
+                        using (FileStream fs = new FileStream(filePath, FileMode.Create))
+                        {
+                            icon.Save(fs);                            
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+        }
+
         private void StartProcess(string nameProcess)
         {
             Application.Current.Dispatcher.InvokeAsync(() =>
@@ -94,12 +119,14 @@ namespace MVVM_test1.Model
             DateBase.StartSession(nameProcess,DateTime.UtcNow.AddHours(3).ToString());
 
             Process[] processes = Process.GetProcessesByName(nameProcess);
+            Process process = Process.GetProcessById(processes[0].Id);
 
-            
-            //Console.WriteLine($"Программа: {nameProcess} начала работать");
+            string projectDirectory = Directory.GetCurrentDirectory();
+            string filePath = Path.Combine(projectDirectory, process.ProcessName + ".ico");
 
+            Task.Run(() => GetIcoPic(filePath, process));
 
-                while (true)
+            while (true)
                 {
 
                     processes = Process.GetProcessesByName(nameProcess);

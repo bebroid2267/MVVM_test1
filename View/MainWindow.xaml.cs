@@ -22,10 +22,11 @@ namespace MVVM_test1
     {
         public MainWindow()
         {
-            InitializeComponent();
+            //InitializeComponent();
             DataContext = new MainVM();
             Closing += (DataContext as MainVM).ClosingWorksProcesess;
         }
 
+        
     }
 }

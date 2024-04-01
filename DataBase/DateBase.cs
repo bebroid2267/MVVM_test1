@@ -10,8 +10,8 @@ namespace MVVM_test1.DataBase
 {
     public static class DateBase
     {
-        //private static readonly string connectionString = @"Data Source = C:\Users\кирилл\Desktop\testFirstWPF.db";
-        private static readonly string connectionString = @"Data Source = C:\Users\porka\OneDrive\Рабочий стол\testFirstWPF.db";
+        private static readonly string connectionString = @"Data Source = C:\Users\кирилл\Desktop\testFirstWPF.db";
+        //private static readonly string connectionString = @"Data Source = C:\Users\porka\OneDrive\Рабочий стол\testFirstWPF.db";
 
 
         private static bool IfProcessExists(string name)
@@ -149,7 +149,7 @@ namespace MVVM_test1.DataBase
                 connection.Open();
                 var command = new SqliteCommand();
                 command.Connection = connection;
-                command.CommandText = $"SELECT name, sum_time, global_start_time, start_today_session FROM Process WHERE status LIKE '{whatTypeProcess}'";
+                command.CommandText = $"SELECT name, sum_time, global_start_time, start_today_session, ico_path FROM Process WHERE status LIKE '{whatTypeProcess}'";
             
                 var reader = command.ExecuteReader();
 
@@ -162,7 +162,13 @@ namespace MVVM_test1.DataBase
                     if (!reader.IsDBNull(3))
                     {
                         info.StartTodaySession = reader.GetString(3);
+                        
                     }
+                    else
+                    {
+                        info.IcoPath = reader.GetString(4);
+                    }
+
                     infoProcesess.Add(info);
                 }
 
@@ -234,6 +240,20 @@ namespace MVVM_test1.DataBase
 
                 connection.Close();
 
+            }
+
+        }
+        public static void AddIcoPath(string nameProcess, string icoPath)
+        {
+            using (SqliteConnection connection = new SqliteConnection(connectionString))
+            {
+                connection.Open();
+                var command = new SqliteCommand();
+                command.Connection = connection;
+                command.CommandText = $"UPDATE Process SET ico_path = {icoPath} WHERE name LIKE '{nameProcess}'";
+
+                command.ExecuteNonQuery();
+                connection.Close();
             }
 
         }
