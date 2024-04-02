@@ -187,13 +187,14 @@ namespace MVVM_test1.DataBase
 
                 string todaySession = GetTimeStartTodaySession(name);
                 DateTime timeSession;
+                command.Parameters.AddWithValue("@StartTodaySession", DateTime.UtcNow.AddHours(3));
                 if (todaySession != string.Empty)
                 {
                     timeSession = Convert.ToDateTime(todaySession);
                     if (timeSession.ToString("d") != DateTime.UtcNow.ToString("d"))
                     {
-                        command.CommandText = $"UPDATE Process SET start_session = '{dateTime}'," +
-                            $" status = 'works', start_today_session = {DateTime.UtcNow.AddHours(3)} " +
+                        command.CommandText = $"UPDATE Process SET start_session = '{dateTime.ToString()}'," +
+                            $" status = 'works', start_today_session = @StartTodaySession " +
                             $"WHERE name LIKE '{name}'";
                     }
                     else
@@ -203,8 +204,8 @@ namespace MVVM_test1.DataBase
                 }
                 else
                 {
-                    command.CommandText = $"UPDATE Process SET start_session = '{dateTime}', " +
-                        $"status = 'works', start_today_session = '{DateTime.UtcNow.AddHours(3).ToString()}' " +
+                    command.CommandText = $"UPDATE Process SET start_session = '{dateTime.ToString()}', " +
+                        $"status = 'works', start_today_session = @StartTodaySession " +
                         $"WHERE name LIKE '{name}'";
                 }
                 command.ExecuteNonQuery();
@@ -294,6 +295,28 @@ namespace MVVM_test1.DataBase
                     return false;
             }
 
+        }
+        public static ProcessTime GetMaxSumTimeProcessToday()
+        {
+            using (SqliteConnection connection = new SqliteConnection(connectionString))
+            {
+                ProcessTime process = new ProcessTime();
+                connection.Open();
+                var command = new SqliteCommand();
+                command.Connection = connection;
+                command.CommandText = $"SELECT sum_time, name FROM table " +
+                    $"ORDER BY sum_time DESC LIMIT 1 WHERE start_today_session LIKE '{DateTime.UtcNow.AddHours(3).ToString().Substring(0,10)}'";
+
+                var reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    process.SumTimeProcess = reader.GetString(0);
+                    process.NameProcess = reader.GetString(1);
+                }
+                connection.Close();
+                return process;
+            }
         }
     }
 }

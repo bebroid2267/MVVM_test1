@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:MVVM_test1" xmlns:viewmodel="clr-namespace:MVVM_test1.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:MainVM}"
         mc:Ignorable="d"
         Title="Process Monitor" 
-        Height="1560" 
+        Height="720" 
         Width="1220"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
@@ -65,7 +65,7 @@
                 <Border Grid.Row="1"
                     Grid.Column="1"
                     CornerRadius="20"
-                    Margin="20">
+                    Margin="40">
 
                     <Border.Background>
 
@@ -82,21 +82,26 @@
                     <Grid>
 
                         <Border Background="#ffffff"
-                            Height="200"
-                            Width="180"
-                            HorizontalAlignment="Left"
-                            VerticalAlignment="Top"
-                            CornerRadius="20"
+                            Width="184"
+                            HorizontalAlignment="Center"
+                            CornerRadius="20,1,20,20"
                             Opacity="0.3"
-                            Margin =" 10,10,0,0"/>
+                            Margin ="0,130,0,10"/>
+                        <Border Background="#ffffff"
+                                Width="60"
+                                HorizontalAlignment="Left"
+                                CornerRadius="20,20,1,1"
+                                Opacity="0.3"
+                                Margin ="132,10,0,70"/>
 
-                        <TextBlock Text="БОЛЬШЕ &#x0a;ВРЕМЕНИ &#x0a;ЗА &#x0a;СЕГОДНЯ"
+                        <TextBlock Text="Любимое &#x0a;приложение &#x0a;дня"
                                Foreground="#ffffff"
                                FontFamily="Oswald"
-                               FontSize="32"
+                               FontSize="19"
+                                 
                                VerticalAlignment="Top"
                                HorizontalAlignment="Left"
-                               Margin="30,20,0,0" />
+                               Margin="8,30,10,0" Width="142" Height="100" />
 
                     </Grid>
 
@@ -105,7 +110,7 @@
                 <Border Grid.Row="1"
             Grid.Column="2"
             CornerRadius="20"
-            Margin="20">
+            Margin="40">
 
                     <Border.Background>
 
@@ -122,30 +127,48 @@
                     <Grid>
 
                         <Border Background="#ffffff"
-                Height=" 200"
-                Width=" 180"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Top"
-                CornerRadius="20"
-                Opacity="0.3"
-                Margin =" 10,10,0,0"/>
+                                Height="48"
+                                Width=" 180"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Top"
+                                CornerRadius="20"
+                                Opacity="0.3"
+                                Margin ="0,142,0,0"/>
 
-                        <TextBlock Text="Любимая &#x0a;игра &#x0a;за &#x0a;сегодня"
+                        <Border Background="#ffffff"
+                                Height="60"
+                                Width="107"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                CornerRadius="15"
+                                Opacity="0.3"
+                                Margin ="83,0,0,0"/>
+
+                        <Border Background="#ffffff"
+                                Height="60"
+                                Width="68"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                CornerRadius="15"
+                                Opacity="0.3"
+                                Margin ="10,0,0,0"/>
+
+                        <TextBlock Text="Чаще всего &#x0a;используете"
                    Foreground="#ffffff"
                    FontFamily="Oswald"
-                   FontSize="32"
+                   FontSize="19"
                    VerticalAlignment="Top"
-                   HorizontalAlignment="Left"
-                   Margin="30,20,0,0" />
+                   HorizontalAlignment="Center"
+                   Margin="0,10,0,0" Width="180" />
 
                     </Grid>
 
                 </Border>
                 <!--panel 3-->
                 <Border Grid.Row="1"
-        Grid.Column="3"
-        CornerRadius="20"
-        Margin="20">
+                        Grid.Column="3"
+                        CornerRadius="20"
+                        Margin="40">
 
                     <Border.Background>
 
@@ -162,21 +185,39 @@
                     <Grid>
 
                         <Border Background="#ffffff"
-                Height=" 200"
-                Width=" 180"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Top"
-                CornerRadius="20"
-                Opacity="0.3"
-                Margin =" 10,10,0,0"/>
+        Height="48"
+        Width=" 180"
+        HorizontalAlignment="Center"
+        VerticalAlignment="Top"
+        CornerRadius="20"
+        Opacity="0.3"
+        Margin ="0,142,0,0"/>
 
-                        <TextBlock Text="БОЛЬШЕ &#x0a;ВСЕГО &#x0a;ВРЕМЕНИ"
-                   Foreground="#ffffff"
-                   FontFamily="Oswald"
-                   FontSize="32"
-                   VerticalAlignment="Top"
-                   HorizontalAlignment="Left"
-                   Margin="30,20,0,0" />
+                        <Border Background="#ffffff"
+                                Height="60"
+                                Width="107"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                CornerRadius="15"
+                                Opacity="0.3"
+                                Margin ="83,0,0,0"/>
+
+                        <Border Background="#ffffff"
+                                Height="60"
+                                Width="68"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Center"
+                                CornerRadius="15"
+                                Opacity="0.3"
+                                Margin ="10,0,0,0"/>
+
+                        <TextBlock Text="Давно не &#x0a;запускали"
+                                    Foreground="#ffffff"
+                                    FontFamily="Oswald"
+                                    FontSize="19"
+                                    VerticalAlignment="Top"
+                                    HorizontalAlignment="Center"
+                                    Margin="0,10,0,0" Width="180" />
 
                     </Grid>
 
@@ -186,7 +227,7 @@
                 <Border Grid.Row="1"
                     Grid.Column="4"
                     CornerRadius="20"
-                    Margin="20">
+                    Margin="40">
 
                     <Border.Background>
 
@@ -203,22 +244,38 @@
                     <Grid>
 
                         <Border Background="#ffffff"
-                            Height=" 200"
-                            Width=" 180"
+                            Height="76"
+                            Width="73"
                             HorizontalAlignment="Left"
                             VerticalAlignment="Top"
                             CornerRadius="20"
                             Opacity="0.3"
-                            Margin =" 10,10,0,0"/>
+                            Margin ="117,10,0,0"/>
 
-                        <TextBlock Text="Первая &#x0a;Программа &#x0a;За &#x0a;Сегодня"
-                               Foreground="#ffffff"
-                               FontFamily="Oswald"
-                               FontSize="32"
-                               VerticalAlignment="Top"
-                               HorizontalAlignment="Left"
-                               Margin="30,20,0,0" />
+                        <Border Background="#ffffff"
+    Height="76"
+    Width="73"
+    HorizontalAlignment="Left"
+    VerticalAlignment="Top"
+    CornerRadius="20"
+    Opacity="0.3"
+    Margin ="10,114,0,0"/>
 
+                        <TextBlock Text="За сегодня"
+                                    Foreground="#ffffff"
+                                    FontFamily="Oswald"
+                                    FontSize="19"
+                                    VerticalAlignment="Top"
+                                    HorizontalAlignment="Left"
+                                    Margin="10,25,0,0" Width="99" />
+
+                        <TextBlock Text="За вчера"
+            Foreground="#ffffff"
+            FontFamily="Oswald"
+            FontSize="19"
+            VerticalAlignment="Top"
+            HorizontalAlignment="Left"
+            Margin="110,141,0,0" Width="86" />
 
                     </Grid>
 
