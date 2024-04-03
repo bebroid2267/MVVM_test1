@@ -87,6 +87,16 @@
                             CornerRadius="20,1,20,20"
                             Opacity="0.3"
                             Margin ="0,130,0,10"/>
+
+                        <TextBlock Text="Любимое &#x0a;приложение &#x0a;дня"
+       Foreground="#ffffff"
+       FontFamily="Oswald"
+       FontSize="19"
+         
+       VerticalAlignment="Top"
+       HorizontalAlignment="Left"
+       Margin="8,30,10,0" Width="142" Height="100" />
+
                         <Border Background="#ffffff"
                                 Width="60"
                                 HorizontalAlignment="Left"
@@ -94,15 +104,37 @@
                                 Opacity="0.3"
                                 Margin ="132,10,0,70"/>
 
-                        <TextBlock Text="Любимое &#x0a;приложение &#x0a;дня"
-                               Foreground="#ffffff"
-                               FontFamily="Oswald"
-                               FontSize="19"
-                                 
-                               VerticalAlignment="Top"
-                               HorizontalAlignment="Left"
-                               Margin="8,30,10,0" Width="142" Height="100" />
+                        <ListBox ItemsSource="{Binding FavoriteAppToday}"
+                                 d:ItemsSource="{d:SampleData ItemCount=1}" HorizontalAlignment="Center" Width="184" Height="180" VerticalAlignment="Center" >
 
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid>
+
+
+
+                                        <TextBlock Text="{Binding NameProcess}" 
+                                                      FontWeight="DemiBold"
+                                                    Foreground="#FFFFFF"
+                                                    FontSize="19" Margin="0,127,-7,0" 
+                                                   Height="27" 
+                                                   VerticalAlignment="Top" HorizontalAlignment="Right" Width="168" />
+
+                                        <TextBlock Text="{Binding SumTimeProcess}"
+                                       FontWeight="DemiBold"
+                                        Foreground="#FFFFFF"
+                                        Margin="119,0,-5,47"
+                                        FontSize="14"
+                                                   Width="52" Height="20" VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
+                                        <Image Source="{Binding IcoPath}"
+                                               Width="45"
+                                               Height="45"
+                                                HorizontalAlignment="Center"
+                                                Margin="-8,-80,-133,-8"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
                     </Grid>
 
                 </Border>
@@ -153,7 +185,45 @@
                                 Opacity="0.3"
                                 Margin ="10,0,0,0"/>
 
-                        <TextBlock Text="Чаще всего &#x0a;используете"
+                        <ListBox ItemsSource="{Binding UsingAppEverTime}"
+         d:ItemsSource="{d:SampleData ItemCount=1}" HorizontalAlignment="Center" Width="184" Height="180" VerticalAlignment="Center" >
+
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid>
+
+
+
+                                        <TextBlock Text="{Binding NameProcess}" 
+                                              FontWeight="DemiBold"
+                                             Foreground="#FFFFFF"
+                                             FontSize="19" Margin="5,127,0,0" 
+                                             Height="42" 
+                                             VerticalAlignment="Stretch" 
+                                            HorizontalAlignment="Center" 
+                                                   Width="168" />
+
+                                        <TextBlock Text="{Binding SumTimeProcess}"
+                                                   FontWeight="DemiBold"
+                                                    Foreground="#FFFFFF"
+                                                    Margin="72,0,0,0"
+                                                    FontSize="18"
+                                                   Width="95" 
+                                                   Height="41" 
+                                                   VerticalAlignment="Center" 
+                                                   HorizontalAlignment="Left"/>
+
+                                        <Image Source="{Binding IcoPath}"
+                                           Width="45"
+                                           Height="45"
+                                            HorizontalAlignment="Center"
+                                            Margin="-243,-14,-133,-8"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+
+                        <TextBlock Text="Чаще всего &#x0a;использовали"
                    Foreground="#ffffff"
                    FontFamily="Oswald"
                    FontSize="19"
@@ -253,13 +323,13 @@
                             Margin ="117,10,0,0"/>
 
                         <Border Background="#ffffff"
-    Height="76"
-    Width="73"
-    HorizontalAlignment="Left"
-    VerticalAlignment="Top"
-    CornerRadius="20"
-    Opacity="0.3"
-    Margin ="10,114,0,0"/>
+                                Height="76"
+                                Width="73"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Top"
+                                CornerRadius="20"
+                                Opacity="0.3"
+                                Margin ="10,114,0,0"/>
 
                         <TextBlock Text="За сегодня"
                                     Foreground="#ffffff"
@@ -377,12 +447,24 @@
                                             <ColumnDefinition Width="Auto"/>
                                         </Grid.ColumnDefinitions>
 
+
+
+                                        <Border Background="#ffffff"
+                                                Height="50"
+                                                Width="70"
+                                                HorizontalAlignment="Left"
+                                                VerticalAlignment="Center"
+                                                CornerRadius="15"
+                                                Opacity="0.3"
+                                                Margin ="28,0,0,0"/>
+
                                         <Border CornerRadius="100" 
-                                                Margin="32,0,35,0"
+                                                Margin="32,0,43,1"
                                                 BorderThickness="1">
-                                            <Image Source="{Binding IcoPath}"
-                                                   />
+                                            <Image Source="{Binding IcoPath}" Margin="4,5,8,5" RenderTransformOrigin="0.319,0.224" />
                                         </Border>
+
+
 
                                         <TextBlock Text="{Binding NameProcess}" 
                                                    FontWeight="DemiBold"

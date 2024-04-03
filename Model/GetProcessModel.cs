@@ -34,7 +34,7 @@ namespace MVVM_test1.Model
                 });
             }
         }
-        private string GetDirectoryIco(ProcessTime process)
+        public string GetDirectoryIco(ProcessTime process)
         {
             string projectDirectory = Directory.GetCurrentDirectory();
             

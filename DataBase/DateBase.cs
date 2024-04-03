@@ -2,6 +2,8 @@
 using Microsoft.Xaml.Behaviors.Media;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,8 +12,8 @@ namespace MVVM_test1.DataBase
 {
     public static class DateBase
     {
-        private static readonly string connectionString = @"Data Source = C:\Users\кирилл\Desktop\testFirstWPF.db";
-        //private static readonly string connectionString = @"Data Source = C:\Users\porka\OneDrive\Рабочий стол\testFirstWPF.db";
+        //private static readonly string connectionString = @"Data Source = C:\Users\кирилл\Desktop\testFirstWPF.db";
+        private static readonly string connectionString = @"Data Source = C:\Users\porka\OneDrive\Рабочий стол\testFirstWPF.db";
 
 
         private static bool IfProcessExists(string name)
@@ -149,7 +151,11 @@ namespace MVVM_test1.DataBase
                 connection.Open();
                 var command = new SqliteCommand();
                 command.Connection = connection;
-                command.CommandText = $"SELECT name, sum_time, global_start_time, start_today_session, ico_path FROM Process WHERE status LIKE '{whatTypeProcess}'";
+
+                if (whatTypeProcess == "all")
+                    command.CommandText = $"SELECT name, sum_time, global_start_time, start_today_session FROM Process";
+                else
+                command.CommandText = $"SELECT name, sum_time, global_start_time, start_today_session FROM Process WHERE status LIKE '{whatTypeProcess}'";
             
                 var reader = command.ExecuteReader();
 
@@ -164,11 +170,7 @@ namespace MVVM_test1.DataBase
                         info.StartTodaySession = reader.GetString(3);
                         
                     }
-                    else
-                    {
-                        info.IcoPath = reader.GetString(4);
-                    }
-
+                    
                     infoProcesess.Add(info);
                 }
 
@@ -187,14 +189,16 @@ namespace MVVM_test1.DataBase
 
                 string todaySession = GetTimeStartTodaySession(name);
                 DateTime timeSession;
-                command.Parameters.AddWithValue("@StartTodaySession", DateTime.UtcNow.AddHours(3));
+                //string startTodaySession = DateTime.UtcNow.AddHours(3).ToString();
+                //command.Parameters.AddWithValue("@StartTodaySession", startTodaySession);
+
                 if (todaySession != string.Empty)
                 {
                     timeSession = Convert.ToDateTime(todaySession);
                     if (timeSession.ToString("d") != DateTime.UtcNow.ToString("d"))
                     {
-                        command.CommandText = $"UPDATE Process SET start_session = '{dateTime.ToString()}'," +
-                            $" status = 'works', start_today_session = @StartTodaySession " +
+                        command.CommandText = $"UPDATE Process SET start_session = '{dateTime}'," +
+                            $" status = 'works', start_today_session = '{dateTime}' " +
                             $"WHERE name LIKE '{name}'";
                     }
                     else
@@ -205,7 +209,7 @@ namespace MVVM_test1.DataBase
                 else
                 {
                     command.CommandText = $"UPDATE Process SET start_session = '{dateTime.ToString()}', " +
-                        $"status = 'works', start_today_session = @StartTodaySession " +
+                        $"status = 'works', start_today_session = '{dateTime}'" +
                         $"WHERE name LIKE '{name}'";
                 }
                 command.ExecuteNonQuery();
@@ -296,26 +300,45 @@ namespace MVVM_test1.DataBase
             }
 
         }
+        
         public static ProcessTime GetMaxSumTimeProcessToday()
         {
             using (SqliteConnection connection = new SqliteConnection(connectionString))
             {
-                ProcessTime process = new ProcessTime();
+                Dictionary<ProcessTime,DateTime> sumTimeApps = new Dictionary<ProcessTime, DateTime>();
+                List<ProcessTime> procesess = new List<ProcessTime>();
+
                 connection.Open();
                 var command = new SqliteCommand();
                 command.Connection = connection;
-                command.CommandText = $"SELECT sum_time, name FROM table " +
-                    $"ORDER BY sum_time DESC LIMIT 1 WHERE start_today_session LIKE '{DateTime.UtcNow.AddHours(3).ToString().Substring(0,10)}'";
+                string todayDate = DateTime.UtcNow.AddHours(3).ToString().Substring(0, 10);
 
+                command.CommandText = $"SELECT sum_time, name FROM Process " +
+                $"WHERE start_today_session LIKE '{todayDate}%'";
                 var reader = command.ExecuteReader();
 
                 while (reader.Read())
                 {
-                    process.SumTimeProcess = reader.GetString(0);
-                    process.NameProcess = reader.GetString(1);
+                    ProcessTime processTime = new ProcessTime();
+                    processTime.SumTimeProcess = reader.GetString(0);
+                    processTime.NameProcess = reader.GetString(1);
+                    procesess.Add(processTime);
                 }
+
+                
+                foreach (var app in procesess)
+                {
+                    DateTime sumTime;
+                    DateTime.TryParseExact(app.SumTimeProcess, "HH:mm:ss", CultureInfo.InvariantCulture,
+                            DateTimeStyles.None, out sumTime);
+                    sumTimeApps.Add(app,sumTime);
+                }
+                
                 connection.Close();
-                return process;
+                ProcessTime processTime1 = procesess.OrderByDescending(x => TimeSpan.Parse(x.SumTimeProcess)).First();
+
+                return processTime1;
+                
             }
         }
     }

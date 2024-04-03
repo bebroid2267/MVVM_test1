@@ -24,9 +24,34 @@ namespace MVVM_test1.ViewModel
         {
             DateBase.StopWorksProcesess();
         }
+
+        public ObservableCollection<ProcessTime> UsingAppEverTime
+        {
+            get { return AppEver._MoreUsingApp; }
+            set
+            {
+                Application.Current.Dispatcher.InvokeAsync(() =>
+                {
+                    AppEver._MoreUsingApp = value;
+                    OnPropertyChanged(nameof(UsingAppEverTime));
+                });
+            }
+        }
+        public ObservableCollection<ProcessTime> FavoriteAppToday
+        {
+            get { return AppToday._FavAppToday; }
+            set
+            {
+                Application.Current.Dispatcher.InvokeAsync(() =>
+                {
+                    AppToday._FavAppToday = value;
+                    OnPropertyChanged(nameof(FavoriteAppToday));
+                });
+            }
+        }
         public ObservableCollection<string> Process
         {
-            
+
             get { return processes._RunningProcesess; }
             set 
             {
@@ -55,10 +80,15 @@ namespace MVVM_test1.ViewModel
 
         public MainVM()
         {
+            AppEver = new FastStatMoreUsingAppEver();
             WorksProcesess = new GetProcessModel();
             processes = new ProcessJobsModel();
+            AppToday = new FastStatFavoriteAppTodayModel();
             Application.Current.Dispatcher.InvokeAsync(() =>
             {
+                AppEver.GetMoreUsingApp();
+                AppToday.GetFavoriteApp();
+
                 System.Timers.Timer timer = new System.Timers.Timer(5000);
                 timer.Elapsed += processes.MonitorProcesess;
                 timer.Start();
@@ -80,7 +110,8 @@ namespace MVVM_test1.ViewModel
         }
         public GetProcessModel WorksProcesess;
         public ProcessJobsModel processes;
-        
+        public FastStatFavoriteAppTodayModel AppToday;
+        public FastStatMoreUsingAppEver AppEver;
 
     }
 }
