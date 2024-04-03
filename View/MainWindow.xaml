@@ -104,7 +104,7 @@
                                 Opacity="0.3"
                                 Margin ="132,10,0,70"/>
 
-                        <ListBox ItemsSource="{Binding FavoriteAppToday}"
+                        <ListBox ItemsSource="{Binding _AppToday}"
                                  d:ItemsSource="{d:SampleData ItemCount=1}" HorizontalAlignment="Center" Width="184" Height="180" VerticalAlignment="Center" >
 
                             <ListBox.ItemTemplate>
@@ -116,21 +116,42 @@
                                         <TextBlock Text="{Binding NameProcess}" 
                                                       FontWeight="DemiBold"
                                                     Foreground="#FFFFFF"
-                                                    FontSize="19" Margin="0,127,-7,0" 
-                                                   Height="27" 
-                                                   VerticalAlignment="Top" HorizontalAlignment="Right" Width="168" />
+                                                    FontSize="19" 
+                                                   Margin="0,117,-7,0" 
+                                                   Height="49" 
+                                                   TextWrapping="Wrap"
+                                                   VerticalAlignment="Top" 
+                                                   HorizontalAlignment="Right" 
+                                                   Width="168" />
 
                                         <TextBlock Text="{Binding SumTimeProcess}"
                                        FontWeight="DemiBold"
                                         Foreground="#FFFFFF"
-                                        Margin="119,0,-5,47"
-                                        FontSize="14"
-                                                   Width="52" Height="20" VerticalAlignment="Bottom" HorizontalAlignment="Right"/>
+                                        Margin="0,0,-6,65"
+                                        FontSize="15"
+                                         Width="56" 
+                                         Height="20" 
+                                         VerticalAlignment="Bottom" 
+                                         HorizontalAlignment="Right"/>
+
+                                        <Image Width="45" 
+                                               Height="45" 
+                                               Stretch="UniformToFill"
+                                               Source="{Binding IcoPath}">
+                                            
+                                            <Image.Clip>
+                                                <RectangleGeometry RadiusX="5" 
+                                                                   RadiusY="20"
+                                                                   
+                                                                   Rect="20,-10,60,60"/>
+                                            </Image.Clip>
+                                        </Image>
                                         <Image Source="{Binding IcoPath}"
                                                Width="45"
+                                               
                                                Height="45"
-                                                HorizontalAlignment="Center"
-                                                Margin="-8,-80,-133,-8"/>
+                                                HorizontalAlignment="Left"
+                                                Margin="123,18,0,0" VerticalAlignment="Top"/>
                                     </Grid>
                                 </DataTemplate>
                             </ListBox.ItemTemplate>
@@ -185,7 +206,7 @@
                                 Opacity="0.3"
                                 Margin ="10,0,0,0"/>
 
-                        <ListBox ItemsSource="{Binding UsingAppEverTime}"
+                        <ListBox ItemsSource="{Binding _AppEver}"
          d:ItemsSource="{d:SampleData ItemCount=1}" HorizontalAlignment="Center" Width="184" Height="180" VerticalAlignment="Center" >
 
                             <ListBox.ItemTemplate>
@@ -280,6 +301,50 @@
                                 CornerRadius="15"
                                 Opacity="0.3"
                                 Margin ="10,0,0,0"/>
+
+                        <ListBox ItemsSource="{Binding _AppHaventLaucnTime}"
+                                 d:ItemsSource="{d:SampleData ItemCount=1}" 
+                                 HorizontalAlignment="Center" 
+                                 Width="184" 
+                                 Height="180" 
+                                 VerticalAlignment="Center" >
+
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid>
+
+
+
+                                        <TextBlock Text="{Binding NameProcess}" 
+                                     FontWeight="DemiBold"
+                                    Foreground="#FFFFFF"
+                                    FontSize="19" 
+                                     Margin="5,127,0,0" 
+                                    Height="42" 
+                                    VerticalAlignment="Stretch" 
+                                   HorizontalAlignment="Center" 
+                                          Width="168" />
+
+                                        <TextBlock Text="{Binding EndSession}"
+                                          FontWeight="DemiBold"
+                                           Foreground="#FFFFFF"
+                                                   TextWrapping="Wrap"
+                                           Margin="72,-5,-10,0"
+                                           FontSize="17"
+                                          Width="95" 
+                                          Height="41" 
+                                          VerticalAlignment="Center" 
+                                          HorizontalAlignment="Center"/>
+
+                                        <Image Source="{Binding IcoPath}"
+                                  Width="45"
+                                  Height="45"
+                                   HorizontalAlignment="Center"
+                                   Margin="-243,-14,-133,-8"/>
+                                    </Grid>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
 
                         <TextBlock Text="Давно не &#x0a;запускали"
                                     Foreground="#ffffff"

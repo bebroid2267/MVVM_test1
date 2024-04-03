@@ -12,8 +12,8 @@ namespace MVVM_test1.DataBase
 {
     public static class DateBase
     {
-        //private static readonly string connectionString = @"Data Source = C:\Users\кирилл\Desktop\testFirstWPF.db";
-        private static readonly string connectionString = @"Data Source = C:\Users\porka\OneDrive\Рабочий стол\testFirstWPF.db";
+        private static readonly string connectionString = @"Data Source = C:\Users\кирилл\Desktop\testFirstWPF.db";
+        //private static readonly string connectionString = @"Data Source = C:\Users\porka\OneDrive\Рабочий стол\testFirstWPF.db";
 
 
         private static bool IfProcessExists(string name)
@@ -153,9 +153,9 @@ namespace MVVM_test1.DataBase
                 command.Connection = connection;
 
                 if (whatTypeProcess == "all")
-                    command.CommandText = $"SELECT name, sum_time, global_start_time, start_today_session FROM Process";
+                    command.CommandText = $"SELECT name, sum_time, global_start_time, end_session, start_today_session FROM Process";
                 else
-                command.CommandText = $"SELECT name, sum_time, global_start_time, start_today_session FROM Process WHERE status LIKE '{whatTypeProcess}'";
+                command.CommandText = $"SELECT name, sum_time, global_start_time, end_session, start_today_session FROM Process WHERE status LIKE '{whatTypeProcess}'";
             
                 var reader = command.ExecuteReader();
 
@@ -166,10 +166,10 @@ namespace MVVM_test1.DataBase
                     info.SumTimeProcess = reader.GetString(1);
                     info.GlobalStartTime = reader.GetString(2);
                     if (!reader.IsDBNull(3))
-                    {
-                        info.StartTodaySession = reader.GetString(3);
-                        
-                    }
+                        info.EndSession = reader.GetString(3);
+                    if (!reader.IsDBNull(4))
+                        info.StartTodaySession = reader.GetString(4);
+                    
                     
                     infoProcesess.Add(info);
                 }
@@ -300,6 +300,7 @@ namespace MVVM_test1.DataBase
             }
 
         }
+        
         
         public static ProcessTime GetMaxSumTimeProcessToday()
         {

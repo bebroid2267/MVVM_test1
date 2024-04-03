@@ -25,7 +25,20 @@ namespace MVVM_test1.ViewModel
             DateBase.StopWorksProcesess();
         }
 
-        public ObservableCollection<ProcessTime> UsingAppEverTime
+        public ObservableCollection<ProcessTime> _AppHaventLaucnTime
+        {
+            get { return AppHaventLaucnTime._App; }
+            set
+            {
+                Application.Current.Dispatcher.InvokeAsync(() =>
+                {
+                    AppHaventLaucnTime._App = value;
+                    OnPropertyChanged(nameof(_AppHaventLaucnTime));
+                });
+            }
+        }
+
+        public ObservableCollection<ProcessTime> _AppEver
         {
             get { return AppEver._MoreUsingApp; }
             set
@@ -33,11 +46,11 @@ namespace MVVM_test1.ViewModel
                 Application.Current.Dispatcher.InvokeAsync(() =>
                 {
                     AppEver._MoreUsingApp = value;
-                    OnPropertyChanged(nameof(UsingAppEverTime));
+                    OnPropertyChanged(nameof(_AppEver));
                 });
             }
         }
-        public ObservableCollection<ProcessTime> FavoriteAppToday
+        public ObservableCollection<ProcessTime> _AppToday
         {
             get { return AppToday._FavAppToday; }
             set
@@ -45,7 +58,7 @@ namespace MVVM_test1.ViewModel
                 Application.Current.Dispatcher.InvokeAsync(() =>
                 {
                     AppToday._FavAppToday = value;
-                    OnPropertyChanged(nameof(FavoriteAppToday));
+                    OnPropertyChanged(nameof(_AppToday));
                 });
             }
         }
@@ -80,12 +93,14 @@ namespace MVVM_test1.ViewModel
 
         public MainVM()
         {
+            AppHaventLaucnTime = new FastStatLongTimeHaventAppModel();
             AppEver = new FastStatMoreUsingAppEver();
             WorksProcesess = new GetProcessModel();
             processes = new ProcessJobsModel();
             AppToday = new FastStatFavoriteAppTodayModel();
             Application.Current.Dispatcher.InvokeAsync(() =>
             {
+                AppHaventLaucnTime.GetLongTimeHaventLauchApp();
                 AppEver.GetMoreUsingApp();
                 AppToday.GetFavoriteApp();
 
@@ -112,6 +127,6 @@ namespace MVVM_test1.ViewModel
         public ProcessJobsModel processes;
         public FastStatFavoriteAppTodayModel AppToday;
         public FastStatMoreUsingAppEver AppEver;
-
+        public FastStatLongTimeHaventAppModel AppHaventLaucnTime;
     }
 }
