@@ -12,8 +12,8 @@ namespace MVVM_test1.DataBase
 {
     public static class DateBase
     {
-        private static readonly string connectionString = @"Data Source = C:\Users\кирилл\Desktop\testFirstWPF.db";
-        //private static readonly string connectionString = @"Data Source = C:\Users\porka\OneDrive\Рабочий стол\testFirstWPF.db";
+        //private static readonly string connectionString = @"Data Source = C:\Users\кирилл\Desktop\testFirstWPF.db";
+        private static readonly string connectionString = @"Data Source = C:\Users\porka\OneDrive\Рабочий стол\testFirstWPF.db";
 
 
         private static bool IfProcessExists(string name)
@@ -336,10 +336,133 @@ namespace MVVM_test1.DataBase
                 }
                 
                 connection.Close();
-                ProcessTime processTime1 = procesess.OrderByDescending(x => TimeSpan.Parse(x.SumTimeProcess)).First();
-
+                ProcessTime processTime1;
+                if (procesess.Count > 0)
+                    processTime1 = procesess.OrderByDescending(x => TimeSpan.Parse(x.SumTimeProcess)).First();
+                else
+                {
+                    processTime1 = new ProcessTime();
+                    processTime1.NameProcess = "Собираем статистику";
+                }
                 return processTime1;
                 
+            }
+        }
+        private static bool IfAppCountStartsExists(string name)
+        {
+            using (SqliteConnection connection = new SqliteConnection(connectionString))
+            {
+                connection.Open();
+                var command = new SqliteCommand();
+                command.CommandText = $"SELECT COUNT(*) FROM DailyCountStartsApp WHERE name_app LIKE '{name}'";
+
+                int result = (int)command.ExecuteScalar();
+
+                if (result > 0)
+                {
+                    connection.Close();
+                    return true;
+                }
+                else
+                {
+                    connection.Close();
+                    return false;
+                }
+            }
+
+        }
+
+
+        public static void StartNewDay()
+        {
+            using (SqliteConnection connection = new SqliteConnection(connectionString))
+            {
+                connection.Open();
+                var command = new SqliteCommand();
+                command.Connection = connection;
+                command.CommandText = $"SELECT name_app, today_count FROM DailyCountStartsApp WHERE today_date NOT LIKE '{DateTime.UtcNow.ToString("d")}'";
+
+                var reader = command.ExecuteReader();
+                List<ProcessTime>  process = new List<ProcessTime>();
+                while (reader.Read())
+                {
+                    ProcessTime app = new ProcessTime();
+                    app.NameProcess = reader.GetString(0);
+                    app.TodayCountStarts = reader.GetInt32(1);
+                    process.Add(app);
+                }
+                reader
+                    .Close();
+                if (process.Count > 0)
+                {
+                    foreach (ProcessTime item in process)
+                    {
+                        command.CommandText = $"UPDATE DailyCountStartsApp SET yesterday_count = '{item.TodayCountStarts}' " +
+                            $"WHERE name_app LIKE '{item.NameProcess}'";
+                        command.ExecuteNonQuery();
+                    }
+
+                    command.CommandText = $"UPDATE DailyCountStartsApp SET today_date = '{DateTime.UtcNow.ToString("d")}'";
+                    command.ExecuteNonQuery();
+
+                    command.CommandText = $"UPDATE DailyCountStartsApp SET today_count = 0";
+                    command.ExecuteNonQuery();
+                }
+                connection.Close();
+            }
+        }
+        private static void AddCountStartsApp(string name)
+        {
+            using (SqliteConnection connection = new SqliteConnection(connectionString))
+            {
+                connection.Open();
+                var command = new SqliteCommand();
+                command.Connection = connection;
+                command.Parameters.AddWithValue("@name", name);
+                command.CommandText = $"INSERT INTO DailyCountStartsApp (name_app, today_count, today_date) values (@name, 1, '{DateTime.UtcNow.ToString("d")}')";
+                command.ExecuteNonQuery();
+
+                connection.Close();
+            }
+        }
+        private static int GetDayCountStartsApp(string name, string whatDayCount)
+        {
+            using (SqliteConnection connection = new SqliteConnection(connectionString))
+            {
+                int countStarts = -1;
+                connection.Open();
+                var command = new SqliteCommand();
+                command.Connection = connection;
+                command.CommandText = $"SELECT '{whatDayCount}' FROM DailyCountStartsApp WHERE name_app LIKE '{name}'";
+
+                var reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    if (!reader.IsDBNull(0))
+                    countStarts = reader.GetInt32(0);
+                }
+                
+                connection.Close();
+                return countStarts;
+            }
+        }
+        public static void UpdateCountStartsApp(string name, string whatDayCount)
+        {
+            using (SqliteConnection connection = new SqliteConnection(connectionString))
+            {
+                int countStarts = GetDayCountStartsApp(name, whatDayCount);
+                connection.Open();
+                var command = new SqliteCommand();
+                command.Connection = connection;
+
+                if (countStarts != -1)
+                {
+                    countStarts++;
+                    command.CommandText = $"UPDATE DailyCountStartsApp SET '{whatDayCount}' = '{countStarts}'";
+                }
+                else
+                    AddCountStartsApp(name);
+
             }
         }
     }

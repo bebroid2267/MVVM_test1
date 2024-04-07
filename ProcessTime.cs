@@ -32,6 +32,9 @@ namespace MVVM_test1
         public string EndSession { get; set; }
         public string StartSession { get; set; }
         public string IcoPath { get; set; }
+        public int TodayCountStarts { get; set; }
+        public int YesterdayCountStarts { get; set; }
+
         public Category CategoryApp {  get; set; }
         public enum Category
         {

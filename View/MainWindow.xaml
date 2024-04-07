@@ -134,24 +134,21 @@
                                          VerticalAlignment="Bottom" 
                                          HorizontalAlignment="Right"/>
 
-                                        <Image Width="45" 
-                                               Height="45" 
-                                               Stretch="UniformToFill"
-                                               Source="{Binding IcoPath}">
-                                            
-                                            <Image.Clip>
-                                                <RectangleGeometry RadiusX="5" 
-                                                                   RadiusY="20"
-                                                                   
-                                                                   Rect="20,-10,60,60"/>
-                                            </Image.Clip>
-                                        </Image>
-                                        <Image Source="{Binding IcoPath}"
+                                        <Ellipse Height="45" Width="44" HorizontalAlignment="Left" Margin="123,0,0,103" VerticalAlignment="Bottom">
+                                            <Ellipse.Fill>
+                                                <ImageBrush Stretch="Fill" 
+                                                ImageSource="{Binding IcoPath}"
+                                                            
+                                                            />
+                                            </Ellipse.Fill>
+                                        </Ellipse>
+
+                                        <!--<Image Source="{Binding IcoPath}"
                                                Width="45"
                                                
                                                Height="45"
                                                 HorizontalAlignment="Left"
-                                                Margin="123,18,0,0" VerticalAlignment="Top"/>
+                                                Margin="123,18,0,0" VerticalAlignment="Top"/>-->
                                     </Grid>
                                 </DataTemplate>
                             </ListBox.ItemTemplate>
@@ -234,11 +231,20 @@
                                                    VerticalAlignment="Center" 
                                                    HorizontalAlignment="Left"/>
 
-                                        <Image Source="{Binding IcoPath}"
+                                        <Ellipse Height="45" Width="45" HorizontalAlignment="Right" Margin="0,0,117,64" VerticalAlignment="Bottom">
+                                            <Ellipse.Fill>
+                                                <ImageBrush Stretch="Fill" 
+        ImageSource="{Binding IcoPath}"
+                    
+                    />
+                                            </Ellipse.Fill>
+                                        </Ellipse>
+
+                                        <!--<Image Source="{Binding IcoPath}"
                                            Width="45"
                                            Height="45"
                                             HorizontalAlignment="Center"
-                                            Margin="-243,-14,-133,-8"/>
+                                            Margin="-243,-14,-133,-8"/>-->
                                     </Grid>
                                 </DataTemplate>
                             </ListBox.ItemTemplate>
@@ -336,11 +342,20 @@
                                           VerticalAlignment="Center" 
                                           HorizontalAlignment="Center"/>
 
-                                        <Image Source="{Binding IcoPath}"
+                                        <Ellipse Height="45" Width="45" HorizontalAlignment="Right" Margin="0,0,117,64" VerticalAlignment="Bottom">
+                                            <Ellipse.Fill>
+                                                <ImageBrush Stretch="Fill" 
+ImageSource="{Binding IcoPath}"
+            
+            />
+                                            </Ellipse.Fill>
+                                        </Ellipse>
+
+                                        <!--<Image Source="{Binding IcoPath}"
                                   Width="45"
                                   Height="45"
                                    HorizontalAlignment="Center"
-                                   Margin="-243,-14,-133,-8"/>
+                                   Margin="-243,-14,-133,-8"/>-->
                                     </Grid>
                                 </DataTemplate>
                             </ListBox.ItemTemplate>

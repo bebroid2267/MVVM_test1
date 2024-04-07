@@ -100,6 +100,7 @@ namespace MVVM_test1.ViewModel
             AppToday = new FastStatFavoriteAppTodayModel();
             Application.Current.Dispatcher.InvokeAsync(() =>
             {
+                DateBase.StartNewDay();
                 AppHaventLaucnTime.GetLongTimeHaventLauchApp();
                 AppEver.GetMoreUsingApp();
                 AppToday.GetFavoriteApp();

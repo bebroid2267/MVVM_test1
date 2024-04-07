@@ -117,6 +117,8 @@ namespace MVVM_test1.Model
 
             DateTime startTimeProcess = DateTime.UtcNow.AddHours(3);
             DateBase.StartSession(nameProcess,DateTime.UtcNow.AddHours(3).ToString());
+            DateBase.UpdateCountStartsApp(nameProcess, "today_count");
+
 
             Process[] processes = Process.GetProcessesByName(nameProcess);
             Process process = Process.GetProcessById(processes[0].Id);
@@ -127,8 +129,7 @@ namespace MVVM_test1.Model
             Task.Run(() => GetIcoPic(filePath, process));
 
             while (true)
-                {
-
+            {
                     processes = Process.GetProcessesByName(nameProcess);
 
                     if (processes.Length == 0)
@@ -173,6 +174,7 @@ namespace MVVM_test1.Model
                         UpdateSumTimeProcessEveryTime(nameProcess, totalTimeSpend);
                         startTimeProcess = DateTime.UtcNow.AddHours(3);
                     }
+                
                     Thread.Sleep(3000);
                 }
             
