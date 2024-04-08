@@ -33,11 +33,16 @@ namespace MVVM_test1.Model
         public void GetMoreUsingApp()
         {
             List<ProcessTime> procesess = DateBase.GetInfoProcess("all");
-
-            ProcessTime moreUseApp = procesess.OrderByDescending(x => TimeSpan.Parse(x.SumTimeProcess)).First();
-            GetProcessModel processModel = new GetProcessModel();
-            if (processModel.GetDirectoryIco(moreUseApp) != null)
-            moreUseApp.IcoPath =  processModel.GetDirectoryIco(moreUseApp);
+            ProcessTime moreUseApp = new();
+            if (procesess.Count > 0)
+            {
+                moreUseApp = procesess.OrderByDescending(x => TimeSpan.Parse(x.SumTimeProcess)).First();
+                GetProcessModel processModel = new GetProcessModel();
+                if (processModel.GetDirectoryIco(moreUseApp) != null)
+                    moreUseApp.IcoPath = processModel.GetDirectoryIco(moreUseApp);
+            }
+            else
+                moreUseApp.NameProcess = "Собираем статистику";
 
             if (MoreUsingApp.Count > 0)
                 MoreUsingApp[0] = moreUseApp;

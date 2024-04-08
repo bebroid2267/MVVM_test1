@@ -37,13 +37,21 @@ namespace MVVM_test1.Model
         public void GetLongTimeHaventLauchApp()
         {
             List<ProcessTime> apps = DateBase.GetInfoProcess("stoped");
-            ProcessTime process = apps.OrderBy(x => DateTime.Parse(x.EndSession)).First();
-            process.EndSession = process.EndSession.Substring(0,16);
+            ProcessTime process = new();
+            if (apps.Count > 0)
+            {
+                process = apps.OrderBy(x => DateTime.Parse(x.EndSession)).First();
 
-            GetProcessModel getProcessModel = new GetProcessModel();
-            string icoPath = getProcessModel.GetDirectoryIco(process);
-            if (icoPath != null)
-                process.IcoPath = icoPath;
+                process.EndSession = process.EndSession.Substring(0, 16);
+
+                GetProcessModel getProcessModel = new GetProcessModel();
+                string icoPath = getProcessModel.GetDirectoryIco(process);
+                if (icoPath != null)
+                    process.IcoPath = icoPath;
+            }
+            else
+                process.NameProcess = "собираем статистику";
+                
             if (_App.Count > 0)
                 _App[0] = process;
             else

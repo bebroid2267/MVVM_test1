@@ -51,29 +51,28 @@ namespace MVVM_test1.Model
         public async void MonitorProcesess(object sender, EventArgs e)
         {
             
-                ProcessWindow[] applications = await Task.Run(() => ProcessHelper.GetRunningApplications());
+            ProcessWindow[] applications = await Task.Run(() => ProcessHelper.GetRunningApplications());
 
-                if (applications != null)
+            if (applications != null)
+            { 
+                foreach (ProcessWindow process in applications)
                 {
-                    foreach (ProcessWindow process in applications)
-                    { 
-
-                        //dynamic addTask = scope.GetVariable("add_task"); //берем нужную функцию и закидываем в переменную
-                        //addTask(process.Process.ProcessName); // вызывает функцию с нужным аргументом
-
+                    //dynamic addTask = scope.GetVariable("add_task"); //берем нужную функцию и закидываем в переменную
+                    //addTask(process.Process.ProcessName); // вызывает функцию с нужным аргументом
+                    if (!NameProcesessDontCheck.Contains(process.Process.ProcessName))
+                    {
                         DateBase.AddProcess(process.Process.ProcessName, DateTime.UtcNow.AddHours(3).ToString());
 
                         if (!RunningProcesses.Contains(process.Process.ProcessName))
                         {
-                                Application.Current.Dispatcher.InvokeAsync(async () =>
-                                {
-                                    await Task.Run(() => StartProcess(process.Process.ProcessName));
-                                });
-
+                            Application.Current.Dispatcher.InvokeAsync(async () =>
+                            {
+                                await Task.Run(() => StartProcess(process.Process.ProcessName));
+                            });
                         }
-
                     }
                 }
+            }
 
         }
         private void UpdateSumTimeProcessEveryTime(string nameProcess, string sumTime)
@@ -222,12 +221,11 @@ namespace MVVM_test1.Model
             if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs(prop));
         }
-        private ScriptEngine engine;
-        private ScriptScope scope;
-
+        
         private string TotalTimeSpendForCheck = string.Empty;
 
         private ObservableCollection<string> RunningProcesses = new ObservableCollection<string>();
         private ObservableCollection<string> CheckTimeProcesess = new ObservableCollection<string>();
+        private List<string> NameProcesessDontCheck = new List<string> { "ApplicationFrameHost", "devenv", "SystemSettings", "TextInputHost", };
     }
 }

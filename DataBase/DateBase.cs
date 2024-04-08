@@ -12,8 +12,8 @@ namespace MVVM_test1.DataBase
 {
     public static class DateBase
     {
-        //private static readonly string connectionString = @"Data Source = C:\Users\кирилл\Desktop\testFirstWPF.db";
-        private static readonly string connectionString = @"Data Source = C:\Users\porka\OneDrive\Рабочий стол\testFirstWPF.db";
+        private static readonly string connectionString = @"Data Source = C:\Users\кирилл\Desktop\testFirstWPF.db";
+        //private static readonly string connectionString = @"Data Source = C:\Users\porka\OneDrive\Рабочий стол\testFirstWPF.db";
 
 
         private static bool IfProcessExists(string name)
@@ -419,13 +419,13 @@ namespace MVVM_test1.DataBase
                 var command = new SqliteCommand();
                 command.Connection = connection;
                 command.Parameters.AddWithValue("@name", name);
-                command.CommandText = $"INSERT INTO DailyCountStartsApp (name_app, today_count, today_date) values (@name, 1, '{DateTime.UtcNow.ToString("d")}')";
+                command.CommandText = $"INSERT INTO DailyCountStartsApp (name_app, today_count, today_date) values (@name, {1}, '{DateTime.UtcNow.ToString("d")}')";
                 command.ExecuteNonQuery();
 
                 connection.Close();
             }
         }
-        private static int GetDayCountStartsApp(string name, string whatDayCount)
+        private static int GetDayCountStartsApp(string name)
         {
             using (SqliteConnection connection = new SqliteConnection(connectionString))
             {
@@ -433,12 +433,11 @@ namespace MVVM_test1.DataBase
                 connection.Open();
                 var command = new SqliteCommand();
                 command.Connection = connection;
-                command.CommandText = $"SELECT '{whatDayCount}' FROM DailyCountStartsApp WHERE name_app LIKE '{name}'";
+                command.CommandText = $"SELECT today_count FROM DailyCountStartsApp WHERE name_app LIKE '{name}'";
 
                 var reader = command.ExecuteReader();
                 while (reader.Read())
                 {
-                    if (!reader.IsDBNull(0))
                     countStarts = reader.GetInt32(0);
                 }
                 
@@ -450,7 +449,7 @@ namespace MVVM_test1.DataBase
         {
             using (SqliteConnection connection = new SqliteConnection(connectionString))
             {
-                int countStarts = GetDayCountStartsApp(name, whatDayCount);
+                int countStarts = GetDayCountStartsApp(name);
                 connection.Open();
                 var command = new SqliteCommand();
                 command.Connection = connection;
@@ -458,12 +457,143 @@ namespace MVVM_test1.DataBase
                 if (countStarts != -1)
                 {
                     countStarts++;
-                    command.CommandText = $"UPDATE DailyCountStartsApp SET '{whatDayCount}' = '{countStarts}'";
+                    command.CommandText = $"UPDATE DailyCountStartsApp SET {whatDayCount} = '{countStarts}' WHERE name_app LIKE '{name}'";
+                    command.ExecuteNonQuery();
                 }
                 else
                     AddCountStartsApp(name);
 
             }
         }
+        public static ProcessTime GetRandomApp(string numberApp, string nameApp)
+        {
+            using (SqliteConnection connection = new SqliteConnection(connectionString))
+            {
+                ProcessTime process = new ProcessTime();
+
+                connection.Open();
+                var command = new SqliteCommand();
+                command.Connection = connection;
+                if (numberApp == "one")
+                {
+                    command.CommandText = $"SELECT name_app, today_count FROM DailyCountStartsApp WHERE today_date LIKE '{DateTime.UtcNow.ToString("d")}'" +
+                    $"ORDER BY RANDOM() LIMIT 1";
+                }
+                else
+                {
+                    command.CommandText = $"SELECT name_app, today_count FROM DailyCountStartsApp WHERE today_date LIKE '{DateTime.UtcNow.ToString("d")}'" +
+                    $"AND name_app NOT LIKE '{nameApp}'  ORDER BY RANDOM() LIMIT 1";
+                }
+                var reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    process.NameProcess = reader.GetString(0);
+                    process.TodayCountStarts = reader.GetInt32(1);
+                }
+                connection.Close();
+                return process;
+
+            }
+        }
+        public static bool IfExistsTodayStartUsingPc(string date)
+        {
+            using (SqliteConnection connection = new SqliteConnection(connectionString))
+            {
+                connection.Open();
+                var command = new SqliteCommand();
+                command.Connection = connection;
+                command.CommandText = $"SELECT COUNT(*) FROM DurationUsingPc WHERE date LIKE '{date}'";
+                
+                long exists = (long)command.ExecuteScalar();
+                if (exists > 0)
+                {
+                    connection.Close();
+                    return true;
+                }
+                else
+                {
+                    connection.Close();
+                    return false;
+                }
+            }
+        }
+        
+        public static void UpdateSumTimeUsingPc(string date, string sumTime)
+        {
+            using (SqliteConnection connection = new SqliteConnection(connectionString))
+            {
+                connection.Open();
+                var command = new SqliteCommand();
+                command.Connection = connection;
+                command.CommandText = $"UPDATE DurationUsingPc SET sum_time = '{sumTime}' WHERE date LIKE '{date}'";
+                command.ExecuteNonQuery();
+                connection.Close();
+            }
+        }
+        public static void StartTodayUsingPc(string date)
+        {
+            using (SqliteConnection connection = new SqliteConnection(connectionString))
+            {
+                connection.Open();
+                var command = new SqliteCommand();
+                command.Connection = connection;
+                if (!IfExistsTodayStartUsingPc(date))
+                {
+                    command.Parameters.AddWithValue("@start_time",$"{DateTime.UtcNow.AddHours(3)}");
+                    command.Parameters.AddWithValue("@date", $"{DateTime.UtcNow.ToString("d")}");
+                    command.CommandText = $"INSERT INTO DurationUsingPc (start_time, date) values (@start_time, @date)";
+                    command.ExecuteNonQuery();
+                }
+                connection.Close();
+            }
+        }
+        public static void EndTodayUsingPc(string date)
+        {
+            using (SqliteConnection connection = new SqliteConnection(connectionString))
+            {
+                connection.Open();
+                var command = new SqliteCommand();
+                command.Connection = connection;
+                command.CommandText = $"UPDATE DurationUsingPc SET end_time = '{DateTime.UtcNow.AddHours(3)}'" +
+                    $" WHERE date LIKE '{date}'";
+                command.ExecuteNonQuery();
+                connection.Close();
+            }
+        }
+
+        public static string GetSumTimeUsingPcToday(string date)
+        {
+            using (SqliteConnection connection = new SqliteConnection(connectionString))
+            {
+                string time = string.Empty;
+                connection.Open();
+
+                var command = new SqliteCommand();
+                command.Connection = connection;
+                command.CommandText = $"SELECT sum_time FROM DurationUsingPc WHERE date LIKE '{date}' ";
+
+                var reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    if (!reader.IsDBNull(0))
+                    {
+                        time = reader.GetString(0);
+                    }
+                    else
+                    {
+                        connection.Close();
+                        return null;
+                    }
+                }
+
+                connection.Close();
+                return time;
+
+            }
+
+        }
+
+
     }
 }

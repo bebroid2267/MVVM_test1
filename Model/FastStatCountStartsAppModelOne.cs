@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
@@ -12,39 +13,39 @@ using System.Windows;
 
 namespace MVVM_test1.Model
 {
-    public class FastStatFavoriteAppTodayModel : BindableBase, INotifyPropertyChanged
+    public class FastStatCountStartsAppModelOne : BindableBase, INotifyPropertyChanged
     {
-
-        public FastStatFavoriteAppTodayModel()
+        public FastStatCountStartsAppModelOne() 
         {
-            FavoriteApp = _FavAppToday;
+            App = _App;
         }
-        public ObservableCollection<ProcessTime> _FavAppToday
+        public ObservableCollection<ProcessTime> _App
         {
-            get { return FavoriteApp; }
+            get { return App; }
             set
             {
                 Application.Current.Dispatcher.InvokeAsync(() =>
-                { 
-                    FavoriteApp = value;
-                    OnPropertyChanged(nameof(FavoriteApp));
+                {
+                    App = value;
+                    OnPropertyChanged(nameof(App));
                 });
+                
             }
         }
-        public void GetFavoriteApp()
+
+        public void GetCountStartsRandomApp(string numberApp, string name)
         {
-            ProcessTime process = DateBase.GetMaxSumTimeProcessToday();
+            ProcessTime randomApp = DateBase.GetRandomApp(numberApp, name);
             GetProcessModel getProcessModel = new GetProcessModel();
-            string icoPath = getProcessModel.GetDirectoryIco(process);
-
+            string icoPath = getProcessModel.GetDirectoryIco(randomApp);
             if (icoPath != null)
-                process.IcoPath = icoPath;
-            if (_FavAppToday.Count > 0)
-                _FavAppToday[0] = process;
-            else
-                _FavAppToday.Add(process);
-        }
+                randomApp.IcoPath = icoPath;
 
+            if (_App.Count > 0)
+                _App[0] = randomApp;
+            else
+                _App.Add(randomApp);
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName] string prop = "")
@@ -52,7 +53,6 @@ namespace MVVM_test1.Model
             if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs(prop));
         }
-        private ObservableCollection<ProcessTime> FavoriteApp = new ObservableCollection<ProcessTime>();
+        private ObservableCollection<ProcessTime> App = new ObservableCollection<ProcessTime>();
     }
-    
 }

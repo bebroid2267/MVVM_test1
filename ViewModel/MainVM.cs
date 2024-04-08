@@ -23,8 +23,35 @@ namespace MVVM_test1.ViewModel
         public void ClosingWorksProcesess(object sender, EventArgs e)
         {
             DateBase.StopWorksProcesess();
+            DateBase.EndTodayUsingPc(DateTime.UtcNow.ToString("d"));
+        }
+        public ObservableCollection<ProcessTime> _RandomAppTwo
+        {
+            get { return RandomAppTwo._App; }
+            set
+            {
+                Application.Current.Dispatcher.InvokeAsync(() =>
+                {
+                    RandomAppTwo._App = value;
+                    OnPropertyChanged(nameof(_RandomAppTwo));
+                });
+            }
+
         }
 
+        public ObservableCollection<ProcessTime> _RandomAppOne
+        {
+            get { return RandomAppOne._App; }
+            set 
+            {
+                Application.Current.Dispatcher.InvokeAsync(() =>
+                {
+                    RandomAppOne._App = value;
+                    OnPropertyChanged(nameof(_RandomAppOne));
+                });
+            }
+
+        }
         public ObservableCollection<ProcessTime> _AppHaventLaucnTime
         {
             get { return AppHaventLaucnTime._App; }
@@ -93,6 +120,10 @@ namespace MVVM_test1.ViewModel
 
         public MainVM()
         {
+            Task.Run(() => UsingPcTimeModel.CheckUsingPc());
+
+            RandomAppOne = new FastStatCountStartsAppModelOne();
+            RandomAppTwo = new FastStatCountStartsAppModelOne();
             AppHaventLaucnTime = new FastStatLongTimeHaventAppModel();
             AppEver = new FastStatMoreUsingAppEver();
             WorksProcesess = new GetProcessModel();
@@ -100,10 +131,14 @@ namespace MVVM_test1.ViewModel
             AppToday = new FastStatFavoriteAppTodayModel();
             Application.Current.Dispatcher.InvokeAsync(() =>
             {
+
                 DateBase.StartNewDay();
+
                 AppHaventLaucnTime.GetLongTimeHaventLauchApp();
                 AppEver.GetMoreUsingApp();
                 AppToday.GetFavoriteApp();
+                RandomAppOne.GetCountStartsRandomApp("one","name");
+                RandomAppTwo.GetCountStartsRandomApp("two", _RandomAppOne[0].NameProcess);
 
                 System.Timers.Timer timer = new System.Timers.Timer(5000);
                 timer.Elapsed += processes.MonitorProcesess;
@@ -129,5 +164,8 @@ namespace MVVM_test1.ViewModel
         public FastStatFavoriteAppTodayModel AppToday;
         public FastStatMoreUsingAppEver AppEver;
         public FastStatLongTimeHaventAppModel AppHaventLaucnTime;
+        public FastStatCountStartsAppModelOne RandomAppOne;
+        public FastStatCountStartsAppModelOne RandomAppTwo;
+
     }
 }
