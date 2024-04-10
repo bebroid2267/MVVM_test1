@@ -14,9 +14,49 @@
         Background="Transparent"
         AllowsTransparency="True">
 
+    <Window.Resources>
+        <Style x:Key="TextBlockWidthStyle" TargetType="TextBlock">
+            <Style.Triggers>
+                <MultiDataTrigger>
+                    <MultiDataTrigger.Conditions>
+                        <Condition Binding="{Binding ElementName=MyScrollViewer, Path=HorizontalOffset}" Value="10"/>
+                        <Condition Binding="{Binding ElementName=MyScrollViewer, Path=VerticalOffset}" Value="10"/>
+                    </MultiDataTrigger.Conditions>
+                    <MultiDataTrigger.EnterActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation Storyboard.TargetProperty="Width" To="200" Duration="0:0:1"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </MultiDataTrigger.EnterActions>
+                </MultiDataTrigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="BorderWidthStyle" TargetType="Border">
+            <Style.Triggers>
+                <MultiDataTrigger>
+                    <MultiDataTrigger.Conditions>
+                        <Condition Binding="{Binding ElementName=MyScrollViewer, Path=HorizontalOffset}" Value="10"/>
+                        <Condition Binding="{Binding ElementName=MyScrollViewer, Path=VerticalOffset}" Value="10"/>
+                    </MultiDataTrigger.Conditions>
+                    <MultiDataTrigger.EnterActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <DoubleAnimation Storyboard.TargetProperty="Width" To="200" Duration="0:0:1"/>
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </MultiDataTrigger.EnterActions>
+                </MultiDataTrigger>
+            </Style.Triggers>
+        </Style>
 
 
-    <ScrollViewer>
+
+
+    </Window.Resources>
+
+    <ScrollViewer x:Name="MyScrollViewer">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="17*"/>
@@ -688,20 +728,10 @@
                             <RowDefinition Height="40"/>
                         </Grid.RowDefinitions>
 
-                        <TextBlock Text="8 часов, 35 минут "
-                                       FontSize="25"
-                                       Grid.Row="1"
-                                       Grid.Column="1"
-                                       Foreground="Black" 
-                                       VerticalAlignment="Center"
-                                       FontWeight="DemiBold"  
-                                        Panel.ZIndex="1"
-                                       HorizontalAlignment="Left" 
-                                       Width="321" 
-                                   Grid.ColumnSpan="2" 
-                                   Margin="10,0,0,0"/>
-
-                        <TextBlock Text=" - вы провели за экраном"
+                        
+                        <TextBlock x:Name="textblock4"
+                            Style="{StaticResource TextBlockWidthStyle}"
+                                   Text=" - вы провели за экраном"
                                    FontSize="25"
                                    Grid.Row="1"
                                    Grid.Column="2"
@@ -711,7 +741,9 @@
                                    FontWeight="DemiBold"
                                    />
 
-                        <TextBlock Text="07:30"
+                        <TextBlock x:Name="textblock3"
+                                   Style="{StaticResource TextBlockWidthStyle}"
+                                   Text="{Binding _StartUsingTime[0]}"
                                        FontSize="25"
                                        Grid.Row="1"
                                        Grid.Column="4"
@@ -722,7 +754,9 @@
                                        FontWeight="DemiBold" Margin="84,0,0,0" 
                                    
                                    />
-                        <TextBlock Text="- первый запуск"
+                        <TextBlock x:Name="textblock2"
+                                     Style="{StaticResource TextBlockWidthStyle}"
+                                     Text="- первый запуск"
                                    FontSize="25"
                                    Grid.Row="1"
                                    Grid.Column="5"
@@ -732,7 +766,9 @@
                                    FontWeight="DemiBold" Margin="0,0,22,0" 
                                />
 
-                        <Border Background="#ffffff"
+                        <Border x:Name="border2"
+                                   Style="{StaticResource BorderWidthStyle}"
+                                  Background="#ffffff"
                                 Height="48"
                                 Width="110"
                                 HorizontalAlignment="Left"
@@ -744,27 +780,42 @@
                                 
                                 />
 
-                        <Border Background="#ffffff"
-                                    Height="48"
+                        <Border x:Name="border1"
+                                Style="{StaticResource BorderWidthStyle}"
+                                Background="#ffffff"
+                                Height="48"
                                 Width="230"
-                                HorizontalAlignment="Left"
+                                HorizontalAlignment="Center"
                                 VerticalAlignment="Center"
                                 CornerRadius="20"
                                 Opacity="0.3"
                                 Grid.Column="1"
                                 Grid.Row="1"
                                 />
-                        <Border Background="Black"
-                                Height="130"
-                                Width="45"
-                                HorizontalAlignment="Left"
-                                VerticalAlignment="Center"
-                                CornerRadius="10"
-                                Opacity="0.5"
-                                Grid.Column="3"
-                                Grid.Row="0"
-                                Grid.RowSpan="3"
-                                />
+                        <TextBlock x:Name="textblock1"
+                                   Style="{StaticResource TextBlockWidthStyle}"
+                                   Text="{Binding _UsingTime[0]}"
+                                   FontSize="25"
+                                   Grid.Row="1"
+                                   Grid.Column="1"
+                                   Foreground="Black" 
+                                   VerticalAlignment="Center"
+                                   FontWeight="DemiBold"  
+                                    Panel.ZIndex="1"
+                                   HorizontalAlignment="Center" 
+                                   
+                                   RenderTransformOrigin="0.5,0.5">
+
+                            <TextBlock.RenderTransform>
+                                <TransformGroup>
+                                    <ScaleTransform ScaleX="1"/>
+                                    <SkewTransform/>
+                                    <RotateTransform/>
+                                    <TranslateTransform/>
+                                </TransformGroup>
+                            </TextBlock.RenderTransform>
+                        </TextBlock>
+                        
 
 
                     </Grid>

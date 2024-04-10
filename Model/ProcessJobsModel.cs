@@ -61,7 +61,7 @@ namespace MVVM_test1.Model
                     //addTask(process.Process.ProcessName); // вызывает функцию с нужным аргументом
                     if (!NameProcesessDontCheck.Contains(process.Process.ProcessName))
                     {
-                        DateBase.AddProcess(process.Process.ProcessName, DateTime.UtcNow.AddHours(3).ToString());
+                        DateBase.AddProcess(process.Process.ProcessName, DateTime.Now.ToString());
 
                         if (!RunningProcesses.Contains(process.Process.ProcessName))
                         {
@@ -114,8 +114,8 @@ namespace MVVM_test1.Model
                 OnPropertyChanged(nameof(RunningProcesses));
             });
 
-            DateTime startTimeProcess = DateTime.UtcNow.AddHours(3);
-            DateBase.StartSession(nameProcess,DateTime.UtcNow.AddHours(3).ToString());
+            DateTime startTimeProcess = DateTime.Now;
+            DateBase.StartSession(nameProcess,DateTime.Now.ToString());
             DateBase.UpdateCountStartsApp(nameProcess, "today_count");
 
 
@@ -154,14 +154,14 @@ namespace MVVM_test1.Model
                         if (DateTime.TryParseExact(firstTimeProcess, "HH:mm:ss", CultureInfo.InvariantCulture,
                             DateTimeStyles.None, out firstTimePrcs))
                         {
-                            TimeSpan time = DateTime.UtcNow.AddHours(3) - startTimeProcess;
+                            TimeSpan time = DateTime.Now - startTimeProcess;
 
                             firstTimePrcs = firstTimePrcs.Add(time);
                             totalTimeSpend = firstTimePrcs.ToString("HH:mm:ss");
                         }
                         else
                         {
-                            TimeSpan timePassed = DateTime.UtcNow.AddHours(3) - startTimeProcess;
+                            TimeSpan timePassed = DateTime.Now - startTimeProcess;
                             DateTime time = DateTime.Today.Add(timePassed);
                             DateTime timePassedPrcs = new DateTime();
 
@@ -171,7 +171,7 @@ namespace MVVM_test1.Model
                         }
 
                         UpdateSumTimeProcessEveryTime(nameProcess, totalTimeSpend);
-                        startTimeProcess = DateTime.UtcNow.AddHours(3);
+                        startTimeProcess = DateTime.Now;
                     }
                 
                     Thread.Sleep(3000);
@@ -188,25 +188,25 @@ namespace MVVM_test1.Model
             if (DateTime.TryParseExact(firstTimeProcess, "HH:mm:ss", CultureInfo.InvariantCulture,
                 DateTimeStyles.None, out firstTimePrcs))
             {
-                TimeSpan time = DateTime.UtcNow.AddHours(3) - startTimeProcess;
+                TimeSpan time = DateTime.Now - startTimeProcess;
 
                 firstTimePrcs = firstTimePrcs.Add(time);
                 string totalTimeSpend = firstTimePrcs.ToString("HH:mm:ss");
-                DateBase.StopSession(nameProcess, DateTime.UtcNow.AddHours(3).ToString(),totalTimeSpend);
+                DateBase.StopSession(nameProcess, DateTime.Now.ToString(),totalTimeSpend);
                 
                 //Console.WriteLine($"Программа: {nameProcess} завершила свою работу. она работает уже в формате часы, минуты, секунды: {totalTimeSpend}");
 
             }
             else if (firstTimeProcess == null || firstTimeProcess == string.Empty)
             {
-                TimeSpan timePassed = DateTime.UtcNow.AddHours(3) - startTimeProcess;
+                TimeSpan timePassed = DateTime.Now - startTimeProcess;
                 DateTime time = DateTime.Today.Add(timePassed);
                 DateTime timePassedPrcs = new DateTime();
 
                 DateTime.TryParseExact(time.ToString("HH':'mm':'ss"), "HH:mm:ss", CultureInfo.InvariantCulture,
                 DateTimeStyles.None, out timePassedPrcs);
 
-                DateBase.StopSession(nameProcess, DateTime.UtcNow.AddHours(3).ToString(), timePassedPrcs.ToString("HH:mm:ss"));
+                DateBase.StopSession(nameProcess, DateTime.Now.ToString(), timePassedPrcs.ToString("HH:mm:ss"));
 
                 //DateBase.UpdateTimeProcess(nameProcess, timePassedPrcs.ToString("HH:mm:ss"));
 

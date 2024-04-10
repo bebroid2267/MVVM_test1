@@ -23,7 +23,26 @@ namespace MVVM_test1.ViewModel
         public void ClosingWorksProcesess(object sender, EventArgs e)
         {
             DateBase.StopWorksProcesess();
-            DateBase.EndTodayUsingPc(DateTime.UtcNow.ToString("d"));
+            DateBase.EndTodayUsingPc(DateTime.Now.ToString("d"));
+        }
+
+        public ObservableCollection<string> _StartUsingTime
+        {
+            get { return UsingTime._FirstStart; }
+            set
+            {
+                UsingTime._FirstStart = value;
+                OnPropertyChanged(nameof(_StartUsingTime));
+            }
+        }
+        public ObservableCollection<string> _UsingTime
+        {
+            get { return UsingTime._Statistic; }
+            set
+            {
+                UsingTime._Statistic = value;
+                OnPropertyChanged(nameof(_UsingTime));
+            }
         }
         public ObservableCollection<ProcessTime> _RandomAppTwo
         {
@@ -120,7 +139,8 @@ namespace MVVM_test1.ViewModel
 
         public MainVM()
         {
-            Task.Run(() => UsingPcTimeModel.CheckUsingPc());
+            UsingTime = new UsingPcTimeModel();
+            Task.Run(() => UsingTime.CheckUsingPc());
 
             RandomAppOne = new FastStatCountStartsAppModelOne();
             RandomAppTwo = new FastStatCountStartsAppModelOne();
@@ -131,9 +151,9 @@ namespace MVVM_test1.ViewModel
             AppToday = new FastStatFavoriteAppTodayModel();
             Application.Current.Dispatcher.InvokeAsync(() =>
             {
-
                 DateBase.StartNewDay();
-
+                UsingTime.GetStartTimeUsingPcToday();
+                UsingTime.GetTimeUsingPcToday();
                 AppHaventLaucnTime.GetLongTimeHaventLauchApp();
                 AppEver.GetMoreUsingApp();
                 AppToday.GetFavoriteApp();
@@ -166,6 +186,6 @@ namespace MVVM_test1.ViewModel
         public FastStatLongTimeHaventAppModel AppHaventLaucnTime;
         public FastStatCountStartsAppModelOne RandomAppOne;
         public FastStatCountStartsAppModelOne RandomAppTwo;
-
+        public UsingPcTimeModel UsingTime;
     }
 }

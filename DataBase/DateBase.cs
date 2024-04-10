@@ -195,7 +195,7 @@ namespace MVVM_test1.DataBase
                 if (todaySession != string.Empty)
                 {
                     timeSession = Convert.ToDateTime(todaySession);
-                    if (timeSession.ToString("d") != DateTime.UtcNow.ToString("d"))
+                    if (timeSession.ToString("d") != DateTime.Now.ToString("d"))
                     {
                         command.CommandText = $"UPDATE Process SET start_session = '{dateTime}'," +
                             $" status = 'works', start_today_session = '{dateTime}' " +
@@ -269,7 +269,7 @@ namespace MVVM_test1.DataBase
                 connection.Open();
                 var command = new SqliteCommand();
                 command.Connection = connection;
-                command.CommandText = $"UPDATE Process SET status = 'stoped', end_session = '{DateTime.UtcNow.AddHours(3)}' WHERE status LIKE 'works'";
+                command.CommandText = $"UPDATE Process SET status = 'stoped', end_session = '{DateTime.Now}' WHERE status LIKE 'works'";
 
                 command.ExecuteNonQuery();
                 connection.Close();
@@ -380,7 +380,7 @@ namespace MVVM_test1.DataBase
                 connection.Open();
                 var command = new SqliteCommand();
                 command.Connection = connection;
-                command.CommandText = $"SELECT name_app, today_count FROM DailyCountStartsApp WHERE today_date NOT LIKE '{DateTime.UtcNow.ToString("d")}'";
+                command.CommandText = $"SELECT name_app, today_count FROM DailyCountStartsApp WHERE today_date NOT LIKE '{DateTime.Now.ToString("d")}'";
 
                 var reader = command.ExecuteReader();
                 List<ProcessTime>  process = new List<ProcessTime>();
@@ -402,7 +402,7 @@ namespace MVVM_test1.DataBase
                         command.ExecuteNonQuery();
                     }
 
-                    command.CommandText = $"UPDATE DailyCountStartsApp SET today_date = '{DateTime.UtcNow.ToString("d")}'";
+                    command.CommandText = $"UPDATE DailyCountStartsApp SET today_date = '{DateTime.Now.ToString("d")}'";
                     command.ExecuteNonQuery();
 
                     command.CommandText = $"UPDATE DailyCountStartsApp SET today_count = 0";
@@ -419,7 +419,7 @@ namespace MVVM_test1.DataBase
                 var command = new SqliteCommand();
                 command.Connection = connection;
                 command.Parameters.AddWithValue("@name", name);
-                command.CommandText = $"INSERT INTO DailyCountStartsApp (name_app, today_count, today_date) values (@name, {1}, '{DateTime.UtcNow.ToString("d")}')";
+                command.CommandText = $"INSERT INTO DailyCountStartsApp (name_app, today_count, today_date) values (@name, {1}, '{DateTime.Now.ToString("d")}')";
                 command.ExecuteNonQuery();
 
                 connection.Close();
@@ -476,12 +476,12 @@ namespace MVVM_test1.DataBase
                 command.Connection = connection;
                 if (numberApp == "one")
                 {
-                    command.CommandText = $"SELECT name_app, today_count FROM DailyCountStartsApp WHERE today_date LIKE '{DateTime.UtcNow.ToString("d")}'" +
+                    command.CommandText = $"SELECT name_app, today_count FROM DailyCountStartsApp WHERE today_date LIKE '{DateTime.Now.ToString("d")}'" +
                     $"ORDER BY RANDOM() LIMIT 1";
                 }
                 else
                 {
-                    command.CommandText = $"SELECT name_app, today_count FROM DailyCountStartsApp WHERE today_date LIKE '{DateTime.UtcNow.ToString("d")}'" +
+                    command.CommandText = $"SELECT name_app, today_count FROM DailyCountStartsApp WHERE today_date LIKE '{DateTime.Now.ToString("d")}'" +
                     $"AND name_app NOT LIKE '{nameApp}'  ORDER BY RANDOM() LIMIT 1";
                 }
                 var reader = command.ExecuteReader();
@@ -539,8 +539,8 @@ namespace MVVM_test1.DataBase
                 command.Connection = connection;
                 if (!IfExistsTodayStartUsingPc(date))
                 {
-                    command.Parameters.AddWithValue("@start_time",$"{DateTime.UtcNow.AddHours(3)}");
-                    command.Parameters.AddWithValue("@date", $"{DateTime.UtcNow.ToString("d")}");
+                    command.Parameters.AddWithValue("@start_time",$"{DateTime.Now}");
+                    command.Parameters.AddWithValue("@date", $"{DateTime.Now.ToString("d")}");
                     command.CommandText = $"INSERT INTO DurationUsingPc (start_time, date) values (@start_time, @date)";
                     command.ExecuteNonQuery();
                 }
@@ -554,7 +554,7 @@ namespace MVVM_test1.DataBase
                 connection.Open();
                 var command = new SqliteCommand();
                 command.Connection = connection;
-                command.CommandText = $"UPDATE DurationUsingPc SET end_time = '{DateTime.UtcNow.AddHours(3)}'" +
+                command.CommandText = $"UPDATE DurationUsingPc SET end_time = '{DateTime.Now}'" +
                     $" WHERE date LIKE '{date}'";
                 command.ExecuteNonQuery();
                 connection.Close();
@@ -592,6 +592,24 @@ namespace MVVM_test1.DataBase
 
             }
 
+        }
+        public static string GetFirstStartsUsingPcToday(string date)
+        {
+            using (SqliteConnection connection = new SqliteConnection(connectionString))
+            {
+                connection.Open();
+                var command = new SqliteCommand();
+                command.Connection = connection;
+                command.CommandText = $"SELECT start_time FROM DurationUsingPc WHERE date LIKE '{date}'";
+                string startTime = string.Empty;
+                var reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    startTime = reader.GetString(0);
+                }
+                connection.Close();
+                return startTime;
+            }
         }
 
 
