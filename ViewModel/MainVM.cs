@@ -19,7 +19,6 @@ namespace MVVM_test1.ViewModel
 {
     public class MainVM : BindableBase, INotifyPropertyChanged
     {
-        
         public void ClosingWorksProcesess(object sender, EventArgs e)
         {
             DateBase.StopWorksProcesess();
@@ -133,7 +132,15 @@ namespace MVVM_test1.ViewModel
                     WorksProcesess._WorkProcess = value;
                     OnPropertyChanged(nameof(CheckProcess));
                 });
-
+            }
+        }
+        public object _CurrentView
+        {
+            get { return CurrentView; }
+            set
+            {
+                CurrentView = value;
+                OnPropertyChanged(nameof(CurrentView));
             }
         }
 
@@ -170,6 +177,9 @@ namespace MVVM_test1.ViewModel
                 timerCheckProcess.Start();
                 CheckProcess = WorksProcesess._WorkProcess;
             });
+            MainCommand = new Utilities.RelayCommand(Home);
+            AllSoftCommand = new Utilities.RelayCommand(AllApps);
+
         }
         
 
@@ -187,5 +197,18 @@ namespace MVVM_test1.ViewModel
         public FastStatCountStartsAppModelOne RandomAppOne;
         public FastStatCountStartsAppModelOne RandomAppTwo;
         public UsingPcTimeModel UsingTime;
+
+        private object CurrentView;
+        public ICommand MainCommand {  get; set; }
+        public ICommand AllSoftCommand {  get; set; }
+        public ICommand FindAppsByNameCommand { get; set; }
+        public ICommand AnalytycsByDateCommand { get; set; }
+
+        private void Home(object obj) => CurrentView = new MainVM();
+        private void AllApps(object obj) => CurrentView = new AllSoftVM();
+        //private void FindApps(object obj) => CurrentView = new Find();
+        //private void Home(object obj) => CurrentView = new MainVM();
+
+
     }
 }

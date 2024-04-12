@@ -1,0 +1,140 @@
+﻿<Window x:Class="MVVM_test1.View.AllSoft"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MVVM_test1.View" xmlns:viewmodel="clr-namespace:MVVM_test1.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:AllSoftVM}"
+        mc:Ignorable="d" 
+             Title="All Soft" 
+            Height="1550" 
+            Width="1220"
+            WindowStartupLocation="CenterScreen"
+            WindowStyle="None"
+            ResizeMode="CanResizeWithGrip"
+            Background="Transparent"
+            AllowsTransparency="True">
+
+
+    <ScrollViewer>
+
+        <Grid>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="150" />
+                <RowDefinition Height="*" />
+
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200" />
+                <ColumnDefinition Width="400" />
+                <ColumnDefinition Width="400" />
+                <ColumnDefinition Width="200" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+
+
+            <Border Background=" #1C1D31"
+CornerRadius="25" Grid.RowSpan="2" Grid.ColumnSpan="4"/>
+
+            <TextBlock Grid.Row=" 0"
+       Grid.Column="0"
+       Grid.ColumnSpan="2"
+       Text="GS Tracker"
+       Foreground="#CDD7E0"
+       FontFamily="Oswald"
+       FontSize="36"
+       Margin="60,50,360,0" />
+
+            <TextBlock Grid.Row="1"
+           Grid.ColumnSpan="1"
+           Text="Весь софт"
+           Foreground="#CDD7E0"
+           FontFamily="Ramona Bold"
+           FontSize="55"
+           VerticalAlignment="Top"
+           HorizontalAlignment="Left" Grid.Column="1"/>
+
+            <Grid Height="900" VerticalAlignment="Top" 
+                  HorizontalAlignment="Center" 
+                  Width="1180" 
+                  Grid.Column="1" 
+                  Grid.ColumnSpan="2"
+                  Margin="0,300,0,0">
+
+
+
+                <ListBox ItemsSource="{Binding Apps}" 
+         Margin="190,10,159,0"
+         d:ItemsSource="{d:SampleData ItemCount=5}" >
+
+
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                </Grid.RowDefinitions>
+
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                </Grid.ColumnDefinitions>
+
+
+
+                                <Border Background="#ffffff"
+                        Height="50"
+                        Width="70"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        CornerRadius="15"
+                        Opacity="0.3"
+                        Margin ="28,0,0,0"/>
+
+                                <Border CornerRadius="100" 
+                        Margin="32,0,43,1"
+                        BorderThickness="1">
+                                    <Image Source="{Binding IcoPath}" 
+                           Margin="4,5,8,5" 
+                           RenderTransformOrigin="0.319,0.224" />
+                                </Border>
+
+
+
+                                <TextBlock Text="{Binding NameProcess}" 
+                           FontWeight="DemiBold"
+                           
+                           Margin="143,0,-400,1"
+                           Foreground="#FFFFFF"
+                           FontSize="23" />
+
+
+
+                                <TextBlock Text="{Binding SumTimeProcess}"
+                           FontSize="18"
+                           FontWeight="Light"
+                           Foreground="#FFFFFF"
+                           VerticalAlignment="Top"
+                           Margin="143,30,-129,0"/>
+
+                                <TextBlock Text="{Binding GlobalStartTime}"
+                           FontSize="18"
+                           FontWeight="Light"
+                           Foreground="#FFFFFF" 
+                           VerticalAlignment="Center"
+                            Margin="690,0,-690,0"/>
+
+
+
+                            </Grid>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+
+
+            </Grid>
+
+        </Grid>
+    </ScrollViewer>
+</Window>

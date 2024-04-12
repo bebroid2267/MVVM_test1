@@ -3,10 +3,10 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:MVVM_test1" xmlns:viewmodel="clr-namespace:MVVM_test1.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:MainVM}"
+        xmlns:local="clr-namespace:MVVM_test1" xmlns:viewmodel="clr-namespace:MVVM_test1.ViewModel" xmlns:Menu="clr-namespace:MVVM_test1.Utilities" d:DataContext="{d:DesignInstance Type=viewmodel:MainVM}"
         mc:Ignorable="d"
         Title="Process Monitor" 
-        Height="720" 
+        Height="1550" 
         Width="1220"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
@@ -14,47 +14,12 @@
         Background="Transparent"
         AllowsTransparency="True">
 
-    <Window.Resources>
-        <Style x:Key="TextBlockWidthStyle" TargetType="TextBlock">
-            <Style.Triggers>
-                <MultiDataTrigger>
-                    <MultiDataTrigger.Conditions>
-                        <Condition Binding="{Binding ElementName=MyScrollViewer, Path=HorizontalOffset}" Value="10"/>
-                        <Condition Binding="{Binding ElementName=MyScrollViewer, Path=VerticalOffset}" Value="10"/>
-                    </MultiDataTrigger.Conditions>
-                    <MultiDataTrigger.EnterActions>
-                        <BeginStoryboard>
-                            <Storyboard>
-                                <DoubleAnimation Storyboard.TargetProperty="Width" To="200" Duration="0:0:1"/>
-                            </Storyboard>
-                        </BeginStoryboard>
-                    </MultiDataTrigger.EnterActions>
-                </MultiDataTrigger>
-            </Style.Triggers>
-        </Style>
-
-        <Style x:Key="BorderWidthStyle" TargetType="Border">
-            <Style.Triggers>
-                <MultiDataTrigger>
-                    <MultiDataTrigger.Conditions>
-                        <Condition Binding="{Binding ElementName=MyScrollViewer, Path=HorizontalOffset}" Value="10"/>
-                        <Condition Binding="{Binding ElementName=MyScrollViewer, Path=VerticalOffset}" Value="10"/>
-                    </MultiDataTrigger.Conditions>
-                    <MultiDataTrigger.EnterActions>
-                        <BeginStoryboard>
-                            <Storyboard>
-                                <DoubleAnimation Storyboard.TargetProperty="Width" To="200" Duration="0:0:1"/>
-                            </Storyboard>
-                        </BeginStoryboard>
-                    </MultiDataTrigger.EnterActions>
-                </MultiDataTrigger>
-            </Style.Triggers>
-        </Style>
+    
 
 
 
 
-    </Window.Resources>
+    
 
     <ScrollViewer x:Name="MyScrollViewer">
         <Grid>
@@ -63,6 +28,12 @@
                 <RowDefinition Height="168*"/>
             </Grid.RowDefinitions>
 
+            <StackPanel>
+                <Menu:Btn 
+                          Command="{Binding AllSoftCommand}"
+                          IsChecked="True">
+                </Menu:Btn>
+            </StackPanel>
 
 
             <Border Background=" #1C1D31"
@@ -654,7 +625,9 @@
                                         <Border CornerRadius="100" 
                                                 Margin="32,0,43,1"
                                                 BorderThickness="1">
-                                            <Image Source="{Binding IcoPath}" Margin="4,5,8,5" RenderTransformOrigin="0.319,0.224" />
+                                            <Image Source="{Binding IcoPath}" 
+                                                   Margin="4,5,8,5" 
+                                                   RenderTransformOrigin="0.319,0.224" />
                                         </Border>
 
 
@@ -730,7 +703,6 @@
 
                         
                         <TextBlock x:Name="textblock4"
-                            Style="{StaticResource TextBlockWidthStyle}"
                                    Text=" - вы провели за экраном"
                                    FontSize="25"
                                    Grid.Row="1"
@@ -742,7 +714,6 @@
                                    />
 
                         <TextBlock x:Name="textblock3"
-                                   Style="{StaticResource TextBlockWidthStyle}"
                                    Text="{Binding _StartUsingTime[0]}"
                                        FontSize="25"
                                        Grid.Row="1"
@@ -755,7 +726,6 @@
                                    
                                    />
                         <TextBlock x:Name="textblock2"
-                                     Style="{StaticResource TextBlockWidthStyle}"
                                      Text="- первый запуск"
                                    FontSize="25"
                                    Grid.Row="1"
@@ -767,7 +737,6 @@
                                />
 
                         <Border x:Name="border2"
-                                   Style="{StaticResource BorderWidthStyle}"
                                   Background="#ffffff"
                                 Height="48"
                                 Width="110"
@@ -781,7 +750,6 @@
                                 />
 
                         <Border x:Name="border1"
-                                Style="{StaticResource BorderWidthStyle}"
                                 Background="#ffffff"
                                 Height="48"
                                 Width="230"
@@ -793,7 +761,6 @@
                                 Grid.Row="1"
                                 />
                         <TextBlock x:Name="textblock1"
-                                   Style="{StaticResource TextBlockWidthStyle}"
                                    Text="{Binding _UsingTime[0]}"
                                    FontSize="25"
                                    Grid.Row="1"
@@ -823,13 +790,7 @@
                 </Border>
 
 
-
-
-
             </Grid>
-
-
-
 
 
         </Grid>

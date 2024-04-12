@@ -169,8 +169,6 @@ namespace MVVM_test1.DataBase
                         info.EndSession = reader.GetString(3);
                     if (!reader.IsDBNull(4))
                         info.StartTodaySession = reader.GetString(4);
-                    
-                    
                     infoProcesess.Add(info);
                 }
 
