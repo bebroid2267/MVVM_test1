@@ -179,7 +179,7 @@ namespace MVVM_test1.ViewModel
             });
             MainCommand = new Utilities.RelayCommand(Home);
             AllSoftCommand = new Utilities.RelayCommand(AllApps);
-
+            CurrentView = this;
         }
         
 

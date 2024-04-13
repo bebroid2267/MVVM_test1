@@ -18,7 +18,7 @@ namespace MVVM_test1.View
     /// <summary>
     /// Логика взаимодействия для AllSoft.xaml
     /// </summary>
-    public partial class AllSoft : Window
+    public partial class AllSoft : UserControl
     {
         public AllSoft()
         {

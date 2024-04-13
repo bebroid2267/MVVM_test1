@@ -3,10 +3,13 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:MVVM_test1" xmlns:viewmodel="clr-namespace:MVVM_test1.ViewModel" xmlns:Menu="clr-namespace:MVVM_test1.Utilities" d:DataContext="{d:DesignInstance Type=viewmodel:MainVM}"
+        xmlns:local="clr-namespace:MVVM_test1" 
+        xmlns:viewmodel="clr-namespace:MVVM_test1.ViewModel" 
+        xmlns:Menu="clr-namespace:MVVM_test1.Utilities" 
+        d:DataContext="{d:DesignInstance Type=viewmodel:MainVM}"
         mc:Ignorable="d"
         Title="Process Monitor" 
-        Height="1550" 
+        Height="720" 
         Width="1220"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
@@ -14,26 +17,71 @@
         Background="Transparent"
         AllowsTransparency="True">
 
+
+
+
+
+
     
 
 
-
-
-    
 
     <ScrollViewer x:Name="MyScrollViewer">
         <Grid>
+
+
             <Grid.RowDefinitions>
                 <RowDefinition Height="17*"/>
                 <RowDefinition Height="168*"/>
             </Grid.RowDefinitions>
 
-            <StackPanel>
-                <Menu:Btn 
-                          Command="{Binding AllSoftCommand}"
-                          IsChecked="True">
-                </Menu:Btn>
-            </StackPanel>
+
+
+            <!--// Home //-->
+
+            <Menu:Btn Style="{StaticResource BtnStyle}"
+                              Command="{Binding AllSoftCommand}"
+                          Panel.ZIndex="1"
+                              IsChecked="True" HorizontalAlignment="Left" Margin="714,52,0,0" VerticalAlignment="Top" Width="238">
+
+                <Grid>
+
+                    <Image Source="Images/Free Flat Menu 9 Icon.png" Margin="28,0,148,0" />
+
+                    <TextBlock Text="Весь софт"
+                                       Style="{StaticResource Text_Style}" Margin="95,0,0,0" Width="120" />
+
+                </Grid>
+
+            </Menu:Btn>
+
+            <!--// Customer //-->
+
+
+
+
+
+
+
+
+            <Grid>
+
+                <Grid.ColumnDefinitions >
+                    <ColumnDefinition Width="600" />
+                    <ColumnDefinition Width="250" />
+                    <ColumnDefinition Width="250" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="200" />
+                    <RowDefinition Height="200" />
+                    <RowDefinition Height="200" />
+                </Grid.RowDefinitions>
+
+
+
+            </Grid>
 
 
             <Border Background=" #1C1D31"
@@ -701,7 +749,7 @@
                             <RowDefinition Height="40"/>
                         </Grid.RowDefinitions>
 
-                        
+
                         <TextBlock x:Name="textblock4"
                                    Text=" - вы провели за экраном"
                                    FontSize="25"
@@ -782,7 +830,7 @@
                                 </TransformGroup>
                             </TextBlock.RenderTransform>
                         </TextBlock>
-                        
+
 
 
                     </Grid>
@@ -795,6 +843,7 @@
 
         </Grid>
     </ScrollViewer>
+
 
 
     <!--<Grid>
@@ -830,3 +879,7 @@
     </Grid>-->
 
 </Window>
+   
+
+   
+

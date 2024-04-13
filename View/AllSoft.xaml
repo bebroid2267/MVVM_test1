@@ -1,19 +1,20 @@
-﻿<Window x:Class="MVVM_test1.View.AllSoft"
+﻿<UserControl x:Class="MVVM_test1.View.AllSoft"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MVVM_test1.View" xmlns:viewmodel="clr-namespace:MVVM_test1.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:AllSoftVM}"
         mc:Ignorable="d" 
-             Title="All Soft" 
+              
             Height="1550" 
             Width="1220"
-            WindowStartupLocation="CenterScreen"
-            WindowStyle="None"
-            ResizeMode="CanResizeWithGrip"
+            
             Background="Transparent"
-            AllowsTransparency="True">
+            >
 
+    <UserControl.DataContext>
+        <viewmodel:AllSoftVM />
+    </UserControl.DataContext>
 
     <ScrollViewer>
 
@@ -137,4 +138,4 @@ CornerRadius="25" Grid.RowSpan="2" Grid.ColumnSpan="4"/>
 
         </Grid>
     </ScrollViewer>
-</Window>
+</UserControl>
