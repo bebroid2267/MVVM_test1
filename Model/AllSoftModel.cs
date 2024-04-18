@@ -42,7 +42,7 @@ namespace MVVM_test1.Model
         {
             Application.Current.Dispatcher.InvokeAsync(() =>
             {
-                List<ProcessTime> processes = DateBase.GetInfoProcess("works");
+                List<ProcessTime> processes = DateBase.GetInfoProcess("all");
 
                 foreach (ProcessTime process in processes)
                 {

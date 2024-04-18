@@ -22,7 +22,7 @@
 
                         <Border.Background>
                             <SolidColorBrush x:Name="BorderBackground"
-                                             Color="#272B2F" />
+                                             Color="#1C1D31" />
                         </Border.Background>
 
                         <Grid>
@@ -32,7 +32,7 @@
                                     Width="4"
                                     HorizontalAlignment="Left"
                                     VerticalAlignment="Center"
-                                    Background="#FFFFFF"
+                                    
                                     Visibility="Collapsed"
                                     CornerRadius="2" />
 

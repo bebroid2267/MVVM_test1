@@ -98,7 +98,7 @@ namespace MVVM_test1.Model
         {
             string usingTime = DateBase.GetSumTimeUsingPcToday(DateTime.Now.ToString("d"));
 
-            if (usingTime == null)
+            if (usingTime == null || usingTime == string.Empty)
                 usingTime = "00:00:00";
 
             string hours = usingTime.Substring(0, 2);

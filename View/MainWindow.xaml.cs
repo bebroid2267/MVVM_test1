@@ -12,6 +12,7 @@ using System.Windows.Shapes;
 using System.ServiceProcess;
 using System.Reflection;
 using System.Configuration.Install;
+using MVVM_test1.View;
 
 namespace MVVM_test1
 {
@@ -22,11 +23,15 @@ namespace MVVM_test1
     {
         public MainWindow()
         {
-            //InitializeComponent();
+            InitializeComponent();
             DataContext = new MainVM();
-            Closing += (DataContext as MainVM).ClosingWorksProcesess;
+            Switcher.pageSwitcher = this;
+            Switcher.Switch(new HomeView());
         }
 
-        
+        public void Navigate(UserControl nextPage)
+        {
+            this.Content = nextPage;
+        }
     }
 }

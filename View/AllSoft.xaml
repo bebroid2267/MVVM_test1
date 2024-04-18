@@ -4,13 +4,11 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:MVVM_test1.View" xmlns:viewmodel="clr-namespace:MVVM_test1.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:AllSoftVM}"
-        mc:Ignorable="d" 
-              
+             xmlns:view="clr-namespace:MVVM_test1.View" 
+             mc:Ignorable="d" 
             Height="1550" 
             Width="1220"
-            
-            Background="Transparent"
-            >
+            Background="Transparent">
 
     <UserControl.DataContext>
         <viewmodel:AllSoftVM />
@@ -21,7 +19,7 @@
         <Grid>
 
             <Grid.RowDefinitions>
-                <RowDefinition Height="150" />
+                <RowDefinition Height="140" />
                 <RowDefinition Height="*" />
 
             </Grid.RowDefinitions>
@@ -34,22 +32,19 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
 
-
+            <view:SwitcherMenu Grid.Row="0"
+                   Grid.Column="0"
+                               Panel.ZIndex="1"
+                   Grid.ColumnSpan="5" Margin="0,0,0,1377" Grid.RowSpan="2"/>
 
             <Border Background=" #1C1D31"
 CornerRadius="25" Grid.RowSpan="2" Grid.ColumnSpan="4"/>
 
-            <TextBlock Grid.Row=" 0"
-       Grid.Column="0"
-       Grid.ColumnSpan="2"
-       Text="GS Tracker"
-       Foreground="#CDD7E0"
-       FontFamily="Oswald"
-       FontSize="36"
-       Margin="60,50,360,0" />
+            
 
             <TextBlock Grid.Row="1"
            Grid.ColumnSpan="1"
+                       Margin="40,-640,100,100"
            Text="Весь софт"
            Foreground="#CDD7E0"
            FontFamily="Ramona Bold"
@@ -66,8 +61,9 @@ CornerRadius="25" Grid.RowSpan="2" Grid.ColumnSpan="4"/>
 
 
 
-                <ListBox ItemsSource="{Binding Apps}" 
+                <ListBox ItemsSource="{Binding _Apps}" 
          Margin="190,10,159,0"
+                         Panel.ZIndex="1"
          d:ItemsSource="{d:SampleData ItemCount=5}" >
 
 

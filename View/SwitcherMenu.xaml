@@ -1,0 +1,78 @@
+﻿<UserControl x:Class="MVVM_test1.View.SwitcherMenu"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MVVM_test1.View" xmlns:Menu="clr-namespace:MVVM_test1.Utilities"
+             mc:Ignorable="d" 
+             d:DesignHeight="150" d:DesignWidth="1220">
+    <Grid>
+        <TextBlock Grid.Row=" 0"
+       Panel.ZIndex="1"
+       Text="GS Tracker"
+       Foreground="#CDD7E0"
+       FontFamily="Oswald"
+       FontSize="36"
+       Margin="100,50,933,59" />
+
+        <Border Background=" #1C1D31"
+    CornerRadius="25" Grid.RowSpan="2"/>
+
+        <StackPanel Orientation="Horizontal">
+
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="800" />
+                    <ColumnDefinition Width="200" />
+                    <ColumnDefinition Width="200" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Button Content="Главная" Grid.Column="1" Margin="42,59,48,59" Click="NavigationToHome"/>
+                <Button Content="Весь софт" Grid.Column="2" Margin="42,59,48,59" Click="NavigationToAllSoft"/>
+
+                <!--<Menu:Btn Style="{StaticResource BtnStyle}"
+    Click="NavigationToHome"
+Panel.ZIndex="1"
+    IsChecked="True" 
+        Margin="500,0,0,0" Width="220" Height="70">
+
+                <Grid>
+
+                    <Image Source="Images/Free Flat Menu 9 Icon.png"
+                           HorizontalAlignment="Stretch"
+                            Panel.ZIndex="1"
+                           Margin="0,0,171,0" />
+
+                    <TextBlock Text="Главная"
+                 FontSize="30"
+             Style="{StaticResource Text_Style}"
+                               Margin="70,0,0,0" Width="123" />
+
+                </Grid>
+
+            </Menu:Btn>
+
+            <Menu:Btn Style="{StaticResource BtnStyle}"
+    Click="NavigationToAllSoft"
+Panel.ZIndex="1"
+    IsChecked="True" 
+        Margin="0,0,0,0" Width="220" Height="70">
+
+                <Grid>
+
+                    <Image Source="Images/Free Flat Menu 9 Icon.png"
+                           HorizontalAlignment="Stretch"
+                           Margin="0,0,171,0" />
+
+                    <TextBlock Text="Весь софт"
+                 FontSize="30"
+             Style="{StaticResource Text_Style}"
+                               Margin="70,0,0,0" Width="147" />
+
+                </Grid>
+
+            </Menu:Btn>-->
+            </Grid>
+        </StackPanel>
+    </Grid>
+</UserControl>
