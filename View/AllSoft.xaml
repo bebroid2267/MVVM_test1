@@ -38,49 +38,54 @@
                    Grid.ColumnSpan="5" Margin="0,0,0,1377" Grid.RowSpan="2"/>
 
             <Border Background=" #1C1D31"
-CornerRadius="25" Grid.RowSpan="2" Grid.ColumnSpan="4"/>
+CornerRadius="25" Grid.RowSpan="2" Grid.ColumnSpan="4" Margin="0,0,0,715"/>
 
-            
+
 
             <TextBlock Grid.Row="1"
            Grid.ColumnSpan="1"
-                       Margin="40,-640,100,100"
+                       Margin="40,-700,100,100"
            Text="Весь софт"
            Foreground="#CDD7E0"
            FontFamily="Ramona Bold"
            FontSize="55"
+                       Panel.ZIndex="1"
            VerticalAlignment="Top"
-           HorizontalAlignment="Left" Grid.Column="1"/>
+           HorizontalAlignment="Left" 
+           Grid.Column="1"
+                       Grid.RowSpan="3"/>
 
-            <Grid Height="900" VerticalAlignment="Top" 
+            <Grid Height="619" VerticalAlignment="Top" 
                   HorizontalAlignment="Center" 
                   Width="1180" 
                   Grid.Column="1" 
+                  
                   Grid.ColumnSpan="2"
-                  Margin="0,300,0,0">
+                  Margin="0,206,0,0">
 
 
-
-                <ListBox ItemsSource="{Binding _Apps}" 
-         Margin="190,10,159,0"
+                <ScrollViewer Margin="0,-68,10,0">
+                    <ListBox ItemsSource="{Binding _Apps}" 
+         Margin="190,-20,159,0"
+                             
                          Panel.ZIndex="1"
-         d:ItemsSource="{d:SampleData ItemCount=5}" >
+         d:ItemsSource="{d:SampleData ItemCount=5}" Width="832" Height="487" >
 
 
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                </Grid.RowDefinitions>
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
 
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"/>
-                                </Grid.ColumnDefinitions>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="Auto"/>
+                                    </Grid.ColumnDefinitions>
 
 
 
-                                <Border Background="#ffffff"
+                                    <Border Background="#ffffff"
                         Height="50"
                         Width="70"
                         HorizontalAlignment="Left"
@@ -89,17 +94,16 @@ CornerRadius="25" Grid.RowSpan="2" Grid.ColumnSpan="4"/>
                         Opacity="0.3"
                         Margin ="28,0,0,0"/>
 
-                                <Border CornerRadius="100" 
+                                    <Border CornerRadius="100" 
                         Margin="32,0,43,1"
                         BorderThickness="1">
-                                    <Image Source="{Binding IcoPath}" 
+                                        <Image Source="{Binding IcoPath}" 
                            Margin="4,5,8,5" 
                            RenderTransformOrigin="0.319,0.224" />
-                                </Border>
+                                    </Border>
 
 
-
-                                <TextBlock Text="{Binding NameProcess}" 
+                                        <TextBlock Text="{Binding NameProcess}" 
                            FontWeight="DemiBold"
                            
                            Margin="143,0,-400,1"
@@ -107,15 +111,16 @@ CornerRadius="25" Grid.RowSpan="2" Grid.ColumnSpan="4"/>
                            FontSize="23" />
 
 
-
-                                <TextBlock Text="{Binding SumTimeProcess}"
+                                    <TextBlock Text="{Binding SumTimeProcess}"
                            FontSize="18"
                            FontWeight="Light"
                            Foreground="#FFFFFF"
                            VerticalAlignment="Top"
                            Margin="143,30,-129,0"/>
+                                    <Button Content="INFO" Margin="350,11,-278,11" />
 
-                                <TextBlock Text="{Binding GlobalStartTime}"
+
+                                    <TextBlock Text="{Binding GlobalStartTime}"
                            FontSize="18"
                            FontWeight="Light"
                            Foreground="#FFFFFF" 
@@ -124,11 +129,11 @@ CornerRadius="25" Grid.RowSpan="2" Grid.ColumnSpan="4"/>
 
 
 
-                            </Grid>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
-
+                                </Grid>
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+                    </ListBox>
+                </ScrollViewer>
 
             </Grid>
 

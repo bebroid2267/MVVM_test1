@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MVVM_test1.Utilities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,16 +23,37 @@ namespace MVVM_test1.View
     {
         public SwitcherMenu()
         {
+            
+                
+            
+             
             InitializeComponent();
         }
 
         private void NavigationToHome(object sender, RoutedEventArgs e)
         {
-            Switcher.Switch(new HomeView());
+            bool existsHome = CheckPages.IfExistsHomePage();
+            if (existsHome)
+                HomePage = CheckPages.GetHomePage();
+            else if (!existsHome)
+            {
+                HomePage = new();
+                CheckPages.AddHomePage(HomePage);
+            }
+            Switcher.Switch(HomePage);
         }
         private void NavigationToAllSoft(object sender, RoutedEventArgs e)
         {
-            Switcher.Switch(new AllSoft());
+            bool existsPages = CheckPages.IfExistsSoftsPage();
+            if (existsPages)
+                SoftsPage = CheckPages.GetSoftsPage();
+            else if (!existsPages)
+            {
+                CheckPages.AddSoftsPage(SoftsPage = new());
+            }
+            Switcher.Switch(SoftsPage);
         }
+        private HomeView HomePage;
+        private AllSoft SoftsPage;
     }
 }
