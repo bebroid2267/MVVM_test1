@@ -609,7 +609,39 @@ namespace MVVM_test1.DataBase
                 return startTime;
             }
         }
+        public static ProcessTime GetAllInfoApp(string name)
+        {
+            using (SqliteConnection connection = new SqliteConnection(connectionString))
+            {
+                ProcessTime app = new ProcessTime();
+                connection.Open();
+                var command = new SqliteCommand();
+                command.Connection = connection;
+                command.CommandText = $"SELECT sum_time, start_today_session, global_start_time, " +
+                    $"status, name FROM Process WHERE name LIKE '{name}'";
+                var reader = command.ExecuteReader();
+                while (reader.Read())
+                {
+                    app.SumTimeProcess = reader.GetString(0);
+                    app.StartTodaySession = reader.GetString(1);
+                    app.GlobalStartTime = reader.GetString(2);
+                    app.StatusApp = reader.GetString(3);
+                    app.NameProcess = reader.GetString(4);
+                }
+                reader.Close();
+                command.CommandText = $"SELECT today_count FROM DailyCountStartsApp WHERE name_app LIKE '{name}'";
+                
+                reader = command.ExecuteReader();
 
+                while (reader.Read())
+                {
+                    app.TodayCountStarts = reader.GetInt32(0);
+                }
+
+                connection.Close();
+                return app;
+            }
+        }
 
     }
 }

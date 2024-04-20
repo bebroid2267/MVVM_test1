@@ -8,10 +8,10 @@
         xmlns:view="clr-namespace:MVVM_test1.View" 
         xmlns:Menu="clr-namespace:MVVM_test1.Utilities" 
         d:DataContext="{d:DesignInstance Type=viewmodel:HomeVM}"
-        mc:Ignorable="d"
+        
         Height="720" 
         Width="1220"
-        
+        mc:Ignorable="d"
         Background="Transparent">
 
 

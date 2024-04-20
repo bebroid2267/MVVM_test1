@@ -6,12 +6,13 @@
              xmlns:local="clr-namespace:MVVM_test1.View" xmlns:viewmodel="clr-namespace:MVVM_test1.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:AllSoftVM}"
              xmlns:view="clr-namespace:MVVM_test1.View" 
              mc:Ignorable="d" 
-            Height="1550" 
-            Width="1220"
-            Background="Transparent">
+             Height="1550" 
+             Width="1220"
+             Background="Transparent">
 
     <UserControl.DataContext>
         <viewmodel:AllSoftVM />
+        
     </UserControl.DataContext>
 
     <ScrollViewer>
@@ -66,10 +67,12 @@ CornerRadius="25" Grid.RowSpan="2" Grid.ColumnSpan="4" Margin="0,0,0,715"/>
 
                 <ScrollViewer Margin="0,-68,10,0">
                     <ListBox ItemsSource="{Binding _Apps}" 
-         Margin="190,-20,159,0"
+                             Margin="190,-20,159,0"
                              
-                         Panel.ZIndex="1"
-         d:ItemsSource="{d:SampleData ItemCount=5}" Width="832" Height="487" >
+                            Panel.ZIndex="1"
+                             d:ItemsSource="{d:SampleData ItemCount=5}" 
+                             Width="832" 
+                             Height="487" >
 
 
                         <ListBox.ItemTemplate>
@@ -112,20 +115,26 @@ CornerRadius="25" Grid.RowSpan="2" Grid.ColumnSpan="4" Margin="0,0,0,715"/>
 
 
                                     <TextBlock Text="{Binding SumTimeProcess}"
-                           FontSize="18"
-                           FontWeight="Light"
-                           Foreground="#FFFFFF"
-                           VerticalAlignment="Top"
-                           Margin="143,30,-129,0"/>
-                                    <Button Content="INFO" Margin="350,11,-278,11" />
+                                               FontSize="18"
+                                               FontWeight="Light"
+                                               Foreground="#FFFFFF"
+                                               VerticalAlignment="Top"
+                                               Margin="143,30,-129,0"/>
+
+                                    <Button Content="INFO" 
+                                            Margin="350,11,-278,11"
+                                            Command="{Binding DataContext.ShowMiniPageApp, 
+                                            RelativeSource={RelativeSource AncestorType=ListBox}}" 
+                                            CommandParameter="{Binding}"/>
+
 
 
                                     <TextBlock Text="{Binding GlobalStartTime}"
-                           FontSize="18"
-                           FontWeight="Light"
-                           Foreground="#FFFFFF" 
-                           VerticalAlignment="Center"
-                            Margin="690,0,-690,0"/>
+                                               FontSize="18"
+                                               FontWeight="Light"
+                                               Foreground="#FFFFFF" 
+                                               VerticalAlignment="Center"
+                                                Margin="690,0,-690,0"/>
 
 
 

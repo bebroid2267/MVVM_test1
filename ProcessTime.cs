@@ -26,6 +26,7 @@ namespace MVVM_test1
         //            _NameProcess = value;
         //    }
         //}
+        public string StatusApp { get; set; }
         public string SumTimeProcess { get; set; }
         public string StartTodaySession { get; set; }
         public string GlobalStartTime { get; set;}
@@ -34,6 +35,7 @@ namespace MVVM_test1
         public string IcoPath { get; set; }
         public int TodayCountStarts { get; set; }
         public int YesterdayCountStarts { get; set; }
+
 
         public Category CategoryApp {  get; set; }
         public enum Category
