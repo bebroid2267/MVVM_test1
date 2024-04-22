@@ -14,7 +14,7 @@ using System.Windows;
 
 namespace MVVM_test1.Model
 {
-    public class AllSoftModel : BindableBase
+    public class AllTimesDateModel : BindableBase
     {
         public ObservableCollection<ProcessTime> _Apps
         {
@@ -42,7 +42,7 @@ namespace MVVM_test1.Model
         {
             Application.Current.Dispatcher.InvokeAsync(() =>
             {
-                List<ProcessTime> processes = DateBase.GetInfoProcess("all", "no");
+                List<ProcessTime> processes = DateBase.GetInfoProcess("all", "yes");
 
                 foreach (ProcessTime process in processes)
                 {
@@ -92,7 +92,7 @@ namespace MVVM_test1.Model
 
         public void GetApps(object sender, EventArgs e)
         {
-            List<ProcessTime> procesess = DateBase.GetInfoProcess("all", "no");
+            List<ProcessTime> procesess = DateBase.GetInfoProcess("all", "yes");
 
             //Application.Current.Dispatcher.InvokeAsync(() =>
             //{

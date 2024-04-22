@@ -22,12 +22,15 @@
 
             <Grid>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="800" />
+                    <ColumnDefinition Width="600" />
+                    <ColumnDefinition Width="200" />
                     <ColumnDefinition Width="200" />
                     <ColumnDefinition Width="200" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
                 <Button Content="Главная" Grid.Column="1" Margin="42,59,48,59" Click="NavigationToHome"/>
+                <Button Content="Дашборд" Grid.Column="3" Margin="42,59,48,59" Click="NavigationToDashboard"/>
+
                 <Button Content="Весь софт" Grid.Column="2" Margin="42,59,48,59" Click="NavigationToAllSoft"/>
 
                 <!--<Menu:Btn Style="{StaticResource BtnStyle}"

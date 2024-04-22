@@ -11,7 +11,25 @@ namespace MVVM_test1.Utilities
     {
         private static HomeView HomePage;
         private static AllSoft SoftsPage;
-
+        private static AnalyticsByDate DashboardPage;
+        public static bool IfExistsDashboardPage()
+        {
+            if (DashboardPage == null)
+                return false;
+            else
+                return true;
+        }
+        public static void AddDashboardPage(AnalyticsByDate dashboardPage)
+        {
+            if (DashboardPage == null)
+            {
+                DashboardPage = dashboardPage;
+            }
+        }
+        public static AnalyticsByDate GetDashboard()
+        {
+            return DashboardPage;
+        }
         public static HomeView GetHomePage()
         {
             return HomePage;

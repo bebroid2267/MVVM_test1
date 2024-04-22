@@ -142,7 +142,7 @@ namespace MVVM_test1.DataBase
             }
 
         }
-        public static List<ProcessTime> GetInfoProcess(string whatTypeProcess)
+        public static List<ProcessTime> GetInfoProcess(string whatTypeProcess, string sortOrNot)
         {
             using (SqliteConnection connection = new SqliteConnection(connectionString))
             {
@@ -172,6 +172,8 @@ namespace MVVM_test1.DataBase
                     infoProcesess.Add(info);
                 }
 
+                if (sortOrNot == "yes")
+                   infoProcesess.OrderByDescending(x => DateTime.ParseExact(x.SumTimeProcess, "HH:mm:ss", CultureInfo.InvariantCulture, DateTimeStyles.None));
                 connection.Close();
                 return infoProcesess;
             }

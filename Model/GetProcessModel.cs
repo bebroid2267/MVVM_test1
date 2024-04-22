@@ -49,7 +49,7 @@ namespace MVVM_test1.Model
         {
             Application.Current.Dispatcher.InvokeAsync(() =>
             {
-                List<ProcessTime> processes = DateBase.GetInfoProcess("works");
+                List<ProcessTime> processes = DateBase.GetInfoProcess("works", "no");
 
                 foreach (ProcessTime process in processes)
                 {
@@ -99,7 +99,7 @@ namespace MVVM_test1.Model
 
         public void GetProcess(object sender, EventArgs e)
         {
-            List<ProcessTime> procesess = DateBase.GetInfoProcess("works");
+            List<ProcessTime> procesess = DateBase.GetInfoProcess("works", "no");
                
                 //Application.Current.Dispatcher.InvokeAsync(() =>
                 //{

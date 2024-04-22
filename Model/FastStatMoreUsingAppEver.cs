@@ -32,7 +32,7 @@ namespace MVVM_test1.Model
         }
         public void GetMoreUsingApp()
         {
-            List<ProcessTime> procesess = DateBase.GetInfoProcess("all");
+            List<ProcessTime> procesess = DateBase.GetInfoProcess("all", "no");
             ProcessTime moreUseApp = new();
             if (procesess.Count > 0)
             {

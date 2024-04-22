@@ -23,13 +23,20 @@ namespace MVVM_test1.View
     {
         public SwitcherMenu()
         {
-            
-                
-            
-             
             InitializeComponent();
         }
-
+        private void NavigationToDashboard(object sender, RoutedEventArgs e)
+        {
+            bool existsDash = CheckPages.IfExistsDashboardPage();
+            if (existsDash)
+                DashboardPage = CheckPages.GetDashboard();
+            else if (!existsDash)
+            {
+                DashboardPage = new();
+                CheckPages.AddDashboardPage(DashboardPage);
+            }
+            Switcher.Switch(DashboardPage);
+        }
         private void NavigationToHome(object sender, RoutedEventArgs e)
         {
             bool existsHome = CheckPages.IfExistsHomePage();
@@ -55,5 +62,6 @@ namespace MVVM_test1.View
         }
         private HomeView HomePage;
         private AllSoft SoftsPage;
+        private AnalyticsByDate DashboardPage;
     }
 }

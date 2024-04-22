@@ -36,7 +36,7 @@ namespace MVVM_test1.Model
 
         public void GetLongTimeHaventLauchApp()
         {
-            List<ProcessTime> apps = DateBase.GetInfoProcess("stoped");
+            List<ProcessTime> apps = DateBase.GetInfoProcess("stoped", "no");
             ProcessTime process = new();
             if (apps.Count > 0)
             {
