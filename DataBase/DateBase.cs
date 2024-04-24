@@ -249,6 +249,39 @@ namespace MVVM_test1.DataBase
             }
 
         }
+        public static string GetSumTimeAppToDailyInfo(string name, string date)
+        {
+            using (SqliteConnection connection = new SqliteConnection(connectionString))
+            {
+                connection.Open();
+                var command = new SqliteCommand();
+                command.Connection = connection;
+                command.CommandText = $"SELECT sum_time FROM DailyInfoApp WHERE name_app LIKE '{name}' AND today_date LIKE '{date}'";
+                var reader = command.ExecuteReader();
+                string sumTime = string.Empty;
+                while (reader.Read())
+                {
+                    if (!reader.IsDBNull(0))
+                    sumTime = reader.GetString(0);
+                }
+
+                connection.Close();
+                return sumTime;
+            }
+        }
+
+        public static void UpdateTimeProcessDaily(string name, string date, string time)
+        {
+            using (SqliteConnection connection = new SqliteConnection(connectionString))
+            {
+                connection.Open();
+                var command = new SqliteCommand();
+                command.Connection = connection;
+                command.CommandText = $"UPDATE DailyInfoApp SET sum_time = '{time}' WHERE name_app LIKE '{name}' AND today_date LIKE '{date}'";
+                command.ExecuteNonQuery();
+                connection.Close();
+            }
+        }
         public static void AddIcoPath(string nameProcess, string icoPath)
         {
             using (SqliteConnection connection = new SqliteConnection(connectionString))
@@ -646,37 +679,26 @@ namespace MVVM_test1.DataBase
             }
         }
 
-        public static Dictionary<string, List<ProcessTime>> GetLast7daysUsingApps()
+        public static List<ProcessTime> GetAppUsingForDay(string date)
         {
             using (SqliteConnection connection = new SqliteConnection(connectionString))
             {
-                Dictionary<string, List<ProcessTime>> last7DaysApps = new Dictionary<string, List<ProcessTime>>();
+                List<ProcessTime> currentDayApps = new List<ProcessTime>();
                 connection.Open();
                 var command = new SqliteCommand();
                 command.Connection = connection;
-                string currentDay = DateTime.Now.AddDays(-1).ToString("d");
-                SqliteDataReader reader = null;
-
-                for (int i = -1; i < -7; i--)
+                command.CommandText = $"SELECT name_app, sum_time FROM DailyInfoApp WHERE today_date LIKE '{date}'";
+                var reader = command.ExecuteReader();
+                while (reader.Read())
                 {
-                    currentDay = DateTime.Now.AddDays(i).ToString("d");
+                    ProcessTime app = new ProcessTime();
 
-                    if (GetRandomApp("one", "default", currentDay) != null)
-                    {
-                        command.CommandText = $"SELECT name_app, sum_time FROM DailyInfoApp WHERE today_date LIKE '{currentDay}'";
-                        reader = command.ExecuteReader();
-                        ProcessTime app = new ProcessTime();
-                        List<ProcessTime> listApps = new List<ProcessTime>();
-                        while (reader.Read())
-                        {
-                            app.NameProcess = reader.GetString(0);
-                            app.SumTimeProcess = reader.GetString(1);
-                            listApps.Add(app);
-                        }
-                        last7DaysApps.Add(currentDay, listApps);
-                    }
-                }
-                return last7DaysApps;
+                    app.NameProcess = reader.GetString(0);
+                    if (!reader.IsDBNull(1))
+                    app.SumTimeProcess = reader.GetString(1);
+                    currentDayApps.Add(app);
+                 }
+                return currentDayApps;
             }
         }
     }

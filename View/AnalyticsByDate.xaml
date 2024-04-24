@@ -15,6 +15,14 @@
         <DataTemplate DataType="{x:Type viewmodel:AllTimesDateVM}">
             <view:AllTimesDateView/>
         </DataTemplate>
+        
+        <DataTemplate DataType="{x:Type viewmodel:Last7daysButtonsVM}">
+            <view:Last7DaysButtonsView/>
+        </DataTemplate>
+        
+        <DataTemplate DataType="{x:Type viewmodel:List7DaysVM}">
+            <view:Last7DaysView/>
+        </DataTemplate>
 
     </UserControl.Resources>
 
@@ -74,13 +82,16 @@
                     Content="Все время"
             Grid.Column="1" 
             Margin="0,0,0,0"/>
-                <Button Content="Последние 7 дней"
+                <Button Command="{Binding ShowLast7DaysButton}"
+                    Content="Последние 7 дней"
             Grid.Column="1" 
             Margin="15,0,0,0"/>
-                <Button Content="За вчера"
+                <Button Command="{Binding ShowYesterdayAppsButton}"
+                    Content="За вчера"
             Grid.Column="1" 
-            Margin="15,0,0,0"/>
-                <Button Content="За сегодня"
+            Margin="15,0,0,0" Cursor="Hand"/>
+                <Button Command="{Binding ShowTodayAppsButton}"
+                    Content="За сегодня"
             Grid.Column="1" 
             Margin="15,0,0,0"/>
 

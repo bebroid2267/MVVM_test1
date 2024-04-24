@@ -18,7 +18,7 @@
                 <Setter Property="ItemsPanel">
                     <Setter.Value>
                         <ItemsPanelTemplate>
-                            <WrapPanel Orientation="Horizontal" 
+                            <WrapPanel Orientation="Vertical" 
                                    Background="Transparent"
                                    ItemWidth="266"
                                    ItemHeight="120"/>
@@ -29,61 +29,62 @@
             </Style>
         </ResourceDictionary>
     </UserControl.Resources>
+    <ScrollViewer>
+        <Grid>
 
-    <Grid>
 
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="283" />
+                <ColumnDefinition Width="283" />
+                <ColumnDefinition Width="283" />
+                <ColumnDefinition Width="*" />
 
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="283" />
-            <ColumnDefinition Width="283" />
-            <ColumnDefinition Width="283" />
-            <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
 
-        </Grid.ColumnDefinitions>
-
-        <Border Background=" #1C1D31"
+            <Border Background=" #1C1D31"
             CornerRadius="25" 
             
             Grid.ColumnSpan="4" Margin="0,0,0,0"/>
 
-        <TextBlock Text="ГРАФИК ЕПТА"
+            <TextBlock Text="ГРАФИК ЕПТА"
                    Margin="100,180,183,100"
                    Foreground="#FFFFFF"
                    FontSize="40"
                    Panel.ZIndex="1" Grid.ColumnSpan="2"/>
-        <ListBox Style="{StaticResource ListBoxStyle}"
+
+            <ListBox Style="{StaticResource ListBoxStyle}"
                 ItemsSource="{Binding _Apps}" 
                 
                 Panel.ZIndex="1"
                 d:ItemsSource="{d:SampleData ItemCount=5}" 
-                Width="395" 
+                Width="297" 
                 Grid.ColumnSpan="2" 
                 HorizontalAlignment="Left" 
                 ScrollViewer.HorizontalScrollBarVisibility="Disabled" 
-                 Margin="167,0,0,10" Grid.Column="1">
+                 Margin="230,0,0,10" Grid.Column="1">
 
 
-            <ListBox.ItemTemplate>
-                <DataTemplate>
-                    <Grid Height="450" Width="800">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="95" />
-                            <RowDefinition Height="95" />
-                            <RowDefinition Height="95" />
-                            <RowDefinition Height="95" />
-                            <RowDefinition Height="*" />
-                        </Grid.RowDefinitions>
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Height="450" Width="800">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="95" />
+                                <RowDefinition Height="95" />
+                                <RowDefinition Height="95" />
+                                <RowDefinition Height="95" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
 
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="266" />
-                            <ColumnDefinition Width="266" />
-                            <ColumnDefinition Width="266" />
-                            <ColumnDefinition Width="*" />
-                        </Grid.ColumnDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="266" />
+                                <ColumnDefinition Width="266" />
+                                <ColumnDefinition Width="266" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
 
 
 
-                        <Border Background="#ffffff"
+                            <Border Background="#ffffff"
                                 Height="50"
                                 Width="150"
                                 Margin="-15,0,0,0"
@@ -92,31 +93,27 @@
                                 CornerRadius="20"
                                 Opacity="0.3"/>
 
-                        <Border CornerRadius="100"
+                            <Border CornerRadius="100"
                                 BorderThickness="1" 
                                 HorizontalAlignment="Left" 
                                 Width="70" 
                             Margin="10,0,0,0">
 
-                            <Image Source="{Binding IcoPath}" 
+                                <Image Source="{Binding IcoPath}" 
                                    Margin="0,0,0,0" 
                                    RenderTransformOrigin="0.319,0.224" />
-                        </Border>
+                            </Border>
 
-                        <TextBlock Text="{Binding Key}" 
-                                   FontWeight="DemiBold"
-                                   Margin="200,-10,0,1"
-                                   Foreground="#FFFFFF"
-                                   FontSize="23" />
 
-                        <TextBlock Text="{Binding NameProcess}" 
+
+                            <TextBlock Text="{Binding NameProcess}" 
                                    FontWeight="DemiBold"
                                    Margin="90,10,0,1"
                                    Foreground="#FFFFFF"
                                    FontSize="23" />
 
 
-                        <TextBlock Text="{Binding SumTimeProcess}"
+                            <TextBlock Text="{Binding SumTimeProcess}"
                            FontSize="18"
                            FontWeight="Light"
                            Foreground="#FFFFFF"
@@ -125,7 +122,7 @@
 
 
 
-                        <!--<TextBlock Text="{Binding GlobalStartTime}"
+                            <!--<TextBlock Text="{Binding GlobalStartTime}"
                            FontSize="18"
                            FontWeight="Light"
                            Foreground="#FFFFFF" 
@@ -134,11 +131,12 @@
 
 
 
-                    </Grid>
-                </DataTemplate>
-            </ListBox.ItemTemplate>
-        </ListBox>
+                        </Grid>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
 
 
-    </Grid>
+        </Grid>
+    </ScrollViewer>
 </UserControl>

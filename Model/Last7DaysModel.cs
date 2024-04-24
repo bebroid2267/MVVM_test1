@@ -16,88 +16,115 @@ namespace MVVM_test1.Model
 {
     public class Last7DaysModel : BindableBase
     {
-        public ObservableCollection<ProcessGroup> _Apps
+        public Last7DaysModel()
         {
-            get { return Apps; }
+            WorksProcess = _WorkProcess;
+        }
+        public ObservableCollection<ProcessTime> _WorkProcess
+        {
+            get { return WorksProcess; }
             set
             {
                 Application.Current.Dispatcher.InvokeAsync(() =>
                 {
-                    Apps = value;
-                    OnPropertyChanged(nameof(Apps));
+
+                    WorksProcess = value;
+                    OnPropertyChanged(nameof(WorksProcess));
                 });
             }
         }
+        public string GetDirectoryIco(ProcessTime process)
+        {
+            string projectDirectory = Directory.GetCurrentDirectory();
 
-        private void AddOrChangeProcess(Dictionary<string, List<ProcessTime>> data)
+            string filePath = Path.Combine(projectDirectory, process.NameProcess + ".ico");
+            if (File.Exists(filePath))
+                return filePath;
+            else
+                return null;
+        }
+        private void AddOrChangeProcess(string date)
         {
             Application.Current.Dispatcher.InvokeAsync(() =>
             {
-                foreach (var key in data.Keys)
+                List<ProcessTime> processes = DateBase.GetAppUsingForDay(date);
+
+                foreach (ProcessTime process in processes)
                 {
-                    bool groupExists = Apps.Any(g => g.Key == key);
-                    if (!groupExists)
+                    string icoPath = GetDirectoryIco(process);
+                    int index = WorksProcess.FindIndex(p => p.NameProcess == process.NameProcess); // Найти индекс элемента по условию
+
+
+                    if (index != -1)
                     {
-                        Apps.Add(new ProcessGroup { Key = key, Processes = data[key] });
+                        Application.Current.Dispatcher.InvokeAsync(() =>
+                        {
+                            if (icoPath != null)
+                            {
+                                process.IcoPath = icoPath;
+                            }
+                            _WorkProcess[index] = process; // Обновить элемент по индексу
+                        });
                     }
                     else
                     {
-                        var group = Apps.First(g => g.Key == key);
-                        group.Processes = data[key];
+                        if (icoPath != null)
+                        {
+                            process.IcoPath = icoPath;
+                        }
+
+                        _WorkProcess.Add(process);
                     }
                 }
 
-                // Удаление группы, если ее нет в новых данных
-                foreach (var group in Apps.ToList())
+                foreach (var item in _WorkProcess)
                 {
-                    if (!data.ContainsKey(group.Key))
+                    int index = processes.FindIndex(p => p.NameProcess == item.NameProcess);
+                    if (index == -1)
                     {
-                        Apps.Remove(group);
+                        Application.Current.Dispatcher.InvokeAsync(() =>
+                        {
+                            WorksProcess.Remove(item);
+
+                        });
                     }
                 }
 
-                OnPropertyChanged(nameof(Apps)); // Уведомить об изменении коллекции
+                OnPropertyChanged(nameof(WorksProcess)); // Уведомить об изменении коллекции
             });
         }
 
-        public void GetApps(object sender, EventArgs e)
-        {
-            Dictionary<string, List<ProcessTime>> data = DateBase.GetLast7daysUsingApps();
 
-            if (data.Count > 0)
+        public void GetProcess( string date)
+        {
+            List<ProcessTime> procesess = DateBase.GetAppUsingForDay(date);
+
+            //Application.Current.Dispatcher.InvokeAsync(() =>
+            //{
+            //    Task.Run(() => DeleteProcess());
+            //});
+            if (procesess.Count > 0)
             {
                 Application.Current.Dispatcher.InvokeAsync(() =>
                 {
-                    Task.Run(() => AddOrChangeProcess(data));
+                    Task.Run(() => AddOrChangeProcess(date));
                 });
             }
+
+
         }
+
 
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName] string prop = "")
         {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(prop));
         }
-
-        private ObservableCollection<ProcessGroup> Apps = new ObservableCollection<ProcessGroup>();
+        public ObservableCollection<ProcessTime> WorksProcess = new ObservableCollection<ProcessTime>();
     }
 
 
-    public class ProcessGroup : BindableBase
-    {
-        private string key;
-        public string Key
-        {
-            get { return key; }
-            set { SetProperty(ref key, value); }
-        }
-
-        private List<ProcessTime> processes;
-        public List<ProcessTime> Processes
-        {
-            get { return processes; }
-            set { SetProperty(ref processes, value); }
-        }
-    }
+    
 
 }

@@ -13,6 +13,7 @@ using System.ServiceProcess;
 using System.Reflection;
 using System.Configuration.Install;
 using MVVM_test1.View;
+using MVVM_test1.Utilities;
 
 namespace MVVM_test1
 {
@@ -26,7 +27,10 @@ namespace MVVM_test1
             InitializeComponent();
             DataContext = new MainVM();
             Switcher.pageSwitcher = this;
-            Switcher.Switch(new HomeView());
+            HomeView view = new HomeView();
+            CheckPages.AddHomePage(view);
+            Switcher.Switch(view);
+            Closing += (DataContext as MainVM).ClosingWorksProcesess;
         }
 
         public void Navigate(UserControl nextPage)

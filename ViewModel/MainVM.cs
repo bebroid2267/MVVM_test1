@@ -1,5 +1,6 @@
 ﻿using MVVM_test1.DataBase;
 using MVVM_test1.Model;
+using MVVM_test1.Utilities;
 using Prism.Commands;
 using Prism.Mvvm;
 using System;
@@ -49,7 +50,10 @@ namespace MVVM_test1.ViewModel
 
         public MainVM()
         {
+            CheckPages.AddSoftsPage(new View.AllSoft());
+            CheckPages.AddDashboardPage(new View.AnalyticsByDate()) ;
 
+            dailyProcesses = new DailyProcessJobsModel();
             UsingTime = new UsingPcTimeModel();
             processes = new ProcessJobsModel();
             
@@ -63,6 +67,10 @@ namespace MVVM_test1.ViewModel
                 Process = processes._RunningProcesess;
 
             });
+
+            System.Timers.Timer timerDaily = new System.Timers.Timer(6000);
+            timerDaily.Elapsed += dailyProcesses.MonitorProcesess;
+            timerDaily.Start();
         }
         
 
@@ -74,6 +82,6 @@ namespace MVVM_test1.ViewModel
         }
         public UsingPcTimeModel UsingTime;
         public ProcessJobsModel processes;
-        
+        private DailyProcessJobsModel dailyProcesses;
     }
 }

@@ -1,4 +1,5 @@
-﻿using MVVM_test1.Model;
+﻿using GalaSoft.MvvmLight;
+using MVVM_test1.Model;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -10,24 +11,22 @@ namespace MVVM_test1.ViewModel
 {
     public class List7DaysVM : Utilities.ViewModelBase
     {
-        public ObservableCollection<ProcessGroup> _Apps
+        public ObservableCollection<ProcessTime> _Apps
         {
-            get { return Apps._Apps; }
+            get { return Apps._WorkProcess; }
             set
             {
-                Apps._Apps = value;
+                Apps._WorkProcess = value;
                 OnPropertyChanged(nameof(_Apps));
             }
         }
-        public List7DaysVM()
+        public List7DaysVM(string date)
         {
             Apps = new Last7DaysModel();
 
-            System.Timers.Timer timerCheckProcess = new System.Timers.Timer(2000);
-            timerCheckProcess.Elapsed += Apps.GetApps;
-            timerCheckProcess.Start();
+            Apps.GetProcess(date);
         }
-
+        
         private Last7DaysModel Apps;
     }
 }
