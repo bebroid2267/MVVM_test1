@@ -55,7 +55,6 @@ namespace MVVM_test1.ViewModel
             
             Application.Current.Dispatcher.InvokeAsync(() =>
             {
-                DateBase.StartNewDay();
                 Task.Run(() => UsingTime.CheckUsingPc());
 
                 System.Timers.Timer timer = new System.Timers.Timer(5000);

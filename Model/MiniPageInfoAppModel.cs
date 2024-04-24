@@ -29,7 +29,7 @@ namespace MVVM_test1.Model
 
         public void GetInfoApp(string nameApp)
         {
-            ProcessTime app = DateBase.GetAllInfoApp(nameApp);
+            ProcessTime app = DateBase.GetAllInfoApp(nameApp, DateTime.Now.ToString("d"));
             GetProcessModel getProcessModel = new GetProcessModel();
             string icoPath = getProcessModel.GetDirectoryIco(app);
             if (icoPath != null)

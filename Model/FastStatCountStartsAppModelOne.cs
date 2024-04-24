@@ -35,7 +35,7 @@ namespace MVVM_test1.Model
 
         public void GetCountStartsRandomApp(string numberApp, string name)
         {
-            ProcessTime randomApp = DateBase.GetRandomApp(numberApp, name);
+            ProcessTime randomApp = DateBase.GetRandomApp(numberApp, name, DateTime.Now.ToString("d"));
             GetProcessModel getProcessModel = new GetProcessModel();
             string icoPath = getProcessModel.GetDirectoryIco(randomApp);
             if (icoPath != null)

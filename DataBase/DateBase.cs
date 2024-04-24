@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -373,45 +374,45 @@ namespace MVVM_test1.DataBase
         }
 
 
-        public static void StartNewDay()
-        {
-            using (SqliteConnection connection = new SqliteConnection(connectionString))
-            {
-                connection.Open();
-                var command = new SqliteCommand();
-                command.Connection = connection;
-                command.CommandText = $"SELECT name_app, today_count FROM DailyCountStartsApp WHERE today_date NOT LIKE '{DateTime.Now.ToString("d")}'";
+        //public static void StartNewDay()
+        //{
+        //    using (SqliteConnection connection = new SqliteConnection(connectionString))
+        //    {
+        //        connection.Open();
+        //        var command = new SqliteCommand();
+        //        command.Connection = connection;
+        //        command.CommandText = $"SELECT name_app, today_count FROM DailyCountStartsApp WHERE today_date NOT LIKE '{DateTime.Now.ToString("d")}'";
 
-                var reader = command.ExecuteReader();
-                List<ProcessTime>  process = new List<ProcessTime>();
-                while (reader.Read())
-                {
-                    ProcessTime app = new ProcessTime();
-                    app.NameProcess = reader.GetString(0);
-                    app.TodayCountStarts = reader.GetInt32(1);
-                    process.Add(app);
-                }
-                reader
-                    .Close();
-                if (process.Count > 0)
-                {
-                    foreach (ProcessTime item in process)
-                    {
-                        command.CommandText = $"UPDATE DailyCountStartsApp SET yesterday_count = '{item.TodayCountStarts}' " +
-                            $"WHERE name_app LIKE '{item.NameProcess}'";
-                        command.ExecuteNonQuery();
-                    }
+        //        var reader = command.ExecuteReader();
+        //        List<ProcessTime>  process = new List<ProcessTime>();
+        //        while (reader.Read())
+        //        {
+        //            ProcessTime app = new ProcessTime();
+        //            app.NameProcess = reader.GetString(0);
+        //            app.TodayCountStarts = reader.GetInt32(1);
+        //            process.Add(app);
+        //        }
+        //        reader
+        //            .Close();
+        //        if (process.Count > 0)
+        //        {
+        //            foreach (ProcessTime item in process)
+        //            {
+        //                command.CommandText = $"UPDATE DailyCountStartsApp SET yesterday_count = '{item.TodayCountStarts}' " +
+        //                    $"WHERE name_app LIKE '{item.NameProcess}'";
+        //                command.ExecuteNonQuery();
+        //            }
 
-                    command.CommandText = $"UPDATE DailyCountStartsApp SET today_date = '{DateTime.Now.ToString("d")}'";
-                    command.ExecuteNonQuery();
+        //            command.CommandText = $"UPDATE DailyCountStartsApp SET today_date = '{DateTime.Now.ToString("d")}'";
+        //            command.ExecuteNonQuery();
 
-                    command.CommandText = $"UPDATE DailyCountStartsApp SET today_count = 0";
-                    command.ExecuteNonQuery();
-                }
-                connection.Close();
-            }
-        }
-        private static void AddCountStartsApp(string name)
+        //            command.CommandText = $"UPDATE DailyCountStartsApp SET today_count = 0";
+        //            command.ExecuteNonQuery();
+        //        }
+        //        connection.Close();
+        //    }
+        //}
+        private static void AddDailyInfoApp(string name, string date)
         {
             using (SqliteConnection connection = new SqliteConnection(connectionString))
             {
@@ -419,13 +420,13 @@ namespace MVVM_test1.DataBase
                 var command = new SqliteCommand();
                 command.Connection = connection;
                 command.Parameters.AddWithValue("@name", name);
-                command.CommandText = $"INSERT INTO DailyCountStartsApp (name_app, today_count, today_date) values (@name, {1}, '{DateTime.Now.ToString("d")}')";
+                command.CommandText = $"INSERT INTO DailyInfoApp (name_app, today_count, today_date) values (@name, {1}, '{date}')";
                 command.ExecuteNonQuery();
 
                 connection.Close();
             }
         }
-        private static int GetDayCountStartsApp(string name)
+        private static int GetDayCountStartsApp(string name, string date)
         {
             using (SqliteConnection connection = new SqliteConnection(connectionString))
             {
@@ -433,7 +434,7 @@ namespace MVVM_test1.DataBase
                 connection.Open();
                 var command = new SqliteCommand();
                 command.Connection = connection;
-                command.CommandText = $"SELECT today_count FROM DailyCountStartsApp WHERE name_app LIKE '{name}'";
+                command.CommandText = $"SELECT today_count FROM DailyInfoApp WHERE name_app LIKE '{name}' AND today_date LIKE '{date}'";
 
                 var reader = command.ExecuteReader();
                 while (reader.Read())
@@ -445,11 +446,11 @@ namespace MVVM_test1.DataBase
                 return countStarts;
             }
         }
-        public static void UpdateCountStartsApp(string name, string whatDayCount)
+                public static void UpdateCountStartsApp(string name, string date)
         {
             using (SqliteConnection connection = new SqliteConnection(connectionString))
             {
-                int countStarts = GetDayCountStartsApp(name);
+                int countStarts = GetDayCountStartsApp(name, DateTime.Now.ToString("d"));
                 connection.Open();
                 var command = new SqliteCommand();
                 command.Connection = connection;
@@ -457,15 +458,15 @@ namespace MVVM_test1.DataBase
                 if (countStarts != -1)
                 {
                     countStarts++;
-                    command.CommandText = $"UPDATE DailyCountStartsApp SET {whatDayCount} = '{countStarts}' WHERE name_app LIKE '{name}'";
+                    command.CommandText = $"UPDATE DailyInfoApp SET today_count = '{countStarts}' WHERE name_app LIKE '{name}' AND today_date LIKE '{date}'";
                     command.ExecuteNonQuery();
                 }
                 else
-                    AddCountStartsApp(name);
+                    AddDailyInfoApp(name, DateTime.Now.ToString("d"));
 
             }
         }
-        public static ProcessTime GetRandomApp(string numberApp, string nameApp)
+        public static ProcessTime GetRandomApp(string numberApp, string nameApp, string date)
         {
             using (SqliteConnection connection = new SqliteConnection(connectionString))
             {
@@ -476,12 +477,12 @@ namespace MVVM_test1.DataBase
                 command.Connection = connection;
                 if (numberApp == "one")
                 {
-                    command.CommandText = $"SELECT name_app, today_count FROM DailyCountStartsApp WHERE today_date LIKE '{DateTime.Now.ToString("d")}'" +
+                    command.CommandText = $"SELECT name_app, today_count FROM DailyInfoApp WHERE today_date LIKE '{date}'" +
                     $"ORDER BY RANDOM() LIMIT 1";
                 }
                 else
                 {
-                    command.CommandText = $"SELECT name_app, today_count FROM DailyCountStartsApp WHERE today_date LIKE '{DateTime.Now.ToString("d")}'" +
+                    command.CommandText = $"SELECT name_app, today_count FROM DailyInfoApp WHERE today_date LIKE '{date}'" +
                     $"AND name_app NOT LIKE '{nameApp}'  ORDER BY RANDOM() LIMIT 1";
                 }
                 var reader = command.ExecuteReader();
@@ -611,7 +612,7 @@ namespace MVVM_test1.DataBase
                 return startTime;
             }
         }
-        public static ProcessTime GetAllInfoApp(string name)
+        public static ProcessTime GetAllInfoApp(string name, string date)
         {
             using (SqliteConnection connection = new SqliteConnection(connectionString))
             {
@@ -631,7 +632,7 @@ namespace MVVM_test1.DataBase
                     app.NameProcess = reader.GetString(4);
                 }
                 reader.Close();
-                command.CommandText = $"SELECT today_count FROM DailyCountStartsApp WHERE name_app LIKE '{name}'";
+                command.CommandText = $"SELECT today_count FROM DailyInfoApp WHERE name_app LIKE '{name}' AND today_date LIKE '{date}'";
                 
                 reader = command.ExecuteReader();
 
@@ -645,5 +646,38 @@ namespace MVVM_test1.DataBase
             }
         }
 
+        public static Dictionary<string, List<ProcessTime>> GetLast7daysUsingApps()
+        {
+            using (SqliteConnection connection = new SqliteConnection(connectionString))
+            {
+                Dictionary<string, List<ProcessTime>> last7DaysApps = new Dictionary<string, List<ProcessTime>>();
+                connection.Open();
+                var command = new SqliteCommand();
+                command.Connection = connection;
+                string currentDay = DateTime.Now.AddDays(-1).ToString("d");
+                SqliteDataReader reader = null;
+
+                for (int i = -1; i < -7; i--)
+                {
+                    currentDay = DateTime.Now.AddDays(i).ToString("d");
+
+                    if (GetRandomApp("one", "default", currentDay) != null)
+                    {
+                        command.CommandText = $"SELECT name_app, sum_time FROM DailyInfoApp WHERE today_date LIKE '{currentDay}'";
+                        reader = command.ExecuteReader();
+                        ProcessTime app = new ProcessTime();
+                        List<ProcessTime> listApps = new List<ProcessTime>();
+                        while (reader.Read())
+                        {
+                            app.NameProcess = reader.GetString(0);
+                            app.SumTimeProcess = reader.GetString(1);
+                            listApps.Add(app);
+                        }
+                        last7DaysApps.Add(currentDay, listApps);
+                    }
+                }
+                return last7DaysApps;
+            }
+        }
     }
 }

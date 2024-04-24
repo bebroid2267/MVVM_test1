@@ -8,7 +8,7 @@
              xmlns:view="clr-namespace:MVVM_test1.View"
              mc:Ignorable="d" 
             Background="Transparent"
-             d:DesignHeight="1550"
+             d:DesignHeight="1000"
              d:DesignWidth="1220">
 
     <UserControl.Resources>
@@ -21,7 +21,7 @@
     <UserControl.DataContext>
         <viewmodel:AnalyticsDateVM />
     </UserControl.DataContext>
-    
+
     <ScrollViewer>
         <Grid>
             <Grid.RowDefinitions>
@@ -47,11 +47,11 @@
 
 
             <Border Background=" #1C1D31"
-                    CornerRadius="25" 
-                    Grid.RowSpan="2" 
-                    Grid.ColumnSpan="4" 
-                    Margin="0,0,0,715"/>
-            
+        CornerRadius="25" 
+        Grid.RowSpan="3" 
+        
+        Grid.ColumnSpan="4"/>
+
             <TextBlock Grid.Row="1"
            Grid.ColumnSpan="1"
                        Margin="40,-700,100,100"
@@ -104,6 +104,7 @@
                     Grid.Row="1"
                     Grid.Column="1"
                     Grid.ColumnSpan="2"/>
+
 
             </Grid>
 
