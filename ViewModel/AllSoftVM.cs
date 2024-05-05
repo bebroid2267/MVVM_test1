@@ -23,7 +23,7 @@ using System.Windows.Media;
 
 namespace MVVM_test1.ViewModel
 {
-    public class AllSoftVM : Utilities.ViewModelBase
+    public class AllSoftVM : Utilities.ViewModelBase, IClosable
     {
         public ProcessTime _SelectedApp
         {
@@ -121,16 +121,21 @@ namespace MVVM_test1.ViewModel
                 popUpWindow.Close();
             }
         }
-
-
-
+        public void Close()
+        {
+            timerCheckProcess.Stop();
+        }
+        public void Start()
+        {
+            timerCheckProcess.Start();
+        }
 
         public AllSoftVM() 
         {
             ShowMiniPageApp = new RelayCommand<object>(OpenPopUp);
             Apps = new AllSoftModel();
 
-            System.Timers.Timer timerCheckProcess = new System.Timers.Timer(3000);
+            timerCheckProcess = new System.Timers.Timer(3000);
             timerCheckProcess.Elapsed += Apps.GetApps;
             timerCheckProcess.Start();
         }
@@ -139,6 +144,7 @@ namespace MVVM_test1.ViewModel
         public AllSoftModel Apps;
         private PopUpAppInfoVM PopUpVm;
         private PopUpAppInfoView PopUpView;
-        
+        private System.Timers.Timer timerCheckProcess;
+
     }
 }

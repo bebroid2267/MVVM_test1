@@ -13,6 +13,7 @@
                 <ResourceDictionary Source="pack://application:,,,/Styles/Buttons.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/Styles/Text.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/Styles/Page.xaml" />
+
             </ResourceDictionary.MergedDictionaries>
             
             

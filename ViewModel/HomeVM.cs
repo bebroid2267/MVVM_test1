@@ -1,4 +1,5 @@
 ﻿using MVVM_test1.Model;
+using MVVM_test1.Utilities;
 using Prism.Mvvm;
 using System;
 using System.Collections.Generic;
@@ -13,7 +14,7 @@ using System.Windows;
 
 namespace MVVM_test1.ViewModel
 {
-    public class HomeVM : BindableBase, INotifyPropertyChanged
+    public class HomeVM : BindableBase, INotifyPropertyChanged, IClosable
     {
         public ObservableCollection<ProcessTime> _RandomAppTwo
         {
@@ -108,7 +109,23 @@ namespace MVVM_test1.ViewModel
                 });
             }
         }
-        
+        public void Close()
+        {
+            timerCheckProcesess.Stop();
+        } 
+        public void Start()
+        {
+            timerCheckProcesess.Start();
+
+            UsingTime.GetStartTimeUsingPcToday();
+            UsingTime.GetTimeUsingPcToday();
+            AppHaventLaucnTime.GetLongTimeHaventLauchApp();
+            AppEver.GetMoreUsingApp();
+            AppToday.GetFavoriteApp();
+            RandomAppOne.GetCountStartsRandomApp("one", "name");
+            RandomAppTwo.GetCountStartsRandomApp("two", _RandomAppOne[0].NameProcess);
+
+        }
         public HomeVM()
         {
             UsingTime = new UsingPcTimeModel();
@@ -127,8 +144,7 @@ namespace MVVM_test1.ViewModel
             AppToday.GetFavoriteApp();
             RandomAppOne.GetCountStartsRandomApp("one", "name");
             RandomAppTwo.GetCountStartsRandomApp("two", _RandomAppOne[0].NameProcess);
-
-            System.Timers.Timer timerCheckProcesess = new System.Timers.Timer(3000);
+            timerCheckProcesess = new System.Timers.Timer(3000);
             timerCheckProcesess.Elapsed += WorksProcesess.GetProcess;
             timerCheckProcesess.Start();
             CheckProcess = WorksProcesess._WorkProcess;
@@ -146,5 +162,10 @@ namespace MVVM_test1.ViewModel
         public FastStatCountStartsAppModelOne RandomAppOne;
         public FastStatCountStartsAppModelOne RandomAppTwo;
         public UsingPcTimeModel UsingTime;
+
+        private System.Timers.Timer timerCheckProcesess;
+
+
+
     }
 }

@@ -25,6 +25,8 @@ namespace MVVM_test1
         public MainWindow()
         {
             InitializeComponent();
+            if (!CheckPages.IfExistsMainWindow())
+                CheckPages.AddMainWindow(this);
             DataContext = new MainVM();
             Switcher.pageSwitcher = this;
             HomeView view = new HomeView();

@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.IO.Packaging;
 using System.Linq;
+using System.Security.AccessControl;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -15,7 +16,28 @@ namespace MVVM_test1.Utilities
         private static Dictionary<string, List7DaysVM> SevenDaysAppsInfo = new Dictionary<string, List7DaysVM>();
         private static HomeView HomePage;
         private static AllSoft SoftsPage;
+        private static MainWindow MainWindow;
         private static AnalyticsByDate DashboardPage;
+        public static MainWindow GetMainWindow()
+        {
+            return MainWindow;
+        }
+        public static void AddMainWindow(MainWindow window)
+        {
+            if (MainWindow == null)
+            {
+                MainWindow = window;
+            }
+        }
+        
+
+        public static bool IfExistsMainWindow()
+        {
+            if (MainWindow == null)
+                return false;
+            else
+                return true;
+        }
         public static AllTimesDateVM GetAllTimesPage()
         {
             return AllTimesPage;

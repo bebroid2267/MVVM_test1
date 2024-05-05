@@ -25,11 +25,6 @@ namespace MVVM_test1.ViewModel
             DateBase.StopWorksProcesess();
             DateBase.EndTodayUsingPc(DateTime.Now.ToString("d"));
         }
-
-        
-        
-        
-
         
         public ObservableCollection<string> Process
         {
@@ -67,7 +62,7 @@ namespace MVVM_test1.ViewModel
                 Process = processes._RunningProcesess;
 
             });
-
+            Task.Run(() => NotifyIconMessage.ShowMessage(DateTime.Now));
             System.Timers.Timer timerDaily = new System.Timers.Timer(6000);
             timerDaily.Elapsed += dailyProcesses.MonitorProcesess;
             timerDaily.Start();

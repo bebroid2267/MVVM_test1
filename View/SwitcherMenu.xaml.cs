@@ -1,4 +1,5 @@
 ﻿using MVVM_test1.Utilities;
+using MVVM_test1.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,6 +25,7 @@ namespace MVVM_test1.View
         public SwitcherMenu()
         {
             InitializeComponent();
+
         }
         private void NavigationToDashboard(object sender, RoutedEventArgs e)
         {
@@ -63,5 +65,18 @@ namespace MVVM_test1.View
         private HomeView HomePage;
         private AllSoft SoftsPage;
         private AnalyticsByDate DashboardPage;
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            CheckPages.GetMainWindow().Hide();
+            if (CheckPages.GetHomePage().DataContext is IClosable closable)
+                closable.Close();
+            if (CheckPages.GetSoftsPage().DataContext is IClosable _closable)
+                _closable.Close();
+
+        }
+
+
+        
     }
 }
