@@ -14,7 +14,7 @@ namespace MVVM_test1.DataBase
     public static class DateBase
     {
         //private static readonly string connectionString = @"Data Source = C:\Users\кирилл\Desktop\testFirstWPF.db";
-        private static readonly string connectionString = @"Data Source = C:\Users\porka\OneDrive\Рабочий стол\testFirstWPF.db";
+        private static readonly string connectionString = @"Data Source = C:\Users\кирилл\Desktop\кодерские архивы\emilka\DataBase\testFirstWPF (3).db";
 
 
         private static bool IfProcessExists(string name)
@@ -164,7 +164,10 @@ namespace MVVM_test1.DataBase
                 {
                     ProcessTime info = new ProcessTime();
                     info.NameProcess = reader.GetString(0);
-                    info.SumTimeProcess = reader.GetString(1);
+                    if (!reader.IsDBNull(1))
+                        info.SumTimeProcess = reader.GetString(1);
+                    else if (reader.IsDBNull(1))
+                        info.SumTimeProcess = "00:00:00";
                     info.GlobalStartTime = reader.GetString(2);
                     if (!reader.IsDBNull(3))
                         info.EndSession = reader.GetString(3);

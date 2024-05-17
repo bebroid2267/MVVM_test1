@@ -688,20 +688,9 @@
                 <Border Grid.Row="3"
                         CornerRadius="25"
                         Grid.RowSpan ="2"
-                        Grid.ColumnSpan="6">
-
-
-                    <Border.Background>
-
-                        <LinearGradientBrush StartPoint="0.75,0"
-                                             EndPoint="0,1">
-                            <GradientStop Color=" #F96100"
-                                             Offset="0.1" />
-                            <GradientStop Color=" #E70B75"
-                                             Offset="0.8" />
-                        </LinearGradientBrush>
-
-                    </Border.Background>
+                        Grid.ColumnSpan="6"
+                        Background="#F03A47">
+                    
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="150"/>

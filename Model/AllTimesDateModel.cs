@@ -21,7 +21,7 @@ namespace MVVM_test1.Model
             get { return Apps; }
             set
             {
-                Application.Current.Dispatcher.InvokeAsync(() =>
+                Application.Current?.Dispatcher.InvokeAsync(() =>
                 {
                     Apps = value;
                     OnPropertyChanged(nameof(Apps));
@@ -40,7 +40,7 @@ namespace MVVM_test1.Model
         }
         private void AddOrChangeProcess()
         {
-            Application.Current.Dispatcher.InvokeAsync(() =>
+            Application.Current?.Dispatcher.InvokeAsync(() =>
             {
                 List<ProcessTime> processes = DateBase.GetInfoProcess("all", "yes");
 
@@ -52,7 +52,7 @@ namespace MVVM_test1.Model
 
                     if (index != -1)
                     {
-                        Application.Current.Dispatcher.InvokeAsync(() =>
+                        Application.Current?.Dispatcher.InvokeAsync(() =>
                         {
                             if (icoPath != null)
                             {
@@ -77,7 +77,7 @@ namespace MVVM_test1.Model
                     int index = processes.FindIndex(p => p.NameProcess == item.NameProcess);
                     if (index == -1)
                     {
-                        Application.Current.Dispatcher.InvokeAsync(() =>
+                        Application.Current?.Dispatcher.InvokeAsync(() =>
                         {
                             Apps.Remove(item);
 
@@ -100,10 +100,10 @@ namespace MVVM_test1.Model
             //});
             if (procesess.Count > 0)
             {
-                Application.Current.Dispatcher.InvokeAsync(() =>
-                {
-                    Task.Run(() => AddOrChangeProcess());
-                });
+                Application.Current?.Dispatcher.InvokeAsync(() =>
+                    {
+                        Task.Run(() => AddOrChangeProcess());
+                    });
             }
 
 

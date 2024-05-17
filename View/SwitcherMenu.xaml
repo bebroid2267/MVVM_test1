@@ -6,20 +6,25 @@
              xmlns:local="clr-namespace:MVVM_test1.View" xmlns:Menu="clr-namespace:MVVM_test1.Utilities"
              mc:Ignorable="d" 
              xmlns:tb="http://www.hardcodet.net/taskbar" xmlns:viewmodel="clr-namespace:MVVM_test1.ViewModel" d:DataContext="{d:DesignInstance Type=viewmodel:HomeVM}"
-             d:DesignHeight="150" d:DesignWidth="1220">
+             d:DesignHeight="140" d:DesignWidth="1220"
+             MinHeight="140"
+             MaxHeight="140">
     
 
-    <Grid>
+    <Grid Margin="0 0 3 0">
         <TextBlock Grid.Row=" 0"
-       Panel.ZIndex="1"
-       Text="GS Tracker"
-       Foreground="#CDD7E0"
-       FontFamily="Oswald"
-       FontSize="36"
-       Margin="100,50,933,59" />
+                   Panel.ZIndex="1"
+                   Text="GS Tracker"
+                   Foreground="#46494C"
+                   FontFamily="Oswald"
+                   FontSize="36"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Bottom"
+                   Margin="90,0,0,20"/>
 
-        <Border Background=" #1C1D31"
-    CornerRadius="25" Grid.RowSpan="2"/>
+        <Border Background=" #CDD6D0"
+                CornerRadius="25 25 0 0 " 
+                Grid.RowSpan="2"/>
 
         <StackPanel Orientation="Horizontal">
             <Image  Width="25" Height="25" Source="icontray.ico"/>
@@ -31,17 +36,47 @@
                     <ColumnDefinition Width="200" />
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
-                <Button Content="X" 
-                        Click="Button_Click"
+                <Button Click="Button_Click"
+                        Style="{StaticResource btn}"
                         Grid.Column="3" 
-                        Margin="145,10,0,108" 
-                        HorizontalAlignment="Left"
-                        Width="43"/> 
-                <Button Content="Главная" Grid.Column="1" Margin="42,59,48,59" Click="NavigationToHome"/>
-                <Button Content="Дашборд" Grid.Column="3" Margin="42,59,48,59" Click="NavigationToDashboard"/>
+                        HorizontalAlignment="Right"
+                        HorizontalContentAlignment="Center"
+                        VerticalContentAlignment="Center"
+                        VerticalAlignment="Top"
+                        Margin="0 25 40 0"
+                        Width="35"
+                        >
+                    <TextBlock FontFamily="Segoe MDL2 Assets" Text="&#xE711;" FontSize="15"/>
+                </Button>
+                <Button Content="Главная" 
+                        Grid.Column="1" 
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Bottom"
+                        Margin="20 20 20 20"
+                        Width="100"
+                        Height="35"
+                        Click="NavigationToHome"
+                        Style="{StaticResource headerbtn}"/>
+                <Button Content="Дашборд" 
+                        Grid.Column="3" 
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Bottom"
+                        Margin="20 20 20 20"
+                        Width="100"
+                        Height="35"
+                        Click="NavigationToDashboard"
+                        Style="{StaticResource headerbtn}"/>
 
 
-                <Button Content="Весь софт" Grid.Column="2" Margin="42,59,48,59" Click="NavigationToAllSoft"/>
+                <Button Content="Весь софт" 
+                        Grid.Column="2" 
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Bottom"
+                        Margin="20 20 20 20"
+                        Width="100"
+                        Height="35"
+                        Click="NavigationToAllSoft"
+                        Style="{StaticResource headerbtn}"/>
 
                 <!--<Menu:Btn Style="{StaticResource BtnStyle}"
     Click="NavigationToHome"
