@@ -126,8 +126,7 @@
                                                Margin="143,30,-129,0"/>
 
                                     <Button Content="INFO" 
-                                            Width="60"
-                                            Margin="400,11,0,11"
+                                            Margin="350,11,-278,11"
                                             Command="{Binding DataContext.ShowMiniPageApp, 
                                             RelativeSource={RelativeSource AncestorType=ListBox}}" 
                                             CommandParameter="{Binding}"

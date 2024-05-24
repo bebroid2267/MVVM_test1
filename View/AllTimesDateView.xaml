@@ -53,6 +53,15 @@
                  Grid.ColumnSpan="3" 
                  HorizontalAlignment="Center" 
                  ScrollViewer.HorizontalScrollBarVisibility="Disabled" Margin="0,10,0,10">
+                    ScrollViewer.HorizontalScrollBarVisibility="Disabled" Margin="0,10,0,10">
+
+
+                    ScrollViewer.HorizontalScrollBarVisibility="Disabled" Margin="0,10,0,10">
+
+
+                    ScrollViewer.HorizontalScrollBarVisibility="Disabled" Margin="0,10,0,10">
+
+
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid Height="450" Width="880">
@@ -62,15 +71,6 @@
                             <RowDefinition Height="100" />
                             <RowDefinition Height="100" />
                             <RowDefinition Height="100" />
-                        </Grid.RowDefinitions>
-
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="300" />
-                            <ColumnDefinition Width="300" />
-                            <ColumnDefinition Width="300" />
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-
                         <Border Background="#46494C"
                                 Height="95"
                                 Margin="0 0 40 0"
@@ -80,31 +80,40 @@
                                 CornerRadius="20"
                                 Opacity="0.3"/>
 
+                        <Border Background="#ffffff"
+                                    Height="95"
+                                    Width="260"
+                                    Margin="-15,0,0,0"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    CornerRadius="20"
+                                    Opacity="0.3"/>
+
                         <Border CornerRadius="100"
                                 BorderThickness="1" 
                                 HorizontalAlignment="Left" 
                                 Width="60" 
-                                Margin="20,0,0,0">
-
-                            <Image Source="{Binding IcoPath}" 
-                                   Margin="0,0,0,0" 
-                                   RenderTransformOrigin="0.319,0.224" />
-                        </Border>
-
-
-                        <TextBlock Text="{Binding NameProcess}" 
                                    FontWeight="DemiBold"
                                    Margin="90,20,0,1"
                                    Foreground="#46494C"
                                    FontSize="23" />
+                                   RenderTransformOrigin="0.319,0.224" />
+                        </Border>
 
-
-                        <TextBlock Text="{Binding SumTimeProcess}"
                                    FontSize="18"
                                    FontWeight="Light"
                                    Foreground="#46494C"
                                    VerticalAlignment="Top"
                                    Margin="90,60,0,0"/>
+                                       FontSize="23" />
+
+
+                        <TextBlock Text="{Binding SumTimeProcess}"
+                               FontSize="18"
+                               FontWeight="Light"
+                               Foreground="#FFFFFF"
+                               VerticalAlignment="Top"
+                               Margin="90,50,0,0"/>
 
 
 

@@ -36,7 +36,9 @@ namespace MVVM_test1.Model
             ProcessTime moreUseApp = new();
             if (procesess.Count > 0)
             {
-                moreUseApp = procesess.OrderByDescending(x => TimeSpan.Parse(x.SumTimeProcess)).First();
+                moreUseApp = procesess.OrderByDescending(x =>
+                TimeSpan.Parse(x.SumTimeProcess)).First();
+
                 GetProcessModel processModel = new GetProcessModel();
                 if (processModel.GetDirectoryIco(moreUseApp) != null)
                     moreUseApp.IcoPath = processModel.GetDirectoryIco(moreUseApp);
