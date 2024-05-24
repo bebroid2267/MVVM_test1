@@ -1,4 +1,5 @@
 ﻿using GalaSoft.MvvmLight;
+using MVVM_test1.DataBase;
 using MVVM_test1.Model;
 using System;
 using System.Collections.Generic;
@@ -25,7 +26,10 @@ namespace MVVM_test1.ViewModel
             Apps = new Last7DaysModel();
 
             Apps.GetProcess(date);
+
+            
         }
+        
         
         private Last7DaysModel Apps;
     }

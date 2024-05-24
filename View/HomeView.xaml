@@ -32,11 +32,11 @@
                 <RowDefinition Height="168*"/>
             </Grid.RowDefinitions>
 
-            
+
 
             <!--// Home //-->
 
-            
+
 
             <!--// Customer //-->
 
@@ -70,7 +70,6 @@
                 CornerRadius="25" Grid.RowSpan="2"/>
 
             <Grid>
-
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="280"/>
@@ -102,6 +101,8 @@
                                    Grid.Column="0"
                                    Grid.ColumnSpan="6"/>
 
+                
+
                 <!--panel 1-->
                 <Border Grid.Row="1"
                         Grid.Column="1"
@@ -109,7 +110,7 @@
                         Margin="40"
                         Background="#F03A47">
 
-                   
+
 
                     <Grid>
                         <Border Background="#ffffff"
@@ -202,7 +203,7 @@
                         Margin="40"
                         Background="#F03A47">
 
-                    
+
 
                     <Grid>
 
@@ -638,7 +639,7 @@
                         Background="#F03A47">
 
 
-                   
+
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="150"/>
@@ -783,5 +784,5 @@
         </ListBox>
     </Grid>-->
 
-   
+
 </UserControl>

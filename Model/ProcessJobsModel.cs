@@ -28,10 +28,6 @@ namespace MVVM_test1.Model
         public ProcessJobsModel() 
         {
             RunningProcesses = _RunningProcesess;
-            // создание в конструкторе класса движка питона и процесс экзекуции епта кода питона в обьект scope
-            //engine = Python.CreateEngine();
-            //scope = engine.CreateScope();
-            //engine.ExecuteFile(@"C:\Users\кирилл\source\repos\MVVM_test1\IronPython\sqlite.py", scope);
         }
 
         public ObservableCollection<string> _RunningProcesess
@@ -57,8 +53,6 @@ namespace MVVM_test1.Model
             { 
                 foreach (ProcessWindow process in applications)
                 {
-                    //dynamic addTask = scope.GetVariable("add_task"); //берем нужную функцию и закидываем в переменную
-                    //addTask(process.Process.ProcessName); // вызывает функцию с нужным аргументом
                     if (!NameProcesessDontCheck.Contains(process.Process.ProcessName))
                     {
                         DateBase.AddProcess(process.Process.ProcessName, DateTime.Now.ToString());
@@ -88,7 +82,7 @@ namespace MVVM_test1.Model
             if (!File.Exists(filePath))
             {
                 try
-                {
+                {   
                     string test =  process.MainModule.FileName;
                     Icon icon = Icon.ExtractAssociatedIcon(process.MainModule.FileName);
                     if (icon != null)

@@ -1,4 +1,5 @@
-﻿using MVVM_test1.Utilities;
+﻿using MVVM_test1.DataBase;
+using MVVM_test1.Utilities;
 using MVVM_test1.View;
 using MVVM_test1.ViewModel;
 using System.Configuration;
@@ -33,7 +34,12 @@ namespace MVVM_test1
                 Image.FromFile("Utilities/pics/Free_Flat_Exit_Door_Icon.ico"),OnCloseClicked);
 
             base.OnStartup(e);
-        }
+
+            
+
+            
+        
+    }
 
         private void BalloonTipClicked(object? sender, EventArgs e)
         {

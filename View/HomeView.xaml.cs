@@ -26,6 +26,7 @@ namespace MVVM_test1.View
             InitializeComponent();
             DataContext = new HomeVM();
         }
+        
 
     }
 }
