@@ -27,6 +27,7 @@ namespace MVVM_test1.View
             InitializeComponent();
 
         }
+
         private void NavigationToDashboard(object sender, RoutedEventArgs e)
         {
             bool existsDash = CheckPages.IfExistsDashboardPage();
@@ -75,8 +76,12 @@ namespace MVVM_test1.View
                 _closable.Close();
 
         }
+        private void MinimizeButton_Click(object sender, RoutedEventArgs e)
+        {
+            Window parentWindow = Window.GetWindow(this);
+            parentWindow.WindowState = WindowState.Minimized;
+        }
 
 
-        
     }
 }

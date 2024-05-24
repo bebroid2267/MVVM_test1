@@ -39,5 +39,6 @@ namespace MVVM_test1
         {
             this.Content = nextPage;
         }
+        
     }
 }

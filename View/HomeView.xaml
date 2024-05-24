@@ -32,11 +32,11 @@
                 <RowDefinition Height="168*"/>
             </Grid.RowDefinitions>
 
-            
+
 
             <!--// Home //-->
 
-            
+
 
             <!--// Customer //-->
 
@@ -66,7 +66,7 @@
             </Grid>
 
 
-            <Border Background=" #1C1D31"
+            <Border Background="#CDD6D0"
                 CornerRadius="25" Grid.RowSpan="2"/>
 
             <Grid>
@@ -82,10 +82,8 @@
 
                 <Grid.RowDefinitions>
                     <RowDefinition Height="140" />
-                    <RowDefinition Height="280" />
+                    <RowDefinition Height="290" />
                     <RowDefinition Height="250" />
-                    <RowDefinition Height="70" />
-                    <RowDefinition Height="70" />
                     <RowDefinition Height="70" />
                     <RowDefinition Height="70" />
                     <RowDefinition Height="70" />
@@ -102,53 +100,48 @@
 
                 <view:SwitcherMenu Grid.Row="0"
                                    Grid.Column="0"
-                                   Grid.ColumnSpan="6" Margin="0,0,0,245" Grid.RowSpan="2"/>
+                                   Grid.ColumnSpan="6"/>
 
                 <!--panel 1-->
                 <Border Grid.Row="1"
-                    Grid.Column="1"
-                    CornerRadius="20"
-                    Margin="40">
+                        Grid.Column="1"
+                        CornerRadius="20"
+                        Margin="40"
+                        Background="#F03A47">
 
-                    <Border.Background>
 
-                        <LinearGradientBrush StartPoint="0.75,0"
-                                         EndPoint="0,1">
-                            <GradientStop Color=" #DF208F"
-                                      Offset="0.1" />
-                            <GradientStop Color=" #DFCF20"
-                                      Offset="0.8" />
-                        </LinearGradientBrush>
-
-                    </Border.Background>
 
                     <Grid>
-
                         <Border Background="#ffffff"
-                            Width="184"
-                            HorizontalAlignment="Center"
-                            CornerRadius="20,1,20,20"
-                            Opacity="0.3"
-                            Margin ="0,130,0,10"/>
+                                Width="184"
+                                Height="60"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Bottom"
+                                CornerRadius="20"
+                                Opacity="0.3"
+                                Margin ="10"/>
 
                         <TextBlock Text="Любимое &#x0a;приложение &#x0a;дня"
-       Foreground="#ffffff"
-       FontFamily="Oswald"
-       FontSize="19"
-         
-       VerticalAlignment="Top"
-       HorizontalAlignment="Left"
-       Margin="8,30,10,0" Width="142" Height="100" />
+                                   Foreground="#ffffff"
+                                   FontFamily="Oswald"
+                                   FontSize="19"
+                                   VerticalAlignment="Top"
+                                   HorizontalAlignment="Left"
+                                   Margin="10,10,10,0" Width="142" Height="100" />
 
                         <Border Background="#ffffff"
                                 Width="60"
-                                HorizontalAlignment="Left"
-                                CornerRadius="20,20,1,1"
+                                HorizontalAlignment="Right"
+                                CornerRadius="20"
                                 Opacity="0.3"
-                                Margin ="132,10,0,70"/>
+                                Margin ="0 10 10 80"/>
 
                         <ListBox ItemsSource="{Binding _AppToday}"
-                                 d:ItemsSource="{d:SampleData ItemCount=1}" HorizontalAlignment="Center" Width="184" Height="180" VerticalAlignment="Center" >
+                                 d:ItemsSource="{d:SampleData ItemCount=1}" 
+                                 HorizontalAlignment="Center" 
+                                 Width="185" 
+                                 Height="180" 
+                                 VerticalAlignment="Center" >
 
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
@@ -157,10 +150,10 @@
 
 
                                         <TextBlock Text="{Binding NameProcess}" 
-                                                      FontWeight="DemiBold"
-                                                    Foreground="#FFFFFF"
-                                                    FontSize="19" 
-                                                   Margin="0,117,-7,0" 
+                                                   FontWeight="DemiBold"
+                                                   Foreground="#FFFFFF"
+                                                   FontSize="19" 
+                                                   Margin="0,127,0,0" 
                                                    Height="49" 
                                                    TextWrapping="Wrap"
                                                    VerticalAlignment="Top" 
@@ -168,16 +161,19 @@
                                                    Width="168" />
 
                                         <TextBlock Text="{Binding SumTimeProcess}"
-                                       FontWeight="DemiBold"
-                                        Foreground="#FFFFFF"
-                                        Margin="0,0,-6,65"
-                                        FontSize="15"
-                                         Width="56" 
-                                         Height="20" 
-                                         VerticalAlignment="Bottom" 
-                                         HorizontalAlignment="Right"/>
+                                                   FontWeight="DemiBold"
+                                                   Foreground="#FFFFFF"
+                                                   Margin="0 0 -5 85"
+                                                   FontSize="15"
+                                                   Width="56" 
+                                                   Height="20" 
+                                                   VerticalAlignment="Bottom" 
+                                                   HorizontalAlignment="Right"/>
 
-                                        <Ellipse Height="45" Width="44" HorizontalAlignment="Left" Margin="123,0,0,103" VerticalAlignment="Bottom">
+                                        <Ellipse Height="45" Width="44" 
+                                                 HorizontalAlignment="Left" 
+                                                 Margin="123,0,0,110" 
+                                                 VerticalAlignment="Bottom">
                                             <Ellipse.Fill>
                                                 <ImageBrush Stretch="Fill" 
                                                 ImageSource="{Binding IcoPath}"
@@ -201,32 +197,23 @@
                 </Border>
                 <!--panel 2-->
                 <Border Grid.Row="1"
-            Grid.Column="2"
-            CornerRadius="20"
-            Margin="40">
+                        Grid.Column="2"
+                        CornerRadius="20"
+                        Margin="40"
+                        Background="#F03A47">
 
-                    <Border.Background>
 
-                        <LinearGradientBrush StartPoint="0.75,0"
-                             EndPoint="0,1">
-                            <GradientStop Color=" #27BDE9"
-                          Offset="0.1" />
-                            <GradientStop Color=" #ABDB54"
-                          Offset="0.8" />
-                        </LinearGradientBrush>
-
-                    </Border.Background>
 
                     <Grid>
 
                         <Border Background="#ffffff"
-                                Height="48"
+                                Height="60"
                                 Width=" 180"
                                 HorizontalAlignment="Center"
-                                VerticalAlignment="Top"
+                                VerticalAlignment="Bottom"
                                 CornerRadius="20"
                                 Opacity="0.3"
-                                Margin ="0,142,0,0"/>
+                                Margin ="10"/>
 
                         <Border Background="#ffffff"
                                 Height="60"
@@ -247,7 +234,10 @@
                                 Margin ="10,0,0,0"/>
 
                         <ListBox ItemsSource="{Binding _AppEver}"
-         d:ItemsSource="{d:SampleData ItemCount=1}" HorizontalAlignment="Center" Width="184" Height="180" VerticalAlignment="Center" >
+                                 d:ItemsSource="{d:SampleData ItemCount=1}" 
+                                 HorizontalAlignment="Center" 
+                                 Width="184" Height="180" 
+                                 VerticalAlignment="Center" >
 
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
@@ -256,30 +246,32 @@
 
 
                                         <TextBlock Text="{Binding NameProcess}" 
-                                              FontWeight="DemiBold"
-                                             Foreground="#FFFFFF"
-                                             FontSize="19" Margin="5,127,0,0" 
-                                             Height="42" 
-                                             VerticalAlignment="Stretch" 
-                                            HorizontalAlignment="Center" 
+                                                   FontWeight="DemiBold"
+                                                   Foreground="#FFFFFF"
+                                                   FontSize="19" Margin="0,127,0,0" 
+                                                   Height="42" 
+                                                   VerticalAlignment="Stretch" 
+                                                   HorizontalAlignment="Center" 
                                                    Width="168" />
 
                                         <TextBlock Text="{Binding SumTimeProcess}"
                                                    FontWeight="DemiBold"
                                                     Foreground="#FFFFFF"
                                                     Margin="72,0,0,0"
+                                                   Padding="0 4 0 0"
                                                     FontSize="18"
                                                    Width="95" 
-                                                   Height="41" 
+                                                   Height="40" 
                                                    VerticalAlignment="Center" 
                                                    HorizontalAlignment="Left"/>
 
-                                        <Ellipse Height="45" Width="45" HorizontalAlignment="Right" Margin="0,0,117,64" VerticalAlignment="Bottom">
+                                        <Ellipse Height="45" Width="45" 
+                                                 HorizontalAlignment="Right" 
+                                                 Margin="0,0,117,64"
+                                                 VerticalAlignment="Bottom">
                                             <Ellipse.Fill>
                                                 <ImageBrush Stretch="Fill" 
-        ImageSource="{Binding IcoPath}"
-                    
-                    />
+                                                            ImageSource="{Binding IcoPath}"/>
                                             </Ellipse.Fill>
                                         </Ellipse>
 
@@ -294,12 +286,13 @@
                         </ListBox>
 
                         <TextBlock Text="Чаще всего &#x0a;использовали"
-                   Foreground="#ffffff"
-                   FontFamily="Oswald"
-                   FontSize="19"
-                   VerticalAlignment="Top"
-                   HorizontalAlignment="Center"
-                   Margin="0,10,0,0" Width="180" />
+                                   Foreground="#ffffff"
+                                   FontFamily="Oswald"
+                                   FontSize="19"
+                                   VerticalAlignment="Top"
+                                   HorizontalAlignment="Center"
+                                   Margin="10,10,0,0" 
+                                   Width="180" />
 
                     </Grid>
 
@@ -308,30 +301,19 @@
                 <Border Grid.Row="1"
                         Grid.Column="3"
                         CornerRadius="20"
-                        Margin="40">
-
-                    <Border.Background>
-
-                        <LinearGradientBrush StartPoint="0.75,0"
-                             EndPoint="0,1">
-                            <GradientStop Color=" #F96100"
-                          Offset="0.1" />
-                            <GradientStop Color=" #E70B75"
-                          Offset="0.8" />
-                        </LinearGradientBrush>
-
-                    </Border.Background>
+                        Margin="40"
+                        Background="#F03A47">
 
                     <Grid>
 
                         <Border Background="#ffffff"
-        Height="48"
-        Width=" 180"
-        HorizontalAlignment="Center"
-        VerticalAlignment="Top"
-        CornerRadius="20"
-        Opacity="0.3"
-        Margin ="0,142,0,0"/>
+                                Height="60"
+                                Width=" 180"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Bottom"
+                                CornerRadius="20"
+                                Opacity="0.3"
+                                Margin ="10"/>
 
                         <Border Background="#ffffff"
                                 Height="60"
@@ -365,25 +347,25 @@
 
 
                                         <TextBlock Text="{Binding NameProcess}" 
-                                     FontWeight="DemiBold"
-                                    Foreground="#FFFFFF"
-                                    FontSize="19" 
-                                     Margin="5,127,0,0" 
-                                    Height="42" 
-                                    VerticalAlignment="Stretch" 
-                                   HorizontalAlignment="Center" 
-                                          Width="168" />
+                                                   FontWeight="DemiBold"
+                                                   Foreground="#FFFFFF"
+                                                   FontSize="19" 
+                                                   Margin="0,127,0,0" 
+                                                   Height="42" 
+                                                   VerticalAlignment="Stretch" 
+                                                   HorizontalAlignment="Center" 
+                                                   Width="168" />
 
                                         <TextBlock Text="{Binding EndSession}"
-                                          FontWeight="DemiBold"
-                                           Foreground="#FFFFFF"
+                                                   FontWeight="DemiBold"
+                                                   Foreground="#FFFFFF"
                                                    TextWrapping="Wrap"
-                                           Margin="72,-5,-10,0"
-                                           FontSize="17"
-                                          Width="95" 
-                                          Height="41" 
-                                          VerticalAlignment="Center" 
-                                          HorizontalAlignment="Center"/>
+                                                   FontSize="17"
+                                                   Width="95" 
+                                                   Height="40"
+                                                   Margin="0 0 0 10"
+                                                   VerticalAlignment="Center" 
+                                                   HorizontalAlignment="Right"/>
 
                                         <Ellipse Height="45" 
                                                  Width="45" 
@@ -414,7 +396,7 @@
                                     FontSize="19"
                                     VerticalAlignment="Top"
                                     HorizontalAlignment="Center"
-                                    Margin="0,10,0,0" Width="180" />
+                                    Margin="10,10,0,0" Width="180" />
 
                     </Grid>
 
@@ -424,19 +406,8 @@
                 <Border Grid.Row="1"
                     Grid.Column="4"
                     CornerRadius="20"
-                    Margin="40">
-
-                    <Border.Background>
-
-                        <LinearGradientBrush StartPoint="0.75,0"
-                     EndPoint="0,1">
-                            <GradientStop Color=" #06A4FB"
-                  Offset="0.1" />
-                            <GradientStop Color=" #B842EB"
-                  Offset="0.8" />
-                        </LinearGradientBrush>
-
-                    </Border.Background>
+                    Margin="40"
+                        Background="#F03A47">
 
                     <Grid>
 
@@ -444,17 +415,17 @@
                         <Border Background="#ffffff"
                             Height="76"
                             Width="73"
-                            HorizontalAlignment="Left"
+                            HorizontalAlignment="Right"
                             VerticalAlignment="Top"
                             CornerRadius="20"
                             Opacity="0.3"
-                            Margin ="117,10,0,0"/>
+                            Margin ="10"/>
 
                         <Ellipse Height="44" 
-                                     Width="45" 
-                                     HorizontalAlignment="Right" 
-                                     Margin="0,0,24,130" 
-                                     VerticalAlignment="Bottom">
+                                 Width="45" 
+                                 HorizontalAlignment="Right" 
+                                 Margin="0,0,23,140" 
+                                 VerticalAlignment="Bottom">
                             <Ellipse.Fill>
                                 <ImageBrush Stretch="Fill" 
                                     ImageSource="{Binding _RandomAppOne[0].IcoPath}"
@@ -466,16 +437,16 @@
                         <Border Background="#ffffff"
                                 Height="35"
                                 Width="73"
-                                HorizontalAlignment="Left"
+                                HorizontalAlignment="Right"
                                 VerticalAlignment="Top"
                                 CornerRadius="20"
                                 Opacity="0.3"
-                                Margin ="27,35,0,0"/>
+                                Margin ="0 37 100 0"/>
 
                         <TextBlock Text="{Binding _RandomAppOne[0].TodayCountStarts}"
                                           FontWeight="DemiBold"
                                            Foreground="#FFFFFF"
-                                           Margin="56,40,0,0"
+                                           Margin="56,45,0,0"
                                            FontSize="17"
                                           Width="35" 
                                           Height="30" 
@@ -486,17 +457,17 @@
                                 Height="76"
                                 Width="73"
                                 HorizontalAlignment="Left"
-                                VerticalAlignment="Top"
+                                VerticalAlignment="Bottom"
                                 CornerRadius="20"
                                 Opacity="0.3"
-                                Margin ="10,116,0,0"/>
+                                Margin ="10"/>
 
 
                         <Ellipse Height="44" 
-                                     Width="45" 
-                                     HorizontalAlignment="Right" 
-                                     Margin="0,0,131,24" 
-                                     VerticalAlignment="Bottom">
+                                 Width="45" 
+                                 HorizontalAlignment="Right" 
+                                 Margin="0,0,130,25" 
+                                 VerticalAlignment="Bottom">
                             <Ellipse.Fill>
                                 <ImageBrush Stretch="Fill" 
                                     ImageSource="{Binding _RandomAppTwo[0].IcoPath}"
@@ -509,15 +480,15 @@
                                 Height="35"
                                 Width="73"
                                 HorizontalAlignment="Left"
-                                VerticalAlignment="Top"
+                                VerticalAlignment="Bottom"
                                 CornerRadius="20"
                                 Opacity="0.3"
-                                Margin ="100,135,0,0"/>
+                                Margin ="100,0,0,37"/>
                         <TextBlock Text="{Binding _RandomAppTwo[0].TodayCountStarts}"
                                   FontWeight="DemiBold"
                                   Foreground="#FFFFFF"
                                   TextWrapping="Wrap"
-                                  Margin="131,140,0,0"
+                                  Margin="131,145,0,0"
                                   FontSize="17"
                                   Width="41" 
                                   Height="30" 
@@ -530,7 +501,7 @@
                                     FontSize="19"
                                     VerticalAlignment="Center"
                                     HorizontalAlignment="Left"
-                                    Margin="6,0,0,0" Width="186" />
+                                    Margin="7" Width="186" />
 
                         <!--<TextBlock Text="За вчера"
             Foreground="#ffffff"
@@ -544,32 +515,16 @@
 
                 </Border>
 
-                
+
 
 
 
 
                 <Border Grid.Row="5"
-                    Grid.RowSpan ="15"
-                    Grid.ColumnSpan="6"
-                    CornerRadius="0,0,20,20">
-
-                    <Border.Background>
-
-                        <LinearGradientBrush StartPoint="0.75,0"
-                                         EndPoint="0,1">
-
-                            <GradientStop Color="#1C1D31"
-                                      Offset="0.1" />
-
-
-                        </LinearGradientBrush>
-
-                    </Border.Background>
-
-
-
-
+                        Grid.RowSpan ="15"
+                        Grid.ColumnSpan="6"
+                        CornerRadius="0,0,20,20"
+                        Background="#CDD6D0">
                     <Grid>
                         <!--<Grid.RowDefinitions>
                             <RowDefinition Height="100"/>
@@ -601,7 +556,7 @@
                         <TextBlock Grid.Row="0"
                                Grid.ColumnSpan="1"
                                Text="Софт в работе"
-                               Foreground="#CDD7E0"
+                               Foreground="#46494C"
                                FontFamily="Ramona Bold"
                                FontSize="55"
                                VerticalAlignment="Top"
@@ -611,9 +566,7 @@
 
                         <ListBox ItemsSource="{Binding CheckProcess}" 
                                  Margin="190,95,159,0"
-                                 d:ItemsSource="{d:SampleData ItemCount=5}" >
-
-
+                                 d:ItemsSource="{d:SampleData ItemCount=5}">
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
                                     <Grid>
@@ -627,7 +580,7 @@
 
 
 
-                                        <Border Background="#ffffff"
+                                        <Border Background="#46494C"
                                                 Height="50"
                                                 Width="70"
                                                 HorizontalAlignment="Left"
@@ -650,7 +603,7 @@
                                                    FontWeight="DemiBold"
                                                    
                                                    Margin="143,0,-400,1"
-                                                   Foreground="#FFFFFF"
+                                                   Foreground="#46494C"
                                                    FontSize="23" />
 
 
@@ -658,14 +611,14 @@
                                         <TextBlock Text="{Binding SumTimeProcess}"
                                                    FontSize="18"
                                                    FontWeight="Light"
-                                                   Foreground="#FFFFFF"
+                                                   Foreground="#46494C"
                                                    VerticalAlignment="Top"
                                                    Margin="143,30,-129,0"/>
 
                                         <TextBlock Text="{Binding GlobalStartTime}"
                                                    FontSize="18"
                                                    FontWeight="Light"
-                                                   Foreground="#FFFFFF" 
+                                                   Foreground="#46494C" 
                                                    VerticalAlignment="Center"
                                                     Margin="690,0,-690,0"/>
 
@@ -683,23 +636,14 @@
 
                 </Border>
 
-                <Border Grid.Row="3"
+                <Border Grid.Row="2"
                         CornerRadius="25"
-                        Grid.RowSpan ="2"
-                        Grid.ColumnSpan="6">
+                        Grid.RowSpan ="3"
+                        Grid.ColumnSpan="6"
+                        Background="#F03A47" Margin="0,247,0,3">
 
 
-                    <Border.Background>
 
-                        <LinearGradientBrush StartPoint="0.75,0"
-                                             EndPoint="0,1">
-                            <GradientStop Color=" #F96100"
-                                             Offset="0.1" />
-                            <GradientStop Color=" #E70B75"
-                                             Offset="0.8" />
-                        </LinearGradientBrush>
-
-                    </Border.Background>
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="150"/>
@@ -844,5 +788,5 @@
         </ListBox>
     </Grid>-->
 
-   
+
 </UserControl>

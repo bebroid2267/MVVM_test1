@@ -14,7 +14,7 @@ namespace MVVM_test1.DataBase
     public static class DateBase
     {
         //private static readonly string connectionString = @"Data Source = C:\Users\кирилл\Desktop\testFirstWPF.db";
-        private static readonly string connectionString = @"Data Source = C:\Users\porka\OneDrive\Рабочий стол\testFirstWPF.db";
+        private static readonly string connectionString = @"Data Source = C:\Users\Эмиль\source\repos\MVVM_test1\DataBase\testFirstWPF (4).db";
 
 
         private static bool IfProcessExists(string name)

@@ -10,28 +10,34 @@
              d:DesignHeight="500" 
              d:DesignWidth="850">
     <Grid>
-        <Border Background=" #1C1D31"
+        <Border Background=" #CDD6D0"
                 CornerRadius="25" />
 
         <StackPanel Orientation="Horizontal">
             <Button Content="Вчера"
+                    Foreground="#46494C"
                     Command="{Binding ShowLast7DaysCommand}"
+                    Style="{StaticResource headerbtn}"
                     CommandParameter="{Binding YesterdayCommandParameter}"
-                    Height="56" 
+                    Height="50" 
                     Width="125"
                     Margin="200,-250,20,10"
                     
         />
             <Button Content="{Binding TwoDaysLeftCommandParameter}" 
                     Command="{Binding ShowLast7DaysCommand}"
-                    Height="56" 
+                    Style="{StaticResource headerbtn}"
+                    Foreground="#46494C"
+                    Height="50" 
                     Width="125"
                     CommandParameter="{Binding TwoDaysLeftCommandParameter}"
                     Margin="20,-250,20,10"/>
 
             <Button Content="{Binding ThreeDaysLeftCommandParameter}"
                     Command="{Binding ShowLast7DaysCommand}"
-                    Height="56"
+                    Style="{StaticResource headerbtn}"
+                    Foreground="#46494C"
+                    Height="50"
                     CommandParameter="{Binding ThreeDaysLeftCommandParameter}"
                     Width="125"
                     Margin="20,-250,20,10"/>
@@ -42,29 +48,40 @@
             <Button Content ="{Binding FourDaysLeftCommandParameter}"
                     Command="{Binding ShowLast7DaysCommand}"
                     CommandParameter="{Binding FourDaysLeftCommandParameter}"
-                    Height="56"
+                    Style="{StaticResource headerbtn}"
+                    Foreground="#46494C"
+                    Height="50"
                     Width="125"
                     Margin="200,-50,20,10"
                     />
             <Button Content ="{Binding FiveDaysLeftCommandParameter}"
                     Command="{Binding ShowLast7DaysCommand}"
-                    Height="56"
+                    Height="50"
                     CommandParameter="{Binding FiveDaysLeftCommandParameter}"
+                    Style="{StaticResource headerbtn}"
+                    Foreground="#46494C"
                     Margin="20,-50,20,10"
                     Width="125" />
             <Button Content ="{Binding SixDaysLeftCommandParameter}"
                     Command="{Binding ShowLast7DaysCommand}"
-                     Height="56"
+                     Height="50"
                      CommandParameter="{Binding SixDaysLeftCommandParameter}"
+                    Style="{StaticResource headerbtn}"
+                    Foreground="#46494C"
                       Width="125"
                     Margin="20,-50, 20,10"
         />
         </StackPanel>
-        <Button Content="{Binding SevenDaysLeftCommandParameter}"
-                Command="{Binding ShowLast7DaysCommand}"
-                CommandParameter="{Binding SevenDaysLeftCommandParameter}"
-                Margin="5,150,0,0"
-                Height="56"
-                Width="125"/>
+        <StackPanel Orientation="Horizontal">
+            <Button Content="{Binding SevenDaysLeftCommandParameter}"
+                    Command="{Binding ShowLast7DaysCommand}"
+                    CommandParameter="{Binding SevenDaysLeftCommandParameter}"
+                    Style="{StaticResource headerbtn}"
+                    Foreground="#46494C"
+                    Margin="365,150,20,10"
+                    Height="50"
+                    Width="125"/>
+        </StackPanel>
+        
     </Grid>
 </UserControl>

@@ -18,11 +18,9 @@
     <ScrollViewer>
 
         <Grid>
-
             <Grid.RowDefinitions>
                 <RowDefinition Height="140" />
                 <RowDefinition Height="*" />
-
             </Grid.RowDefinitions>
 
             <Grid.ColumnDefinitions>
@@ -34,33 +32,41 @@
             </Grid.ColumnDefinitions>
 
             <view:SwitcherMenu Grid.Row="0"
-                   Grid.Column="0"
+                               VerticalAlignment="Top"
+                               Grid.Column="0"
                                Panel.ZIndex="1"
-                   Grid.ColumnSpan="5" Margin="0,0,0,1377" Grid.RowSpan="2"/>
+                               Grid.ColumnSpan="5" 
+                               Margin="0,0,0,1000" 
+                               Grid.RowSpan="2"/>
 
-            <Border Background=" #1C1D31"
-CornerRadius="25" Grid.RowSpan="2" Grid.ColumnSpan="4" Margin="0,0,0,715"/>
+            <Border Background="#CDD6D0"
+                    Grid.Column="0"
+                    Grid.Row="0"
+                    CornerRadius="25" 
+                    Grid.RowSpan="2" 
+                    Grid.ColumnSpan="4" 
+                    Margin="0,0,0,715"/>
 
 
 
             <TextBlock Grid.Row="1"
-           Grid.ColumnSpan="1"
-                       Margin="40,-700,100,100"
-           Text="Весь софт"
-           Foreground="#CDD7E0"
-           FontFamily="Ramona Bold"
-           FontSize="55"
+                       Grid.ColumnSpan="1"
+                       Margin="40,-500,100,100"
+                       Text="Весь софт"
+                       Foreground="#46494C"
+                       FontFamily="Ramona Bold"
+                       FontSize="55"
                        Panel.ZIndex="1"
-           VerticalAlignment="Top"
-           HorizontalAlignment="Left" 
-           Grid.Column="1"
+                       VerticalAlignment="Top"
+                       HorizontalAlignment="Left" 
+                       Grid.Column="1"
                        Grid.RowSpan="3"/>
 
-            <Grid Height="619" VerticalAlignment="Top" 
+            <Grid Height="619" 
+                  VerticalAlignment="Top" 
                   HorizontalAlignment="Center" 
                   Width="1180" 
                   Grid.Column="1" 
-                  
                   Grid.ColumnSpan="2"
                   Margin="0,206,0,0">
 
@@ -68,8 +74,7 @@ CornerRadius="25" Grid.RowSpan="2" Grid.ColumnSpan="4" Margin="0,0,0,715"/>
                 <ScrollViewer Margin="0,-68,10,0">
                     <ListBox ItemsSource="{Binding _Apps}" 
                              Margin="190,-20,159,0"
-                             
-                            Panel.ZIndex="1"
+                             Panel.ZIndex="1"
                              d:ItemsSource="{d:SampleData ItemCount=5}" 
                              Width="832" 
                              Height="487" >
@@ -88,56 +93,52 @@ CornerRadius="25" Grid.RowSpan="2" Grid.ColumnSpan="4" Margin="0,0,0,715"/>
 
 
 
-                                    <Border Background="#ffffff"
-                        Height="50"
-                        Width="70"
-                        HorizontalAlignment="Left"
-                        VerticalAlignment="Center"
-                        CornerRadius="15"
-                        Opacity="0.3"
-                        Margin ="28,0,0,0"/>
+                                    <Border Background="#46494C"
+                                            Height="50"
+                                            Width="70"
+                                            HorizontalAlignment="Left"
+                                            VerticalAlignment="Center"
+                                            CornerRadius="15"
+                                            Opacity="0.3"
+                                            Margin ="28,0,0,0"/>
 
                                     <Border CornerRadius="100" 
-                        Margin="32,0,43,1"
-                        BorderThickness="1">
+                                            HorizontalAlignment="Left"
+                                            Margin="43 0 0 0"
+                                            BorderThickness="1">
                                         <Image Source="{Binding IcoPath}" 
-                           Margin="4,5,8,5" 
-                           RenderTransformOrigin="0.319,0.224" />
+                                               Margin="4,5,8,5" 
+                                               RenderTransformOrigin="0.319,0.224" />
                                     </Border>
-
-
-                                        <TextBlock Text="{Binding NameProcess}" 
-                           FontWeight="DemiBold"
-                           
-                           Margin="143,0,-400,1"
-                           Foreground="#FFFFFF"
-                           FontSize="23" />
-
-
+                                    
+                                    
+                                    <TextBlock Text="{Binding NameProcess}" 
+                                                   FontWeight="DemiBold"
+                                                   Margin="143,0,-400,1"
+                                                   Foreground="#46494C"
+                                                   FontSize="23" />
+                                    
                                     <TextBlock Text="{Binding SumTimeProcess}"
                                                FontSize="18"
                                                FontWeight="Light"
-                                               Foreground="#FFFFFF"
+                                               Foreground="#46494C"
                                                VerticalAlignment="Top"
                                                Margin="143,30,-129,0"/>
 
                                     <Button Content="INFO" 
-                                            Margin="350,11,-278,11"
+                                            Width="60"
+                                            Margin="400,11,0,11"
                                             Command="{Binding DataContext.ShowMiniPageApp, 
                                             RelativeSource={RelativeSource AncestorType=ListBox}}" 
-                                            CommandParameter="{Binding}"/>
-
-
-
+                                            CommandParameter="{Binding}"
+                                            Style="{StaticResource headerbtn}"/>
+                                    
                                     <TextBlock Text="{Binding GlobalStartTime}"
                                                FontSize="18"
                                                FontWeight="Light"
-                                               Foreground="#FFFFFF" 
+                                               Foreground="#46494C" 
                                                VerticalAlignment="Center"
-                                                Margin="690,0,-690,0"/>
-
-
-
+                                               Margin="640,0,-690,0"/>
                                 </Grid>
                             </DataTemplate>
                         </ListBox.ItemTemplate>

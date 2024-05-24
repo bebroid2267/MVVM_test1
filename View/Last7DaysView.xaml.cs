@@ -1,4 +1,9 @@
-﻿using System;
+﻿using LiveCharts;
+using MVVM_test1.DataBase;
+using MVVM_test1;
+using LiveCharts.Defaults;
+using LiveCharts.Wpf;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,6 +17,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Diagnostics;
 
 namespace MVVM_test1.View
 {
@@ -23,6 +29,14 @@ namespace MVVM_test1.View
         public Last7DaysView()
         {
             InitializeComponent();
+            
+            
         }
+
+
+        
+
+
+
     }
 }
