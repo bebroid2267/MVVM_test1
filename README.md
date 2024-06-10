@@ -2,13 +2,13 @@
 - [C# 12](https://learn.microsoft.com/ru-ru/dotnet/csharp/whats-new/csharp-12)
 - [WPF](https://learn.microsoft.com/ru-ru/dotnet/desktop/wpf/overview/?view=netdesktop-8.0)
 - **Инструменты:**
-  - [Паттерн MVVM](https://learn.microsoft.com/ru-ru/dotnet/architecture/maui/mvvm)
-  - [ORM - Entity Framework Core](https://github.com/PyCQA/isort](https://learn.microsoft.com/ru-ru/ef/core/)
-  - [PyLint](https://github.com/pylint-dev/pylint)
-  - [CodeFactor](https://www.codefactor.io/)
+  - [Pattern MVVM](https://learn.microsoft.com/ru-ru/dotnet/architecture/maui/mvvm)
+  - [ORM - Entity Framework Core] (https://learn.microsoft.com/ru-ru/ef/core/)
+  - [DB - Sqlite](https://sqlite.org)
     
-## 👀 Look at this
-- [Text](pacman/objects/text.py)
+## 👀 Look at this - DEMO
+- Main Menu
+https://imgur.com/a/7Bp12lj
 - [Button + controller](pacman/objects/buttons)
 - [Sounds + controller](pacman/sound)
 - [Scenes + SceneManager](pacman/scenes)
