@@ -8,18 +8,20 @@
     
 ## 👀 Look at this - DEMO
 
+- Main Menu
 <p align="left">
  <img width="500px" src="https://i.imgur.com/IcHmn3c.jpeg" alt="qr"/>
 </p>
 
-{username} — ваш ник на ГитХабе;
-{repository} — репозиторий где хранятся картинки;
-{branch} — ветка репозитория;
-{path} — путь к месту нахождения картинки.
-- Main Menu
-https://imgur.com/a/7Bp12lj
-- [Button + controller](pacman/objects/buttons)
-- [Sounds + controller](pacman/sound)
+- Work apps
+-  <p align="left">
+ <img width="500px" src="https://i.imgur.com/CsUdz2l.jpeg" alt="qr"/>
+  </p>
+  
+- All Apps (mini window for info)
+  <p align="left">
+ <img width="500px" src="https://i.imgur.com/EJiSyII.jpeg" alt="qr"/>
+  </p>
 - [Scenes + SceneManager](pacman/scenes)
 - [Animators + SpriteSheets](pacman/animator)
 - [Saves - json serialize/deserialize](pacman/storage)
