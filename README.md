@@ -7,6 +7,13 @@
   - [DB - Sqlite](https://sqlite.org)
     
 ## 👀 Look at this - DEMO
+
+![- Main Menu](https://imgur.com/a/7Bp12lj)
+
+{username} — ваш ник на ГитХабе;
+{repository} — репозиторий где хранятся картинки;
+{branch} — ветка репозитория;
+{path} — путь к месту нахождения картинки.
 - Main Menu
 https://imgur.com/a/7Bp12lj
 - [Button + controller](pacman/objects/buttons)
