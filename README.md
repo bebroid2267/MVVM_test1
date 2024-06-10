@@ -8,7 +8,9 @@
     
 ## 👀 Look at this - DEMO
 
-![- Main Menu](https://imgur.com/a/7Bp12lj)
+<p align="center">
+ <img width="200px" src="https://imgur.com/a/7Bp12lj" alt="qr"/>
+</p>
 
 {username} — ваш ник на ГитХабе;
 {repository} — репозиторий где хранятся картинки;
