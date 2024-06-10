@@ -9,7 +9,7 @@
 ## 👀 Look at this - DEMO
 
 <p align="center">
- <img width="200px" src="https://imgur.com/a/7Bp12lj" alt="qr"/>
+ <img width="200px" src="https://i.imgur.com/IcHmn3c.jpeg" alt="qr"/>
 </p>
 
 {username} — ваш ник на ГитХабе;
